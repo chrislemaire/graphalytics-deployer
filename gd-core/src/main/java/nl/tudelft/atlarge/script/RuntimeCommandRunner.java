@@ -36,7 +36,7 @@ public class RuntimeCommandRunner {
      * @throws IOException when the shell command could not be executed.
      * @throws InterruptedException when command execution was interrupted.
      */
-    public static int runCommandBlockingWithExit(String command) throws IOException, InterruptedException {
+    private static int runCommandBlockingWithExit(String command) throws IOException, InterruptedException {
         try {
             Process p = Runtime.getRuntime().exec(command);
             return p.waitFor();

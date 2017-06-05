@@ -14,6 +14,11 @@ import java.io.File;
  */
 public interface ScriptType {
 
+    /**
+     * Class that is to be implemented by each ScriptType
+     * within an enumeration of such classes.
+     * This class should allow use of lambda expressions more easily.
+     */
     abstract class CmdGenerator {
 
         /**
@@ -22,17 +27,17 @@ public interface ScriptType {
          * @param script of the script to execute.
          * @return command String.
          */
-        public abstract String generateExecCommand(File script);
+        public abstract String generateExecCommand(Script script);
 
     }
 
     /**
      * Generates the execution command given the script {@link File}.
      *
-     * @param script of the script to execute.
+     * @param script to execute.
      * @return command String.
      */
-    String genCmd(File script);
+    String genCmd(Script script);
 
 
 }

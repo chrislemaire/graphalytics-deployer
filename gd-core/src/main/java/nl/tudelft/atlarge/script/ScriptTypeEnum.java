@@ -1,7 +1,5 @@
 package nl.tudelft.atlarge.script;
 
-import java.io.File;
-
 /**
  * Enumeration of default script types and also implementation
  * of the ScriptType interface.
@@ -13,19 +11,28 @@ public enum ScriptTypeEnum implements ScriptType {
 
     SHELL(new CmdGenerator() {
         @Override
-        public String generateExecCommand(File script) {
-            return "./" + script.getName();
+        public String generateExecCommand(Script script) {
+            return "./" + script.getFile().getName();
         }
     });
 
+    /**
+     * {@link nl.tudelft.atlarge.script.ScriptType.CmdGenerator} for generating
+     * command Strings for the specific script type.
+     */
     private CmdGenerator cmdGenerator;
 
+    /**
+     * Creates a new enumeration item by its CmdGenerator.
+     *
+     * @param cmdGenerator for generating commands from and for Scripts.
+     */
     ScriptTypeEnum(CmdGenerator cmdGenerator) {
         this.cmdGenerator = cmdGenerator;
     }
 
     @Override
-    public String genCmd(File script) {
+    public String genCmd(Script script) {
         return cmdGenerator.generateExecCommand(script);
     }
 }

@@ -42,6 +42,12 @@ public class Script {
     private File unpackFile;
 
     /**
+     * Whether this script has been exported to the appropriate
+     * directory.
+     */
+    private boolean isExported;
+
+    /**
      * Creates a new Script from a script type, the internal url
      * and the unpacking directory. Also immediately generates
      * the script execution command.
@@ -54,8 +60,9 @@ public class Script {
         this.type = type;
         this.internalUrl = internalUrl;
         this.unpackFile = unpackFile;
+        this.isExported = false;
 
-        this.executionCommand = type.genCmd(unpackFile);
+        this.executionCommand = type.genCmd(this);
     }
 
     /**
@@ -65,6 +72,10 @@ public class Script {
      * @throws IOException when something went wrong during exporting.
      */
     public void exportScript() throws IOException {
+        if (isExported) {
+            return;
+        }
+
         try {
             FileUtils.copyURLToFile(internalUrl, unpackFile);
         } catch (IOException e) {
@@ -73,6 +84,8 @@ public class Script {
                     "\n\tTo:\t'" + unpackFile.getPath() + "'");
             throw e;
         }
+
+        isExported = true;
     }
 
     /**
@@ -83,5 +96,14 @@ public class Script {
      */
     public String getExecutionCommand() {
         return executionCommand;
+    }
+
+    /**
+     * Gets the {@link #unpackFile} field.
+
+     * @return file pointing to the location this Script should unpack to.
+     */
+    public File getFile() {
+        return unpackFile;
     }
 }
