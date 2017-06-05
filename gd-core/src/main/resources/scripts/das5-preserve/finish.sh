@@ -10,7 +10,7 @@
 source reservation
 
 # Get the node numbers.
-export IPS=`preserve -llist | grep $RESERVATION | tr -d '\t' | awk -F"node" '{ for(i = 0; i < 100; i++) { if ($i) print $i; } }' | grep -v $1 |  sed 's/$2\.*//' | tr -d '\n'`
+export IPS=`preserve -llist | grep $RESERVATION | tr -d '\t' | awk -F"node" '{ for(i = 0; i < 100; i++) { if ($i) print $i; } }' | grep -v $1 |  sed "s/$2\.*//" | tr -d '\n'`
 
 # Put the nodes in the slaves file.
 rm slaves.txt
