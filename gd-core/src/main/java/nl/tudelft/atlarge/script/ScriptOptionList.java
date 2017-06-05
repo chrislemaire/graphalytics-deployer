@@ -14,6 +14,13 @@ import java.util.Arrays;
 public class ScriptOptionList extends ArrayList<String> {
 
     /**
+     * Creates an empty ScriptOptionList.
+     */
+    public ScriptOptionList() {
+        super();
+    }
+
+    /**
      * Creates a ScriptOptionList from a given array of String options.
      *
      * @param options array representing options.
