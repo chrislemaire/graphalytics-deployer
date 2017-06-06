@@ -26,4 +26,9 @@ public class HadoopArchiver extends ApacheArchiver {
         return attrib.replaceFirst("hadoop-(.*)\\.tar\\.gz", "$1");
     }
 
+    @Override
+    public boolean isTargetFile(String attrib) {
+        return attrib.startsWith("hadoop-") && attrib.endsWith(".tar.gz");
+    }
+
 }

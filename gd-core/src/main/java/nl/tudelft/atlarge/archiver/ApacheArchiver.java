@@ -56,7 +56,7 @@ public abstract class ApacheArchiver extends Archiver {
 
         String path = url + anchorNode.attr("href");
 
-        if (path.endsWith(".tar.gz")) {
+        if (isTargetFile(anchorNode.attr("href"))) {
             String version = parseVersion(anchorNode.attr("href"));
             config.configure(version, path);
         }
@@ -71,6 +71,15 @@ public abstract class ApacheArchiver extends Archiver {
      * @return parsed version String.
      */
     public abstract String parseVersion(String attrib);
+
+    /**
+     * Checks whether a file with name attrib conforms to the standard
+     * set for software package names of the requested type.
+     *
+     * @param attrib name of software package.
+     * @return <code>true</code> when attrib is a valid name.
+     */
+    public abstract boolean isTargetFile(String attrib);
 
     @Override
     public void crawl(String url) {

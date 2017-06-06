@@ -1,5 +1,5 @@
 #Written back by PropertiesConfig.java.
-#Tue Jun 06 23:44:14 CEST 2017
+#Tue Jun 06 23:52:57 CEST 2017
 2.4.0-src=https\://archive.apache.org/dist/hadoop/core/hadoop-2.4.0/hadoop-2.4.0-src.tar.gz
 1.0.4-bin=https\://archive.apache.org/dist/hadoop/core/hadoop-1.0.4/hadoop-1.0.4-bin.tar.gz
 2.7.3=https\://archive.apache.org/dist/hadoop/core/stable2/hadoop-2.7.3.tar.gz
@@ -30,7 +30,6 @@
 0.19.2=https\://archive.apache.org/dist/hadoop/core/hadoop-0.19.2/hadoop-0.19.2.tar.gz
 0.19.1=https\://archive.apache.org/dist/hadoop/core/hadoop-0.19.1/hadoop-0.19.1.tar.gz
 0.19.0=https\://archive.apache.org/dist/hadoop/core/hadoop-0.19.0/hadoop-0.19.0.tar.gz
-commons-daemon-native.tar.gz=https\://archive.apache.org/dist/hadoop/core/hadoop-2.0.2-alpha/share/hadoop/httpfs/tomcat/bin/commons-daemon-native.tar.gz
 0.17.2=https\://archive.apache.org/dist/hadoop/core/hadoop-0.17.2/hadoop-0.17.2.tar.gz
 0.17.1=https\://archive.apache.org/dist/hadoop/core/hadoop-0.17.1/hadoop-0.17.1.tar.gz
 0.17.0=https\://archive.apache.org/dist/hadoop/core/hadoop-0.17.0/hadoop-0.17.0.tar.gz
@@ -86,7 +85,6 @@ commons-daemon-native.tar.gz=https\://archive.apache.org/dist/hadoop/core/hadoop
 2.1.1-beta-src=https\://archive.apache.org/dist/hadoop/core/hadoop-2.1.1-beta/hadoop-2.1.1-beta-src.tar.gz
 2.6.0=https\://archive.apache.org/dist/hadoop/core/hadoop-2.6.0/hadoop-2.6.0.tar.gz
 2.6.5-src=https\://archive.apache.org/dist/hadoop/core/hadoop-2.6.5/hadoop-2.6.5-src.tar.gz
-tomcat-native.tar.gz=https\://archive.apache.org/dist/hadoop/core/hadoop-2.0.2-alpha/share/hadoop/httpfs/tomcat/bin/tomcat-native.tar.gz
 2.4.1=https\://archive.apache.org/dist/hadoop/core/hadoop-2.4.1/hadoop-2.4.1.tar.gz
 2.4.0=https\://archive.apache.org/dist/hadoop/core/hadoop-2.4.0/hadoop-2.4.0.tar.gz
 0.23.4-src=https\://archive.apache.org/dist/hadoop/core/hadoop-0.23.4/hadoop-0.23.4-src.tar.gz
