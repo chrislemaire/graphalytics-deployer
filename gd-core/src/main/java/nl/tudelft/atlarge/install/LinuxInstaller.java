@@ -34,7 +34,7 @@ public class LinuxInstaller extends Installer {
     }
 
     @Override
-    public void install(String version, String softwareDir) throws IOException {
+    public boolean install(String version, String softwareDir) throws IOException {
         // Generate general paths.
         String downloadLink = versions.get(version);
         String versionDir = softwareDir + product + "/" + version + "/";
@@ -59,10 +59,10 @@ public class LinuxInstaller extends Installer {
         String cleanUpCmd = "rm -f " + tempFile;
 
         // Run commands in order in a blocking fashion.
-        runner.runCommandBlocking(mkDirCmd);
-        runner.runCommandBlocking(downloadCmd);
-        runner.runCommandBlocking(unpackCmd);
-        runner.runCommandBlocking(cleanUpCmd);
+        return runner.runCommandBlocking(mkDirCmd)
+            && runner.runCommandBlocking(downloadCmd)
+            && runner.runCommandBlocking(unpackCmd)
+            && runner.runCommandBlocking(cleanUpCmd);
     }
 
 }

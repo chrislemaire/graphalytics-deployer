@@ -46,7 +46,8 @@ public abstract class Installer {
      *
      * @param version of the product to install.
      * @param installDir to install the version into.
+     * @return <code>true</code> when install was successful.
      */
-    public abstract void install(String version, String installDir) throws IOException;
+    public abstract boolean install(String version, String installDir) throws IOException;
 
 }
