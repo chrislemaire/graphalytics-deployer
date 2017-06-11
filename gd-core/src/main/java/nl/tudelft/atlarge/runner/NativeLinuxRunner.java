@@ -9,7 +9,7 @@ public class NativeLinuxRunner extends CommandRunner {
 
     @Override
     protected CommandBuilder getCommandBuilder(String origCmd) {
-        return new CommandBuilder();
+        return new CommandBuilder().setCmd(origCmd);
     }
 
 }
