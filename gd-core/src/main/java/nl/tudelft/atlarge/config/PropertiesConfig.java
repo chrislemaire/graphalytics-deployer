@@ -1,13 +1,17 @@
 package nl.tudelft.atlarge.config;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
 /**
  * Configurations managed by Java {@link Properties}
  * may be managed through this {@link Configurable}.
  *
- * Created by Chris Lemaire on 6-6-2017.
  * @author Chris Lemaire
  */
 public class PropertiesConfig extends AbstractConfig {
@@ -15,7 +19,7 @@ public class PropertiesConfig extends AbstractConfig {
     /**
      * Properties of the configurations.
      */
-    private Properties properties;
+    Properties properties;
 
     /**
      * Calls super constructor with file that relates to the
@@ -30,33 +34,24 @@ public class PropertiesConfig extends AbstractConfig {
     }
 
     @Override
-    public void read() throws IOException {
+    public void readImpl() throws IOException {
         try (InputStream inputStream = new FileInputStream(file)) {
             properties.load(inputStream);
-        } catch (FileNotFoundException e) {
-            System.err.println("Given config file '" + file.getPath() + "' does not exist.");
-            throw e;
-        } catch (IOException e) {
-            System.err.println("Something went wrong while reading properties file '" + file.getPath() + "'");
-            throw e;
         }
     }
 
     @Override
     public void configure(String key, String value) {
+    	assert key != null;
+    	assert value != null;
+    	
         properties.setProperty(key, value);
     }
 
     @Override
-    public void writeBack() throws IOException {
+    public void writeImpl(File file) throws IOException {
         try (OutputStream outputStream = new FileOutputStream(file)) {
             properties.store(outputStream, "Written back by PropertiesConfig.java.");
-        } catch (FileNotFoundException e) {
-            System.err.println("Given config file '" + file.getPath() + "' does not exist.");
-            throw e;
-        } catch (IOException e) {
-            System.err.println("Something went wrong while writing properties file '" + file.getPath() + "'");
-            throw e;
         }
     }
 
