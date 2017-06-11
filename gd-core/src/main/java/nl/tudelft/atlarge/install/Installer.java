@@ -1,7 +1,6 @@
 package nl.tudelft.atlarge.install;
 
 import nl.tudelft.atlarge.runner.CommandRunner;
-import nl.tudelft.atlarge.runner.HeadNodeRunner;
 
 import java.io.IOException;
 
@@ -30,7 +29,7 @@ public abstract class Installer {
      * @param runner to run commands with.
      * @param product to install on the target system.
      */
-    public Installer(HeadNodeRunner runner, String product) {
+    public Installer(CommandRunner runner, String product) {
         assert runner != null;
         assert product != null;
 
@@ -48,6 +47,6 @@ public abstract class Installer {
      * @param version of the product to install.
      * @param installDir to install the version into.
      */
-    protected abstract void install(String version, String installDir) throws IOException;
+    public abstract void install(String version, String installDir) throws IOException;
 
 }

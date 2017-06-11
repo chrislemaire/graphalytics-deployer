@@ -2,7 +2,7 @@ package nl.tudelft.atlarge.install;
 
 import nl.tudelft.atlarge.Global;
 import nl.tudelft.atlarge.config.PropertiesConfig;
-import nl.tudelft.atlarge.runner.HeadNodeRunner;
+import nl.tudelft.atlarge.runner.CommandRunner;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,14 +26,14 @@ public class LinuxInstaller extends Installer {
      * @param runner to run commands with.
      * @param product to install.
      */
-    public LinuxInstaller(HeadNodeRunner runner, String product) {
+    public LinuxInstaller(CommandRunner runner, String product) {
         super(runner, product);
 
         versions = new PropertiesConfig(new File(Global.RESOURCES_DIR + product + ".txt"));
     }
 
     @Override
-    protected void install(String version, String softwareDir) throws IOException {
+    public void install(String version, String softwareDir) throws IOException {
         // Generate general paths.
         String downloadLink = versions.get(version);
         String versionDir = softwareDir + product + "/" + version + "/";
