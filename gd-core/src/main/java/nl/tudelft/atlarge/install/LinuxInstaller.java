@@ -26,10 +26,11 @@ public class LinuxInstaller extends Installer {
      * @param runner to run commands with.
      * @param product to install.
      */
-    public LinuxInstaller(CommandRunner runner, String product) {
+    public LinuxInstaller(CommandRunner runner, String product) throws IOException {
         super(runner, product);
 
-        versions = new PropertiesConfig(new File(Global.RESOURCES_DIR + product + ".txt"));
+        versions = new PropertiesConfig(new File(Global.RESOURCES_DIR + "versions\\" + product + ".txt"));
+        versions.read();
     }
 
     @Override

@@ -20,14 +20,14 @@ public class XmlPropertiesConfig extends PropertiesConfig {
     }
 
     @Override
-    public void readImpl() throws IOException {
+    protected void readImpl() throws IOException {
         try (InputStream inputStream = new FileInputStream(file)) {
             properties.loadFromXML(inputStream);
         }
     }
 
     @Override
-    public void writeImpl(File file) throws IOException {
+    protected void writeImpl(File file) throws IOException {
         try (OutputStream outputStream = new FileOutputStream(file)) {
             properties.storeToXML(outputStream, "Written back by PropertiesConfig.java.");
         }
