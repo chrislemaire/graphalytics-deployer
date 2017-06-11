@@ -40,7 +40,7 @@ public class LinuxInstaller extends Installer {
         String tempFile = versionDir + "temp-download.temp";
 
         // Create mkDir command to make directories up to version directory.
-        String mkDirCmd = "mkdir -P " + versionDir;
+        String mkDirCmd = "mkdir -p " + versionDir;
 
         // Create wget, echo and full commands to download the packaged software.
         String wgetCmd = "wget " + downloadLink + " -P " + versionDir;
