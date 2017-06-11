@@ -13,19 +13,26 @@ import java.io.IOException;
  * Crawls Apache fileservers to find different versions
  * of a certain type of software.
  *
- * Created by Chris Lemaire on 6-6-2017.
+ * @author Chris Lemaire
  */
-public abstract class ApacheArchiver extends Archiver {
+public class ApacheArchiver extends Archiver {
+
+    /**
+     * The prefix target versions must have.
+     */
+    private String productPrefix;
 
     /**
      * Creates a new {@link Archiver} from the file to write to
      * and the external address to crawl.
      *
      * @param file    to write properties to.
-     * @param address at which to find software versions.
+     * @param addresses at which to find software versions.
      */
-    ApacheArchiver(File file, String address) {
-        super(file, address);
+    ApacheArchiver(File file, String[] addresses, String productPrefix) {
+        super(file, addresses);
+
+        this.productPrefix = productPrefix;
     }
 
     /**
@@ -70,7 +77,9 @@ public abstract class ApacheArchiver extends Archiver {
      * @param attrib full name of the attribute to parse version from.
      * @return parsed version String.
      */
-    public abstract String parseVersion(String attrib);
+    public String parseVersion(String attrib) {
+        return attrib.replaceFirst(productPrefix + "-(.*)\\.tar\\.gz", "$1");
+    }
 
     /**
      * Checks whether a file with name attrib conforms to the standard
@@ -79,7 +88,9 @@ public abstract class ApacheArchiver extends Archiver {
      * @param attrib name of software package.
      * @return <code>true</code> when attrib is a valid name.
      */
-    public abstract boolean isTargetFile(String attrib);
+    public boolean isTargetFile(String attrib) {
+        return attrib.startsWith(productPrefix + "-") && attrib.endsWith(".tar.gz");
+    }
 
     @Override
     public void crawl(String url) {

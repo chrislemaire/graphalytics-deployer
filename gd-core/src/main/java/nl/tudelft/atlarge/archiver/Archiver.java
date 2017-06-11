@@ -9,14 +9,14 @@ import java.io.IOException;
  * Abstract Archiver class to define crawling
  * and writing behaviour for child Archivers.
  *
- * Created by Chris Lemaire on 6-6-2017.
+ * @author Chris Lemaire
  */
 public abstract class Archiver {
 
     /**
-     * File server which to crawl through.
+     * File servers which to crawl through.
      */
-    private String address;
+    private String[] addresses;
 
     /**
      * Properties config with which to write to file.
@@ -25,14 +25,14 @@ public abstract class Archiver {
 
     /**
      * Creates a new Archiver from the file to write to
-     * and the external address to crawl.
+     * and the external addresses to crawl.
      *
      * @param file to write properties to.
-     * @param address at which to find software versions.
+     * @param addresses at which to find software versions.
      */
-    Archiver(File file, String address) {
+    Archiver(File file, String[] addresses) {
         this.config = new PropertiesConfig(file);
-        this.address = address;
+        this.addresses = addresses;
     }
 
     /**
@@ -54,10 +54,12 @@ public abstract class Archiver {
     public abstract void crawl(String url);
 
     /**
-     * Crawls using the internally kept {@link #address} URL String.
+     * Crawls using the internally kept {@link #addresses} URL String.
      */
     void crawl() {
-        crawl(address);
+        for (String address : addresses) {
+            crawl(address);
+        }
     }
 
 }
