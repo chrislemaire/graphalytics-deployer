@@ -1,5 +1,6 @@
 package nl.tudelft.atlarge.reserve;
 
+import nl.tudelft.atlarge.runner.HeadNodeRunner;
 import nl.tudelft.atlarge.script.Script;
 import nl.tudelft.atlarge.script.ScriptOptionList;
 import nl.tudelft.atlarge.script.ScriptTypeEnum;
@@ -26,8 +27,8 @@ public class Das5Reserver extends Reserver {
     /**
      * Creates a new {@link Das5Reserver} from predetermined {@link Script}s.
      */
-    private Das5Reserver() {
-        super(REQ_SCRIPT, POLL_SCRIPT, FIN_SCRIPT);
+    private Das5Reserver(HeadNodeRunner runner) {
+        super(runner, REQ_SCRIPT, POLL_SCRIPT, FIN_SCRIPT);
     }
 
 }

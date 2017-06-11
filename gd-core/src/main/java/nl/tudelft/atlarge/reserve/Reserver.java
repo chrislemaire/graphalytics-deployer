@@ -1,6 +1,6 @@
 package nl.tudelft.atlarge.reserve;
 
-import nl.tudelft.atlarge.script.RuntimeCommandRunner;
+import nl.tudelft.atlarge.runner.CommandRunner;
 import nl.tudelft.atlarge.script.Script;
 
 /**
@@ -10,24 +10,30 @@ import nl.tudelft.atlarge.script.Script;
  * Created by Chris Lemaire on 5-6-2017.
  */
 public class Reserver {
+	
+	/**
+	 * The runner that should run commands for this
+	 * {@link Reserver}.
+	 */
+	private CommandRunner runner;
 
     /**
      * The script that requests a reservation to be
      * completed.
      */
-    protected Script reqScript;
+    private Script reqScript;
 
     /**
      * The script that waits until a reservation is
      * granted.
      */
-    protected Script pollScript;
+    private Script pollScript;
 
     /**
      * The script that stores the reservation ticket
      * after the reservation is granted.
      */
-    protected Script finScript;
+    private Script finScript;
 
     /**
      * Creates a new {@link Reserver} from script files.
@@ -36,11 +42,13 @@ public class Reserver {
      * @param pollScript ScriptType for executing poller.
      * @param finScript ScriptType for executing finisher.
      */
-    public Reserver(Script reqScript, Script pollScript, Script finScript) {
+    public Reserver(CommandRunner runner, Script reqScript, Script pollScript, Script finScript) {
+    	assert runner != null;
         assert reqScript != null;
         assert pollScript != null;
         assert finScript != null;
 
+        this.runner = runner;
         this.reqScript = reqScript;
         this.pollScript = pollScript;
         this.finScript = finScript;
@@ -55,17 +63,17 @@ public class Reserver {
      * @return <code>true</code> when reserving was successful.
      */
     public boolean reserve() {
-        if (!RuntimeCommandRunner.runCommandBlocking(
+        if (!runner.runCommandBlocking(
                 reqScript.getExecutionCommand())) {
             return false;
         }
 
-        if (!RuntimeCommandRunner.runCommandBlocking(
+        if (!runner.runCommandBlocking(
                 pollScript.getExecutionCommand())) {
             return false;
         }
 
-        if (!RuntimeCommandRunner.runCommandBlocking(
+        if (!runner.runCommandBlocking(
                 finScript.getExecutionCommand())) {
             return false;
         }

@@ -2,6 +2,8 @@ package nl.tudelft.atlarge.script;
 
 import org.apache.commons.io.FileUtils;
 
+import nl.tudelft.atlarge.runner.NativeLinuxRunner;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -91,7 +93,7 @@ public class Script {
     /**
      * Gets the execution command String.
      *
-     * @return execution command String ready for {@link RuntimeCommandRunner}
+     * @return execution command String ready for {@link NativeLinuxRunner}
      *          execution.
      */
     public String getExecutionCommand() {
