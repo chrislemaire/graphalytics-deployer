@@ -1,0 +1,21 @@
+#Written back by PropertiesConfig.java.
+#Wed Jun 07 10:48:56 CEST 2017
+3.3.6=https\://archive.apache.org/dist/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz
+3.3.5=https\://archive.apache.org/dist/zookeeper/zookeeper-3.3.5/zookeeper-3.3.5.tar.gz
+3.3.4=https\://archive.apache.org/dist/zookeeper/zookeeper-3.3.4/zookeeper-3.3.4.tar.gz
+3.3.3=https\://archive.apache.org/dist/zookeeper/zookeeper-3.3.3/zookeeper-3.3.3.tar.gz
+3.5.1-alpha=https\://archive.apache.org/dist/zookeeper/zookeeper-3.5.1-alpha/zookeeper-3.5.1-alpha.tar.gz
+3.5.0-alpha=https\://archive.apache.org/dist/zookeeper/zookeeper-3.5.0-alpha/zookeeper-3.5.0-alpha.tar.gz
+3.4.9=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
+3.4.8=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz
+3.4.7=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.7/zookeeper-3.4.7.tar.gz
+3.4.6=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
+3.4.5=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.5/zookeeper-3.4.5.tar.gz
+3.5.3-beta=https\://archive.apache.org/dist/zookeeper/zookeeper-3.5.3-beta/zookeeper-3.5.3-beta.tar.gz
+3.4.4=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.4/zookeeper-3.4.4.tar.gz
+3.4.3=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.3/zookeeper-3.4.3.tar.gz
+3.4.2=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.2/zookeeper-3.4.2.tar.gz
+3.4.1=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.1/zookeeper-3.4.1.tar.gz
+3.4.0=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.0/zookeeper-3.4.0.tar.gz
+3.4.10=https\://archive.apache.org/dist/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz
+3.5.2-alpha=https\://archive.apache.org/dist/zookeeper/zookeeper-3.5.2-alpha/zookeeper-3.5.2-alpha.tar.gz
