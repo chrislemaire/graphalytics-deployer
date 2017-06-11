@@ -1,5 +1,5 @@
 #Written back by PropertiesConfig.java.
-#Tue Jun 06 23:52:57 CEST 2017
+#Wed Jun 07 10:48:55 CEST 2017
 2.4.0-src=https\://archive.apache.org/dist/hadoop/core/hadoop-2.4.0/hadoop-2.4.0-src.tar.gz
 1.0.4-bin=https\://archive.apache.org/dist/hadoop/core/hadoop-1.0.4/hadoop-1.0.4-bin.tar.gz
 2.7.3=https\://archive.apache.org/dist/hadoop/core/stable2/hadoop-2.7.3.tar.gz

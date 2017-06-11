@@ -15,10 +15,17 @@ public class ArchiveUpdater {
     private static final String HADOOP_ARCHIVE = "https://archive.apache.org/dist/hadoop/core/";
     private static final String HADOOP_FILE = RESOURCES_DIR + "\\versions\\hadoop.txt";
 
+    private static final String ZOOKEEPER_ARCHIVE = "https://archive.apache.org/dist/zookeeper/";
+    private static final String ZOOKEEPER_FILE = RESOURCES_DIR + "\\versions\\zookeeper.txt";
+
     public static void main(String[] args) throws IOException {
         HadoopArchiver hadoopArchiver = new HadoopArchiver(new File(HADOOP_FILE), HADOOP_ARCHIVE);
         hadoopArchiver.crawl();
         hadoopArchiver.write();
+
+        ZookeeperArchiver zookeeperArchiver = new ZookeeperArchiver(new File(ZOOKEEPER_FILE), ZOOKEEPER_ARCHIVE);
+        zookeeperArchiver.crawl();
+        zookeeperArchiver.write();
     }
 
 }
