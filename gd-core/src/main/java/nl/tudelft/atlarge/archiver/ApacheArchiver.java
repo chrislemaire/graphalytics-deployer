@@ -6,7 +6,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -29,7 +28,7 @@ public class ApacheArchiver extends Archiver {
      * @param file    to write properties to.
      * @param addresses at which to find software versions.
      */
-    ApacheArchiver(File file, String[] addresses, String productPrefix) {
+    ApacheArchiver(String file, String[] addresses, String productPrefix) {
         super(file, addresses);
 
         this.productPrefix = productPrefix;

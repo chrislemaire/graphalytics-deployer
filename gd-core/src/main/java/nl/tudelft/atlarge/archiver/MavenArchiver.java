@@ -17,7 +17,7 @@ public class MavenArchiver extends ApacheArchiver {
      * @param file          to write properties to.
      * @param addresses     at which to find software versions.
      */
-    MavenArchiver(File file, String[] addresses) {
+    MavenArchiver(String file, String[] addresses) {
         super(file, addresses, "");
     }
 

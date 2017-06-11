@@ -4,7 +4,6 @@ import nl.tudelft.atlarge.Global;
 import nl.tudelft.atlarge.config.PropertiesConfig;
 import nl.tudelft.atlarge.runner.CommandRunner;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -29,7 +28,7 @@ public class LinuxInstaller extends Installer {
     public LinuxInstaller(CommandRunner runner, String product) throws IOException {
         super(runner, product);
 
-        versions = new PropertiesConfig(new File(Global.RESOURCES_DIR + "versions\\" + product + ".txt"));
+        versions = new PropertiesConfig(Global.VERSIONS_DIR_CLASS + product + ".txt");
         versions.read();
     }
 

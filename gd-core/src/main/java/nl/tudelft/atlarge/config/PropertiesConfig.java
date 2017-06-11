@@ -1,11 +1,6 @@
 package nl.tudelft.atlarge.config;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -27,7 +22,7 @@ public class PropertiesConfig extends AbstractConfig {
      *
      * @param file associated with the configurations.
      */
-    public PropertiesConfig(File file) {
+    public PropertiesConfig(String file) {
         super(file);
 
         this.properties = new Properties();
@@ -35,7 +30,7 @@ public class PropertiesConfig extends AbstractConfig {
 
     @Override
     protected void readImpl() throws IOException {
-        try (InputStream inputStream = new FileInputStream(file)) {
+        try (InputStream inputStream = file.openStream()) {
             properties.load(inputStream);
         }
     }

@@ -1,11 +1,6 @@
 package nl.tudelft.atlarge.config;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class XmlPropertiesConfig extends PropertiesConfig {
 
@@ -15,13 +10,13 @@ public class XmlPropertiesConfig extends PropertiesConfig {
      * 
      * @param file with associated properties.
      */
-    public XmlPropertiesConfig(File file) {
+    public XmlPropertiesConfig(String file) {
         super(file);
     }
 
     @Override
     protected void readImpl() throws IOException {
-        try (InputStream inputStream = new FileInputStream(file)) {
+        try (InputStream inputStream = file.openStream()) {
             properties.loadFromXML(inputStream);
         }
     }

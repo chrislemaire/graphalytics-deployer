@@ -1,12 +1,7 @@
 package nl.tudelft.atlarge.config;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.net.URL;
 
 /**
  * Abstract config class with super constructor to
@@ -20,7 +15,7 @@ public abstract class AbstractConfig implements Configurable {
     /**
      * File the configurations relate to.
      */
-    protected File file;
+    protected URL file;
 
     /**
      * Super constructor for config classes to initialize
@@ -28,15 +23,15 @@ public abstract class AbstractConfig implements Configurable {
      *
      * @param file the configurations relate to.
      */
-    AbstractConfig(File file) {
+    AbstractConfig(String file) {
     	assert file != null;
     	
-        this.file = file;
+        this.file = getClass().getResource(file);
     }
     
     @Override
     public void read() throws IOException {
-        try (InputStream inputStream = new FileInputStream(file)) {
+        try (InputStream inputStream = file.openStream()) {
             readImpl();
         } catch (FileNotFoundException e) {
             System.err.println("Given config file '" + file.getPath() + "' does not exist.");
@@ -49,7 +44,7 @@ public abstract class AbstractConfig implements Configurable {
     
     @Override
     public void writeBack() throws IOException {
-        write(file);
+        write(new File(file.getFile()));
     }
     
     @Override
