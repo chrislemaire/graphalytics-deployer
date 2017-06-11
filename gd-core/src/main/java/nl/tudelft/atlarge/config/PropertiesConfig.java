@@ -49,6 +49,13 @@ public class PropertiesConfig extends AbstractConfig {
     }
 
     @Override
+    public String get(String key) {
+        assert key != null;
+
+        return properties.getProperty(key);
+    }
+
+    @Override
     public void writeImpl(File file) throws IOException {
         try (OutputStream outputStream = new FileOutputStream(file)) {
             properties.store(outputStream, "Written back by PropertiesConfig.java.");

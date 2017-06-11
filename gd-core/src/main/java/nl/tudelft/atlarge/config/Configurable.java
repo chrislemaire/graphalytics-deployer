@@ -31,6 +31,14 @@ public interface Configurable {
     void configure(String key, String value);
 
     /**
+     * Returns the requested value for the given key.
+     *
+     * @param key String to match as key.
+     * @return value associated with given key.
+     */
+    String get(String key);
+
+    /**
      * Writes back the configurations to the associated
      * config file.
      * 
