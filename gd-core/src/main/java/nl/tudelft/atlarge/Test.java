@@ -15,7 +15,7 @@ public class Test {
         LinuxInstaller installer = new LinuxInstaller(runner, "hadoop");
 
         try {
-            installer.install("2.6.2", "$HOME/frameworks/");
+            installer.install("2.6.2", "/home/Chris/frameworks/");
         } catch (IOException e) {
             e.printStackTrace();
         }

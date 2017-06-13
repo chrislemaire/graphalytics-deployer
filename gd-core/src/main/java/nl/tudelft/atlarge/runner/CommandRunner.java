@@ -1,6 +1,7 @@
 package nl.tudelft.atlarge.runner;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Contains static methods to run commands in the runtime either
@@ -44,9 +45,9 @@ public abstract class CommandRunner {
      * @throws IOException when the shell command could not be executed.
      */
     public Process runCommand(String origCmd) throws IOException {
-    	String command = getCommand(origCmd);
+        CommandBuilder command = getCommandBuilder(origCmd);
         try {
-            return Runtime.getRuntime().exec(command);
+            return Runtime.getRuntime().exec(command.buildCommandTokens());
         } catch (IOException e) {
             System.err.println("Shell command '" + command + "' could not be executed.");
             throw e;
@@ -62,9 +63,10 @@ public abstract class CommandRunner {
      * @throws IOException when the shell command could not be executed.
      * @throws InterruptedException when command execution was interrupted.
      */
-    private int runCommandBlockingWithExit(String command) throws IOException, InterruptedException {
+    private int runCommandBlockingWithExit(CommandBuilder command) throws IOException, InterruptedException {
         try {
-            Process p = Runtime.getRuntime().exec(command);
+            System.out.println("Running: '" + Arrays.toString(command.buildCommandTokens()) + "'");
+            Process p = Runtime.getRuntime().exec(command.buildCommandTokens());
             return p.waitFor();
         } catch (IOException e) {
             System.err.println("Shell command '" + command + "' could not be executed.");
@@ -86,7 +88,7 @@ public abstract class CommandRunner {
      * @return <code>true</code> when the command was executed successfully.
      */
     public boolean runCommandBlocking(String origCmd) {
-    	String command = getCommand(origCmd);
+    	CommandBuilder command = getCommandBuilder(origCmd);
         try {
             int exit = runCommandBlockingWithExit(command);
             if (exit != 0) {

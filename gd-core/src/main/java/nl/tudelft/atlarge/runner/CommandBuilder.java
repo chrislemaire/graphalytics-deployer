@@ -24,6 +24,8 @@ public class CommandBuilder {
 	 * to the command String upon flushing.
 	 */
 	private String currCmd;
+
+	private boolean letShell;
 	
 	/**
 	 * Creates a new CommandBuilder and initializes
@@ -47,6 +49,12 @@ public class CommandBuilder {
 		
 		return this;
 	}
+
+	public CommandBuilder letShellDoWork(boolean letShell) {
+	    this.letShell = letShell;
+
+	    return this;
+    }
 	
 	/**
 	 * Sets the command for the current builder.
@@ -63,8 +71,6 @@ public class CommandBuilder {
     /**
      * Flushes the current command and ssh keys
      * together to create a single part of a command.
-     * 
-     * @return {@link CommandBuilder} to continue building.
      */
     private void flush() {
         if (currCmd != null) {
@@ -90,5 +96,15 @@ public class CommandBuilder {
 
 		return builder.toString();
 	}
+
+	public String[] buildCommandTokens() {
+	    flush();
+
+	    if (letShell) {
+	        return new String[] {"sh", "-c", builder.toString()};
+        } else {
+	        return builder.toString().split(" +");
+        }
+    }
 	
 }

@@ -28,6 +28,7 @@ public class HeadNodeRunner extends CommandRunner {
 	protected CommandBuilder getCommandBuilder(String origCmd) {
         CommandBuilder builder = new CommandBuilder();
         builder.sshTo(sshId);
+        builder.letShellDoWork(true);
         return builder.setCmd(origCmd);
 	}
 
