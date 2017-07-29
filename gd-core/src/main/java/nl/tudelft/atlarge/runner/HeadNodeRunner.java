@@ -28,8 +28,11 @@ public class HeadNodeRunner extends CommandRunner {
 	protected CommandBuilder getCommandBuilder(String origCmd) {
         CommandBuilder builder = new CommandBuilder();
         builder.sshTo(sshId);
-        builder.letShellDoWork(true);
+        builder.setNativeShellExecutor(CommandBuilder.ShellExecutor.SH);
         return builder.setCmd(origCmd);
 	}
 
+	public String getSshId() {
+		return sshId;
+	}
 }

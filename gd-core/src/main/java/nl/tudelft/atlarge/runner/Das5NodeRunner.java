@@ -24,7 +24,7 @@ public class Das5NodeRunner extends HeadNodeRunner {
 
     @Override
     protected CommandBuilder getCommandBuilder(String origCmd) {
-        return super.getCommandBuilder(origCmd).letShellDoWork(true).sshTo(nodeId);
+        return super.getCommandBuilder(origCmd).setNativeShellExecutor(CommandBuilder.ShellExecutor.SH).sshTo(nodeId);
     }
 
 }

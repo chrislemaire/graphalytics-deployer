@@ -8,6 +8,17 @@ package nl.tudelft.atlarge.runner;
  */
 public class CommandBuilder {
 
+	enum ShellExecutor {
+		SH("sh", "-c");
+
+		private String exec, options;
+
+		ShellExecutor(String exec, String options) {
+			this.exec = exec;
+			this.options = options;
+		}
+	}
+
 	/**
 	 * Builder for the full command String.
 	 */
@@ -17,15 +28,25 @@ public class CommandBuilder {
 	 * Number of ssh commands currently performed
 	 * in a chain.
 	 */
-	private int noSshs;
+	private int noSshs = 0;
 	
 	/**
 	 * The current command that will be appended
 	 * to the command String upon flushing.
 	 */
-	private String currCmd;
+	private String currCmd = null;
 
-	private boolean letShell;
+	/**
+	 * The executor that handles the command at
+	 * the native system.
+	 */
+	private ShellExecutor nativeExec = ShellExecutor.SH;
+
+	/**
+	 * The file the stdout output should be written
+	 * to.
+	 */
+	private String outputFile = null;
 	
 	/**
 	 * Creates a new CommandBuilder and initializes
@@ -33,8 +54,6 @@ public class CommandBuilder {
 	 */
 	public CommandBuilder() {
 		builder = new StringBuilder();
-		noSshs = 0;
-		currCmd = null;
 	}
 	
 	/**
@@ -50,8 +69,8 @@ public class CommandBuilder {
 		return this;
 	}
 
-	public CommandBuilder letShellDoWork(boolean letShell) {
-	    this.letShell = letShell;
+	public CommandBuilder setNativeShellExecutor(ShellExecutor exec) {
+	    this.nativeExec = exec;
 
 	    return this;
     }
@@ -65,6 +84,18 @@ public class CommandBuilder {
 	public CommandBuilder setCmd(String command) {
 		currCmd = command;
 		
+		return this;
+	}
+
+	/**
+	 * Sets the output file for stdout.
+	 *
+	 * @param filename to be set.
+	 * @return {@link CommandBuilder} to continue building.
+	 */
+	public CommandBuilder outputToFile(String filename) {
+		outputFile = filename;
+
 		return this;
 	}
     
@@ -94,17 +125,19 @@ public class CommandBuilder {
 	public String buildCommand() {
 		flush();
 
-		return builder.toString();
+		return nativeExec.exec + " " + nativeExec.options + " " + builder.toString();
 	}
 
+	/**
+	 * Builds the command by flushing and thereafter
+	 * prepends the shell executor to execute the command.
+	 *
+	 * @return String array with shell executor and the command.
+	 */
 	public String[] buildCommandTokens() {
-	    flush();
+		flush();
 
-	    if (letShell) {
-	        return new String[] {"sh", "-c", builder.toString()};
-        } else {
-	        return builder.toString().split(" +");
-        }
-    }
+		return new String[]{nativeExec.exec, nativeExec.options, builder.toString()};
+	}
 	
 }
