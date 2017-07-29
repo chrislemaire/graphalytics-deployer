@@ -1,4 +1,4 @@
-package nl.tudelft.atlarge.runner;
+package nl.tudelft.atlarge.live.runner;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -95,7 +95,10 @@ public abstract class CommandRunner {
                 System.err.println("Shell command '" + command + "' exited with code " + exit);
                 return false;
             }
-        } catch (IOException|InterruptedException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (InterruptedException e) {
             e.printStackTrace();
             return false;
         }

@@ -1,6 +1,6 @@
-package nl.tudelft.atlarge.reserve;
+package nl.tudelft.atlarge.live.reserve;
 
-import nl.tudelft.atlarge.runner.HeadNodeRunner;
+import nl.tudelft.atlarge.live.runner.HeadNodeRunner;
 import nl.tudelft.atlarge.script.Script;
 import nl.tudelft.atlarge.script.ScriptOptionList;
 import nl.tudelft.atlarge.script.ScriptTypeEnum;

@@ -1,6 +1,6 @@
-package nl.tudelft.atlarge.reserve;
+package nl.tudelft.atlarge.live.reserve;
 
-import nl.tudelft.atlarge.runner.CommandRunner;
+import nl.tudelft.atlarge.live.runner.CommandRunner;
 import nl.tudelft.atlarge.script.Script;
 
 /**

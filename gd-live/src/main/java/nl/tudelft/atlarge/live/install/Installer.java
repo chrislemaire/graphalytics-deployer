@@ -1,6 +1,6 @@
-package nl.tudelft.atlarge.install;
+package nl.tudelft.atlarge.live.install;
 
-import nl.tudelft.atlarge.runner.CommandRunner;
+import nl.tudelft.atlarge.live.runner.CommandRunner;
 
 import java.io.IOException;
 

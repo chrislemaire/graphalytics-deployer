@@ -1,7 +1,7 @@
-package nl.tudelft.atlarge;
+package nl.tudelft.atlarge.live;
 
-import nl.tudelft.atlarge.install.LinuxInstaller;
-import nl.tudelft.atlarge.runner.NativeLinuxRunner;
+import nl.tudelft.atlarge.live.install.LinuxInstaller;
+import nl.tudelft.atlarge.live.runner.NativeLinuxRunner;
 
 import java.io.IOException;
 

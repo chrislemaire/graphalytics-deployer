@@ -1,4 +1,4 @@
-package nl.tudelft.atlarge.install;
+package nl.tudelft.atlarge.live.install;
 
 /**
  * Describes a set of packed file types.

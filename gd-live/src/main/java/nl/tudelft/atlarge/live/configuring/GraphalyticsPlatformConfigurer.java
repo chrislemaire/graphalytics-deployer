@@ -1,8 +1,7 @@
-package nl.tudelft.atlarge.configuring;
+package nl.tudelft.atlarge.live.configuring;
 
-import nl.tudelft.atlarge.Global;
 import nl.tudelft.atlarge.config.PropertiesConfig;
-import nl.tudelft.atlarge.runner.HeadNodeRunner;
+import nl.tudelft.atlarge.live.runner.HeadNodeRunner;
 
 import java.io.IOException;
 
@@ -43,7 +42,7 @@ public abstract class GraphalyticsPlatformConfigurer {
      *      reading the properties locally.
      */
     public void loadConfigs() throws IOException {
-        Global.NATIVE_RUNNER.runCommandBlocking(
+        nl.tudelft.atlarge.live.Global.NATIVE_RUNNER.runCommandBlocking(
                 "scp -rv " + entryPointRunner.getSshId() + ":" + pathToPlatformConfig + " ./");
 
         platform = new PropertiesConfig("./platform.properties");
