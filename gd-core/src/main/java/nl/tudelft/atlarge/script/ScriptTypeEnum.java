@@ -11,8 +11,8 @@ public enum ScriptTypeEnum implements ScriptType {
 
     SHELL(new CmdGenerator() {
         @Override
-        public String generateExecCommand(Script script) {
-            return "./" + script.getFile().getName();
+        public String generateExecCommand(ClassResourceScript classResourceScript) {
+            return "./" + classResourceScript.getFile().getName();
         }
     });
 
@@ -32,7 +32,7 @@ public enum ScriptTypeEnum implements ScriptType {
     }
 
     @Override
-    public String genCmd(Script script) {
-        return cmdGenerator.generateExecCommand(script);
+    public String genCmd(ClassResourceScript classResourceScript) {
+        return cmdGenerator.generateExecCommand(classResourceScript);
     }
 }

@@ -1,7 +1,7 @@
 package nl.tudelft.atlarge.live.reserve;
 
 import nl.tudelft.atlarge.live.runner.CommandRunner;
-import nl.tudelft.atlarge.script.Script;
+import nl.tudelft.atlarge.script.ClassResourceScript;
 
 /**
  * Reserver meant to reserve nodes in the cluster to
@@ -21,37 +21,37 @@ public class Reserver {
      * The script that requests a reservation to be
      * completed.
      */
-    private Script reqScript;
+    private ClassResourceScript reqClassResourceScript;
 
     /**
      * The script that waits until a reservation is
      * granted.
      */
-    private Script pollScript;
+    private ClassResourceScript pollClassResourceScript;
 
     /**
      * The script that stores the reservation ticket
      * after the reservation is granted.
      */
-    private Script finScript;
+    private ClassResourceScript finClassResourceScript;
 
     /**
      * Creates a new {@link Reserver} from script files.
      *
-     * @param reqScript ScriptType for executing requester.
-     * @param pollScript ScriptType for executing poller.
-     * @param finScript ScriptType for executing finisher.
+     * @param reqClassResourceScript ScriptType for executing requester.
+     * @param pollClassResourceScript ScriptType for executing poller.
+     * @param finClassResourceScript ScriptType for executing finisher.
      */
-    public Reserver(CommandRunner runner, Script reqScript, Script pollScript, Script finScript) {
+    public Reserver(CommandRunner runner, ClassResourceScript reqClassResourceScript, ClassResourceScript pollClassResourceScript, ClassResourceScript finClassResourceScript) {
     	assert runner != null;
-        assert reqScript != null;
-        assert pollScript != null;
-        assert finScript != null;
+        assert reqClassResourceScript != null;
+        assert pollClassResourceScript != null;
+        assert finClassResourceScript != null;
 
         this.runner = runner;
-        this.reqScript = reqScript;
-        this.pollScript = pollScript;
-        this.finScript = finScript;
+        this.reqClassResourceScript = reqClassResourceScript;
+        this.pollClassResourceScript = pollClassResourceScript;
+        this.finClassResourceScript = finClassResourceScript;
     }
 
     /**
@@ -64,17 +64,17 @@ public class Reserver {
      */
     public boolean reserve() {
         if (!runner.runCommandBlocking(
-                reqScript.getExecutionCommand())) {
+                reqClassResourceScript.getExecutionCommand())) {
             return false;
         }
 
         if (!runner.runCommandBlocking(
-                pollScript.getExecutionCommand())) {
+                pollClassResourceScript.getExecutionCommand())) {
             return false;
         }
 
         if (!runner.runCommandBlocking(
-                finScript.getExecutionCommand())) {
+                finClassResourceScript.getExecutionCommand())) {
             return false;
         }
 

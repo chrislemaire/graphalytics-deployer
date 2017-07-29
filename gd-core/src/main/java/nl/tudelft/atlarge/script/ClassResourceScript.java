@@ -13,15 +13,15 @@ import java.net.URL;
  * Created by Chris Lemaire on 5-6-2017.
  * @author Chris Lemaire
  */
-public class Script {
+public class ClassResourceScript {
 
     /**
-     * The {@link ScriptType} for this Script.
+     * The {@link ScriptType} for this ClassResourceScript.
      */
     private ScriptType type;
 
     /**
-     * The {@link ScriptOptionList} used for this Script.
+     * The {@link ScriptOptionList} used for this ClassResourceScript.
      */
     private ScriptOptionList options;
 
@@ -48,15 +48,15 @@ public class Script {
     private boolean isExported;
 
     /**
-     * Creates a new Script from a script type, the internal url
+     * Creates a new ClassResourceScript from a script type, the internal url
      * and the unpacking directory. Also immediately generates
      * the script execution command.
      *
-     * @param type of the Script.
+     * @param type of the ClassResourceScript.
      * @param internalUrl location of script in classpath.
      * @param unpackFile file to unpack to.
      */
-    public Script(ScriptType type, ScriptOptionList options, URL internalUrl, File unpackFile) {
+    public ClassResourceScript(ScriptType type, ScriptOptionList options, URL internalUrl, File unpackFile) {
         this.type = type;
         this.internalUrl = internalUrl;
         this.unpackFile = unpackFile;
@@ -66,7 +66,7 @@ public class Script {
     }
 
     /**
-     * Exports this Script from its {@link #internalUrl} to the
+     * Exports this ClassResourceScript from its {@link #internalUrl} to the
      * given {@link #unpackFile} file.
      *
      * @throws IOException when something went wrong during exporting.
@@ -79,7 +79,7 @@ public class Script {
         try {
             FileUtils.copyURLToFile(internalUrl, unpackFile);
         } catch (IOException e) {
-            System.err.println("Couldn't export Script '" + this + "'" +
+            System.err.println("Couldn't export ClassResourceScript '" + this + "'" +
                     "\n\tFrom:\t'" + internalUrl.getPath() + "'" +
                     "\n\tTo:\t'" + unpackFile.getPath() + "'");
             throw e;
@@ -100,7 +100,7 @@ public class Script {
     /**
      * Gets the {@link #unpackFile} field.
 
-     * @return file pointing to the location this Script should unpack to.
+     * @return file pointing to the location this ClassResourceScript should unpack to.
      */
     public File getFile() {
         return unpackFile;

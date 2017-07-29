@@ -3,7 +3,7 @@ package nl.tudelft.atlarge.script;
 import java.io.File;
 
 /**
- * Type of Script generalized by an interface with a single method
+ * Type of ClassResourceScript generalized by an interface with a single method
  * returning the command needed to execute the type of script.
  *
  * This should be implemented by enumerations to extend the list
@@ -22,22 +22,22 @@ public interface ScriptType {
     abstract class CmdGenerator {
 
         /**
-         * Generates the execution command given the script {@link File}.
+         * Generates the execution command given the classResourceScript {@link File}.
          *
-         * @param script of the script to execute.
+         * @param classResourceScript of the classResourceScript to execute.
          * @return command String.
          */
-        public abstract String generateExecCommand(Script script);
+        public abstract String generateExecCommand(ClassResourceScript classResourceScript);
 
     }
 
     /**
-     * Generates the execution command given the script {@link File}.
+     * Generates the execution command given the classResourceScript {@link File}.
      *
-     * @param script to execute.
+     * @param classResourceScript to execute.
      * @return command String.
      */
-    String genCmd(Script script);
+    String genCmd(ClassResourceScript classResourceScript);
 
 
 }
