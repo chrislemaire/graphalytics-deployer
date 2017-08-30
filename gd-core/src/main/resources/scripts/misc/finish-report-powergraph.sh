@@ -35,7 +35,7 @@ echo "Finishing report at '$report'"
 echo "Copying graphalytics configs into report at '$report/configs'"
 cp -r ./config "$report/configs"
 
-# Also copy the run-mpi.sh script into a bin folder to check settings in this.
+# Also copy the run-mpi.sh classResourceScript into a bin folder to check settings in this.
 echo "Copying './bin/sh/run-mpi.sh' into report at '$report/bin'"
 mkdir "$report/bin"
 cp ./bin/sh/run-mpi.sh "$report/bin"

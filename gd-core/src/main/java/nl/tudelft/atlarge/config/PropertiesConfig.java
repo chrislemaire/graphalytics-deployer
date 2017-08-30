@@ -57,4 +57,8 @@ public class PropertiesConfig extends AbstractConfig {
         }
     }
 
+    @Override
+    public boolean hasKey(String key) {
+        return properties.containsKey(key);
+    }
 }

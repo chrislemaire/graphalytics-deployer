@@ -56,4 +56,14 @@ public interface Configurable {
      */
     void write(File file) throws IOException;
 
+    /**
+     * Returns whether the configurations contain the
+     * given key.
+     *
+     * @param key to check with configurations.
+     * @return true when the configurations contains
+     *          the key.
+     */
+    boolean hasKey(String key);
+
 }
