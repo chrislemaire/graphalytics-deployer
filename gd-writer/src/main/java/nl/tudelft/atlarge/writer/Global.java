@@ -8,11 +8,11 @@ import java.util.Random;
  */
 public class Global {
 
-    public static final String SCRIPT_PATH = "/scripts";
+    public static final String USERNAME = "clemaire";
 
-    public static final String NATIVE_HOME = "/home/Chris";
-
-    public static final String OUTPUT_FILE = "~/tmpoutput.out";
+    public static final String SCRIPT_DIRECTORY = "scripts/";
+    public static final String PRODUCT_DIRECTORY = "frameworks/";
+    public static final String OUTPUT_FILE = "tmpoutput.out";
 
     public static final Random RANDOM = new Random(System.currentTimeMillis());
 

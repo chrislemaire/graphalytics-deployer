@@ -39,7 +39,7 @@ public class ShellScriptBuilder {
      * This is "localhost" for the first ShellScriptBuilder
      * in a chain.
      */
-    private String sshRemote;
+    private RemoteSystem sshRemote;
 
     /**
      * The {@link ShellScriptBuilder} hosting this script
@@ -66,13 +66,13 @@ public class ShellScriptBuilder {
      * localhost and ending with the current builder's
      * remote.
      */
-    private final LinkedList<String> relayRemotes;
+    private final LinkedList<RemoteSystem> relayRemotes;
 
     /**
      * Constructs the first {@link ShellScriptBuilder}.
      */
     public ShellScriptBuilder(String scriptArchiveName) {
-        this("localhost", null, new LinkedList<String>(), "/" + scriptArchiveName);
+        this(RemoteSystem.NATIVE, null, new LinkedList<RemoteSystem>(), "/" + scriptArchiveName);
     }
 
     /**
@@ -85,8 +85,8 @@ public class ShellScriptBuilder {
      * @param relayRemotes all remotes in the ssh chain.
      * @param currentPath the current path.
      */
-    private ShellScriptBuilder(String sshRemote, ShellScriptBuilder host,
-                               LinkedList<String> relayRemotes, String currentPath) {
+    private ShellScriptBuilder(RemoteSystem sshRemote, ShellScriptBuilder host,
+                               LinkedList<RemoteSystem> relayRemotes, String currentPath) {
         outputBuilder = new StringBuilder();
         remoteScripts = new Stack<>();
         appendDefaultExportCommands();
@@ -169,7 +169,7 @@ public class ShellScriptBuilder {
      *                            be called from this ShellScript.
      */
     private void appendScriptCall(ShellScript remoteScript) {
-        appendLine(remoteScript.createRemoteCallCommand(sshRemote));
+        appendLine(remoteScript.createRemoteCallCommand(sshRemote.sshAlias));
     }
 
     /**
@@ -185,7 +185,7 @@ public class ShellScriptBuilder {
         appendLine("find $(dirname $0) -type f -regex \".*/*.sh\" | xargs --max-args=1 chmod +x");
         appendLine("find $(dirname $0) -mindepth 1 -maxdepth 1 -type d -printf '%f\\n' "
                 + "| xargs -I % --max-args=1 scp -r ~"
-                + Global.SCRIPT_PATH + " %:~" + Global.SCRIPT_PATH + "\n");
+                + Global.SCRIPT_DIRECTORY + " %:~" + Global.SCRIPT_DIRECTORY + "\n");
     }
 
     /**
@@ -197,7 +197,7 @@ public class ShellScriptBuilder {
      *                 will be executed.
      * @return
      */
-    public ShellScriptBuilder startBuildingSshRemoteScript(String sshAlias) {
+    public ShellScriptBuilder startBuildingSshRemoteScript(RemoteSystem sshAlias) {
         ShellScriptBuilder currentBuilder = getCurrentBuilder();
 
         currentBuilder.remoteScripts.push(new ShellScriptBuilder(sshAlias, this, relayRemotes, path));
@@ -245,7 +245,7 @@ public class ShellScriptBuilder {
             stopBuildingSshRemoteScript();
         }
 
-        String fullPath = Global.NATIVE_HOME + Global.SCRIPT_PATH + path;
+        String fullPath = RemoteSystem.NATIVE.scripts() + path.substring(1);
 
         System.out.println("Creating script directory: '" + fullPath + "'");
         Files.createDirectories(Paths.get(fullPath));

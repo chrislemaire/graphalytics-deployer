@@ -17,17 +17,17 @@ public class ShellScript {
 
     private final String fullPath;
 
-    private final String remote;
+    private final RemoteSystem remote;
 
-    private final List<String> relayRemotes;
+    private final List<RemoteSystem> relayRemotes;
 
-    ShellScript(String name, String path, String remote, LinkedList<String> relayRemotes) {
+    ShellScript(String name, String path, RemoteSystem remote, LinkedList<RemoteSystem> relayRemotes) {
         this.name = name;
         this.path = path;
-        this.fullPath = '~' + Global.SCRIPT_PATH + path + '/' + name;
+        this.fullPath = '~' + Global.SCRIPT_DIRECTORY + path + '/' + name;
         this.remote = remote;
 
-        this.relayRemotes = new ArrayList<String>(relayRemotes);
+        this.relayRemotes = new ArrayList<RemoteSystem>(relayRemotes);
     }
 
     /**
