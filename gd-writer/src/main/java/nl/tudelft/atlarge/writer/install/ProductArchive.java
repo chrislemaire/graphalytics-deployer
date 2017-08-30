@@ -10,8 +10,8 @@ public class ProductArchive {
 
     private PropertiesConfig archive;
 
-    public ProductArchive(String file) {
-        archive = new PropertiesConfig(Global.VERSIONS_DIR_CLASS + file);
+    public ProductArchive(String product) {
+        archive = new PropertiesConfig(Global.VERSIONS_DIR_CLASS + product + ".txt");
     }
 
     public boolean hasVersion(String version) {
