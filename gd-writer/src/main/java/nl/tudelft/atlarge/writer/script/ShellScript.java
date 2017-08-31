@@ -1,7 +1,5 @@
 package nl.tudelft.atlarge.writer.script;
 
-import nl.tudelft.atlarge.writer.Global;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,8 +11,6 @@ public class ShellScript {
 
     private final String name;
 
-    private final String path;
-
     private final String fullPath;
 
     private final RemoteSystem remote;
@@ -23,11 +19,10 @@ public class ShellScript {
 
     ShellScript(String name, String path, RemoteSystem remote, LinkedList<RemoteSystem> relayRemotes) {
         this.name = name;
-        this.path = path;
-        this.fullPath = '~' + Global.SCRIPT_DIRECTORY + path + '/' + name;
+        this.fullPath = remote.scripts() + path.substring(1) + '/' + name;
         this.remote = remote;
 
-        this.relayRemotes = new ArrayList<RemoteSystem>(relayRemotes);
+        this.relayRemotes = new ArrayList<>(relayRemotes);
     }
 
     /**
@@ -38,7 +33,7 @@ public class ShellScript {
      * @return command calling this Script from the host
      *          remote.
      */
-    String createRemoteCallCommand(String hostRemote) {
+    String createRemoteCallCommand(RemoteSystem hostRemote) {
         if (!relayRemotes.contains(hostRemote)) {
             throw new IllegalArgumentException("No known ssh relay path from '" + hostRemote
                     + "' to '" + remote);
@@ -50,9 +45,9 @@ public class ShellScript {
 
         StringBuilder commandBuilder = new StringBuilder();
         for (int i = relayRemotes.lastIndexOf(hostRemote) + 1; i < relayRemotes.size(); i++) {
-            commandBuilder.append("ssh ").append(relayRemotes.get(i)).append(' ');
+            commandBuilder.append("ssh ").append(relayRemotes.get(i).sshAlias).append(' ');
         }
-        commandBuilder.append('\'').append(fullPath).append('\'');
+        commandBuilder.append("\"nohup ").append(fullPath).append('\"');
 
         return commandBuilder.toString();
     }

@@ -4,6 +4,7 @@ import nl.tudelft.atlarge.writer.Global;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.LinkedList;
@@ -66,7 +67,7 @@ public class ShellScriptBuilder {
      * localhost and ending with the current builder's
      * remote.
      */
-    private final LinkedList<RemoteSystem> relayRemotes;
+    private LinkedList<RemoteSystem> relayRemotes;
 
     /**
      * Constructs the first {@link ShellScriptBuilder}.
@@ -93,7 +94,7 @@ public class ShellScriptBuilder {
 
         this.sshRemote = sshRemote;
         this.parentBuilder = host;
-        this.path = currentPath + '/' + sshRemote;
+        this.path = currentPath + '/' + sshRemote.sshAlias;
         this.relayRemotes = new LinkedList<>(relayRemotes);
         this.relayRemotes.add(sshRemote);
 
@@ -125,6 +126,16 @@ public class ShellScriptBuilder {
         } else {
             return this;
         }
+    }
+
+    /**
+     * Returns the {@link RemoteSystem} the builder is currently
+     * writing to.
+     *
+     * @return the currently active {@link RemoteSystem}.
+     */
+    public RemoteSystem getCurrentRemoteSystem() {
+        return getCurrentBuilder().sshRemote;
     }
 
     /**
@@ -169,7 +180,7 @@ public class ShellScriptBuilder {
      *                            be called from this ShellScript.
      */
     private void appendScriptCall(ShellScript remoteScript) {
-        appendLine(remoteScript.createRemoteCallCommand(sshRemote.sshAlias));
+        appendLine(remoteScript.createRemoteCallCommand(sshRemote));
     }
 
     /**
@@ -198,10 +209,12 @@ public class ShellScriptBuilder {
      * @return
      */
     public ShellScriptBuilder startBuildingSshRemoteScript(RemoteSystem sshAlias) {
-        ShellScriptBuilder currentBuilder = getCurrentBuilder();
-
-        currentBuilder.remoteScripts.push(new ShellScriptBuilder(sshAlias, this, relayRemotes, path));
-        currentBuilder.writingOnRemote = true;
+        if (writingOnRemote) {
+            getCurrentBuilder().startBuildingSshRemoteScript(sshAlias);
+        } else {
+            remoteScripts.push(new ShellScriptBuilder(sshAlias, this, relayRemotes, path));
+            writingOnRemote = true;
+        }
 
         return this;
     }
@@ -245,10 +258,10 @@ public class ShellScriptBuilder {
             stopBuildingSshRemoteScript();
         }
 
-        String fullPath = RemoteSystem.NATIVE.scripts() + path.substring(1);
+        Path fullPath = Paths.get(RemoteSystem.NATIVE.scripts() + path.substring(1));
 
         System.out.println("Creating script directory: '" + fullPath + "'");
-        Files.createDirectories(Paths.get(fullPath));
+        Files.createDirectories(fullPath);
 
         System.out.println("Creating script file: '" + fullPath + "/" + name + "'");
         Files.createFile(Paths.get(fullPath + "/" + name));

@@ -7,7 +7,11 @@ import nl.tudelft.atlarge.writer.Global;
  */
 public enum RemoteSystem {
 
-    NATIVE("localhost", "/home/Chris/graphalytics-deployer/"),
+    // Must exist since Scripts get generated on the Native system first.
+    NATIVE_("localhost", "/home/Chris/graphalytics-deployer/"),
+
+    // For testing on Windows.
+    NATIVE("localhost", "C:\\Users\\Chris Lemaire\\AppData\\Local\\lxss\\home\\Chris\\graphalytics-deployer\\"),
 
     BASTION("bastion", "/home/nfs/" + Global.USERNAME + "/graphalytics-deployer/"),
     DAS5VU("das5vu", "/home/" + Global.USERNAME + "/graphalytics-deployer/"),

@@ -1,5 +1,7 @@
 package nl.tudelft.atlarge.writer;
 
+import nl.tudelft.atlarge.writer.install.ArchivedProductInstallScriptWriter;
+import nl.tudelft.atlarge.writer.script.RemoteSystem;
 import nl.tudelft.atlarge.writer.script.ShellScriptBuilder;
 
 import java.io.IOException;
@@ -10,15 +12,15 @@ import java.io.IOException;
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        ShellScriptBuilder helloWorldBuilder = new ShellScriptBuilder("hello_world");
+        ShellScriptBuilder installScriptWriter = new ShellScriptBuilder("install_maven_relay");
 
-        helloWorldBuilder.appendLine("echo This is before");
-        helloWorldBuilder.startBuildingSshRemoteScript("bastion");
-        helloWorldBuilder.appendLine("echo hello world");
-        helloWorldBuilder.stopBuildingSshRemoteScript();
-        helloWorldBuilder.appendLine("echo This is after");
+        installScriptWriter.startBuildingSshRemoteScript(RemoteSystem.BASTION);
+        installScriptWriter.startBuildingSshRemoteScript(RemoteSystem.DAS5VU);
 
-        helloWorldBuilder.finish();
+        ArchivedProductInstallScriptWriter writer = new ArchivedProductInstallScriptWriter(installScriptWriter, "maven");
+        writer.write("3.3.1-bin");
+
+        installScriptWriter.finish();
     }
 
 }
