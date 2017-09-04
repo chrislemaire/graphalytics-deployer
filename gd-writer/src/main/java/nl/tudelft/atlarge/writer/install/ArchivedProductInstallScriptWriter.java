@@ -1,13 +1,12 @@
 package nl.tudelft.atlarge.writer.install;
 
+import nl.tudelft.atlarge.writer.packages.ProductPackage;
 import nl.tudelft.atlarge.writer.script.ShellScriptBuilder;
 
 /**
  * Created by Chris Lemaire on 29-8-2017.
  */
 public class ArchivedProductInstallScriptWriter {
-
-    private static final String TEMP_DIR = "./tmp_install";
 
     private ProductArchive productArchive;
 
@@ -35,20 +34,12 @@ public class ArchivedProductInstallScriptWriter {
                 .appendLine("mkdir -p ./" + product + "/" + version)
                 .appendLine("cd ./" + product + "/" + version)
 
-                .appendLine("if [ -z \"$(ls -A ./)\" ]; then")
+                .appendLine("if [ -z \"$(ls -A ./)\" ]; then");
 
-                .appendLine("mkdir ./" + TEMP_DIR)
-                .appendLine("cd ./" + TEMP_DIR)
-                .appendLineWithOutput(productArchive.getDownloadCommand(version))
-                .appendLine("TMP_INSTALL_FILE=$(basename (find ./ -type f | head -n 1))")
-                .appendLineWithOutput("tar -xzvf ./$TMP_INSTALL_FILE")
-                .appendLine("rm -f ./$TMP_INSTALL_FILE")
-                .appendLine("INSTALL_DIR=$(basename (find ./ -type d | head -n 1))")
-                .appendLine("mv -rf ./$INSTALL_DIR ../$INSTALL_DIR")
-                .appendLine("cd ..")
-                .appendLine("rm -rf ./" + TEMP_DIR)
+        ProductPackage.TAR_GZ.downloadAndUnpack(builder, productArchive.getLink(version))
+        
+                .appendLine("else")                
 
-                .appendLine("else")
                 .appendLineWithOutput("echo Product already installed: " + product + " v" + version)
                 .appendLine("fi")
                 .appendLine("# END OF ARCHIVE DOWNLOADING SCRIPT #\n\n");

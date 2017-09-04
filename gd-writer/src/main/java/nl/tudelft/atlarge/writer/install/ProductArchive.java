@@ -27,11 +27,8 @@ public class ProductArchive {
         return archive.hasKey(version);
     }
 
-    public String getDownloadCommand(String version) {
-        StringBuilder cmdBuilder = new StringBuilder("wget ");
-        cmdBuilder.append(archive.get(version));
-
-        return cmdBuilder.toString();
+    public String getLink(String version) {
+        return archive.get(version);
     }
 
 }
