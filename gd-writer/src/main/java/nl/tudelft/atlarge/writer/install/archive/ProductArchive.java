@@ -1,4 +1,4 @@
-package nl.tudelft.atlarge.writer.install;
+package nl.tudelft.atlarge.writer.install.archive;
 
 import nl.tudelft.atlarge.Global;
 import nl.tudelft.atlarge.config.PropertiesConfig;

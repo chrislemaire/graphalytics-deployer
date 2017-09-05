@@ -28,7 +28,7 @@ public enum ProductPackage {
         this.unpackCommand = unpackCommand.replaceAll("%$TEMP_FILE", TEMP_FILE);
     }
 
-    public ShellScriptBuilder downloadAndUnpack(ShellScriptBuilder builder, String link) {
+    public ShellScriptBuilder downloadAndUnpack(ShellScriptBuilder builder, String version, String link) {
         builder.appendLine("mkdir ./" + TEMP_DIR)
                 .appendLine("cd ./" + TEMP_DIR)
                 .appendLineWithOutput(downloadCommand.replaceAll("%$link", link))
@@ -36,7 +36,7 @@ public enum ProductPackage {
                 .appendLineWithOutput(unpackCommand)
                 .appendLine("rm -f ./$" + TEMP_FILE)
                 .appendLine("INSTALL_DIR=$(basename (find ./ -type d | head -n 1))")
-                .appendLine("mv -rf ./$INSTALL_DIR ../$INSTALL_DIR")
+                .appendLine("mv -rf ./$INSTALL_DIR ../../" + version)
                 .appendLine("cd ..")
                 .appendLine("rm -rf ./" + TEMP_DIR);
         
