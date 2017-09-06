@@ -13,8 +13,10 @@ public class MavenInstallScriptWriter extends ArchivedProductInstallScriptWriter
     }
 
     @Override
-    public void writeAdditionalOperations(String version) {
+    public ShellScriptBuilder writeAdditionalOperations(String version) {
         builder.appendLine("echo PATH=$PATH:" + builder.getCurrentRemoteSystem().frameworks() + "/maven/" + version + "/bin >> ~/");
+
+        return builder;
     }
 
 }
