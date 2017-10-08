@@ -37,4 +37,8 @@ public enum RemoteSystem {
         return preferredDeployerDirectory + Global.SCRIPT_DIRECTORY ;
     }
 
+    public String resources() {
+        return preferredDeployerDirectory + Global.OUTPUT_RESOURCES;
+    }
+
 }

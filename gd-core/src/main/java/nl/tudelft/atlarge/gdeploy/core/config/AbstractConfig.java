@@ -1,7 +1,12 @@
 package nl.tudelft.atlarge.gdeploy.core.config;
 
-import java.io.*;
-import java.net.URL;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Abstract config class with super constructor to
@@ -15,7 +20,7 @@ public abstract class AbstractConfig implements Configurable {
     /**
      * File the configurations relate to.
      */
-    protected URL file;
+    protected File file;
 
     /**
      * Super constructor for config classes to initialize
@@ -23,16 +28,16 @@ public abstract class AbstractConfig implements Configurable {
      *
      * @param file the configurations relate to.
      */
-    AbstractConfig(String file) {
+    AbstractConfig(File file) {
     	assert file != null;
     	
-        this.file = getClass().getResource(file);
+        this.file = file;
     }
     
     @Override
     public void read() throws IOException {
-        try (InputStream inputStream = file.openStream()) {
-            readImpl();
+        try (InputStream inputStream = new FileInputStream(file)) {
+            readImpl(inputStream);
         } catch (FileNotFoundException e) {
             System.err.println("Given config file '" + file.getPath() + "' does not exist.");
             throw e;
@@ -44,7 +49,7 @@ public abstract class AbstractConfig implements Configurable {
     
     @Override
     public void writeBack() throws IOException {
-        write(new File(file.getFile()));
+        write(file);
     }
     
     @Override
@@ -70,7 +75,7 @@ public abstract class AbstractConfig implements Configurable {
      * @throws IOException when something went wrong during the
      *          reading from file.
      */
-    protected abstract void readImpl() throws IOException;
+    protected abstract void readImpl(InputStream inputStream) throws IOException;
     
     /**
      * Abstract method that should be implemented and should

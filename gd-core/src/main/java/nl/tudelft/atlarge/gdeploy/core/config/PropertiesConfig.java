@@ -1,6 +1,10 @@
 package nl.tudelft.atlarge.gdeploy.core.config;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
 /**
@@ -22,17 +26,15 @@ public class PropertiesConfig extends AbstractConfig {
      *
      * @param file associated with the configurations.
      */
-    public PropertiesConfig(String file) {
+    public PropertiesConfig(File file) {
         super(file);
 
         this.properties = new Properties();
     }
 
     @Override
-    protected void readImpl() throws IOException {
-        try (InputStream inputStream = file.openStream()) {
-            properties.load(inputStream);
-        }
+    protected void readImpl(InputStream inputStream) throws IOException {
+        properties.load(inputStream);
     }
 
     @Override

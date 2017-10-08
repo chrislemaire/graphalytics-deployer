@@ -10,15 +10,13 @@ public class XmlPropertiesConfig extends PropertiesConfig {
      * 
      * @param file with associated properties.
      */
-    public XmlPropertiesConfig(String file) {
+    public XmlPropertiesConfig(File file) {
         super(file);
     }
 
     @Override
-    protected void readImpl() throws IOException {
-        try (InputStream inputStream = file.openStream()) {
-            properties.loadFromXML(inputStream);
-        }
+    protected void readImpl(InputStream inputStream) throws IOException {
+        properties.loadFromXML(inputStream);
     }
 
     @Override
