@@ -2,6 +2,7 @@ package nl.tudelft.atlarge.gdeploy.core.archiver;
 
 import nl.tudelft.atlarge.gdeploy.core.config.PropertiesConfig;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -29,7 +30,7 @@ public abstract class Archiver {
      * @param file to write properties to.
      * @param addresses at which to find software versions.
      */
-    Archiver(String file, String[] addresses) {
+    Archiver(File file, String[] addresses) {
         this.config = new PropertiesConfig(file);
         this.addresses = addresses;
     }

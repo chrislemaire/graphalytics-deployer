@@ -1,5 +1,7 @@
 package nl.tudelft.atlarge.gdeploy.core.archiver;
 
+import java.io.File;
+
 /**
  * Extends {@link ApacheArchiver} with implementations of the
  * {@link #parseVersion(String)} and {@link #isTargetFile(String)}
@@ -15,7 +17,7 @@ public class MavenArchiver extends ApacheArchiver {
      * @param file          to write properties to.
      * @param addresses     at which to find software versions.
      */
-    MavenArchiver(String file, String[] addresses) {
+    MavenArchiver(File file, String[] addresses) {
         super(file, addresses, "");
     }
 
