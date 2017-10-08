@@ -1,0 +1,25 @@
+{
+  "experimentSetup": {
+    "targetSystem": {
+      "host": "DAS5VU",
+      "nodeType": "KNL",
+      "numberOfNodesUsed": 1,
+      "numberOfCpusUsed": 1
+    },
+    "targetPlatform": {
+      "platform": "GIRAPH",
+      "configurations": {
+        "giraph-memory-per-worker": "1024",
+        "giraph-memory-per-node": "102400"
+      }
+    }
+  },
+
+  "runs": [
+    {
+        "sweepType": "PROCESSES_VS_THREADS",
+        "dataSets": "graph500-23-fb",
+        "algorithms": "BFS"
+    }
+  ]
+}

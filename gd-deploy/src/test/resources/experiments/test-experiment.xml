@@ -1,0 +1,24 @@
+<experiment>
+    <target-system>                 <!--Information about the target system that will be communicated to the platform-->
+        <name>das5vu</name>         <!--Name of the target system (das5vu, das5tud, intel-knl-->
+        <node-type>knl</node-type>  <!--Type of nodes to use (knl, default)-->
+        <nnodes>1</nnodes>          <!--Number of nodes to use of above type-->
+        <ncpus>1</ncpus>            <!--Number of cpus available per node, deployer should try to fill this in if ncpus is not given-->
+    </target-system>
+
+    <target-platform>
+        <name>giraph</name>         <!--Name of the platform to run (giraph, graphx, graphmat, powergraph)-->
+        <setup>simple-setup</setup> <!--Name of the set of configurations to use as 'default'-->
+
+        <configurations>            <!--Override default configurations here.-->
+            <config>
+                <name>giraph-memory-per-worker</name>
+                <value>1024</value>
+            </config>
+            <config>
+                <name>memory-per-node</name>
+                <value>102400</value>
+            </config>
+        </configurations>
+    </target-platform>
+</experiment>
