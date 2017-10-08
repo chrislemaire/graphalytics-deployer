@@ -7,7 +7,7 @@ import nl.tudelft.atlarge.gdeploy.writer.script.ShellScriptBuilder;
  */
 public abstract class ScriptWriter {
 
-    private ShellScriptBuilder builder;
+    protected ShellScriptBuilder builder;
 
     public ScriptWriter(ShellScriptBuilder builder) {
         this.builder = builder;

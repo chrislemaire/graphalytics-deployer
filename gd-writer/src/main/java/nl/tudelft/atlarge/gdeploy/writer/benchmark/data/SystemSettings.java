@@ -5,6 +5,8 @@ import lombok.Getter;
 import nl.tudelft.atlarge.gdeploy.writer.benchmark.JacksonSerializable;
 import nl.tudelft.atlarge.gdeploy.writer.deploy.host.Das5ReserveWriter;
 import nl.tudelft.atlarge.gdeploy.writer.deploy.host.HostReserveWriter;
+import nl.tudelft.atlarge.gdeploy.writer.deploy.platform.PlatformConfigurationWriter;
+import nl.tudelft.atlarge.gdeploy.writer.script.ShellScriptBuilder;
 
 @Data
 public class SystemSettings implements JacksonSerializable {
@@ -16,12 +18,22 @@ public class SystemSettings implements JacksonSerializable {
         INTEL(HostReserveWriter.class),
         SURF_SARA(HostReserveWriter.class);
 
+        @Getter
+        Class<? extends HostReserveWriter> writer;
+
         RemoteHost(Class<? extends HostReserveWriter> writer) {
             this.writer = writer;
         }
 
-        @Getter
-        Class<? extends HostReserveWriter> writer;
+        public PlatformConfigurationWriter newInstance(ShellScriptBuilder builder, HostReserveWriter platformSettings) {
+            try {
+                return (PlatformConfigurationWriter) writer.getConstructors()[0]
+                        .newInstance(builder, platformSettings);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
     public enum NodeType {
