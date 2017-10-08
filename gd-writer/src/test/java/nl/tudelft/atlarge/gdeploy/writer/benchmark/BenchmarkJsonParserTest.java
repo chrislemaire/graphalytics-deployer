@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BenchmarkJsonParserTest {
 
-    private static String INTERNAL_TEST_EXP = "/test-experiment.json";
+    private static String INTERNAL_TEST_EXP = "/experiments/test-experiment.json";
 
     @Test
     void fromInternalShouldWork() throws IOException {

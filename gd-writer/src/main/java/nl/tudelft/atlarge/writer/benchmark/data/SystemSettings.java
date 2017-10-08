@@ -1,20 +1,30 @@
 package nl.tudelft.atlarge.writer.benchmark.data;
 
 import lombok.Data;
+import lombok.Getter;
 import nl.tudelft.atlarge.writer.benchmark.JacksonSerializable;
+import nl.tudelft.atlarge.writer.deploy.host.Das5ReserveWriter;
+import nl.tudelft.atlarge.writer.deploy.host.HostReserveWriter;
 
 @Data
 public class SystemSettings implements JacksonSerializable {
 
-    private enum RemoteHost {
-        NONE,
-        DAS5VU,
-        DAS5TUD,
-        INTEL,
-        SURF_SARA
+    public enum RemoteHost {
+        NONE(HostReserveWriter.class),
+        DAS5VU(Das5ReserveWriter.class),
+        DAS5TUD(Das5ReserveWriter.class),
+        INTEL(HostReserveWriter.class),
+        SURF_SARA(HostReserveWriter.class);
+
+        RemoteHost(Class<? extends HostReserveWriter> writer) {
+            this.writer = writer;
+        }
+
+        @Getter
+        Class<? extends HostReserveWriter> writer;
     }
 
-    private enum NodeType {
+    public enum NodeType {
         NONE,
         KNL,
         DAS5
