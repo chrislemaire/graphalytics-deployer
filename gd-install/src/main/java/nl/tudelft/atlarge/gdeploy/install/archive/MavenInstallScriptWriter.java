@@ -1,6 +1,6 @@
 package nl.tudelft.atlarge.gdeploy.install.archive;
 
-import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.install.ArchivedProductInstallScriptWriter;
 
 /**
@@ -8,12 +8,12 @@ import nl.tudelft.atlarge.gdeploy.install.ArchivedProductInstallScriptWriter;
  */
 public class MavenInstallScriptWriter extends ArchivedProductInstallScriptWriter {
 
-    public MavenInstallScriptWriter(ShellScriptBuilder builder) {
+    public MavenInstallScriptWriter(PythonScriptBuilder builder) {
         super(builder, "maven");
     }
 
     @Override
-    public ShellScriptBuilder writeAdditionalOperations(String version) {
+    public PythonScriptBuilder writeAdditionalOperations(String version) {
         builder.appendLine("echo PATH=$PATH:" + builder.getCurrentRemoteSystem().frameworks() + "/maven/" + version + "/bin >> ~/");
 
         return builder;

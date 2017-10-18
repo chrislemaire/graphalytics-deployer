@@ -1,6 +1,6 @@
 package nl.tudelft.atlarge.gdeploy.install.packages;
 
-import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
 
 public enum ProductPackage {
 
@@ -28,7 +28,7 @@ public enum ProductPackage {
         this.unpackCommand = unpackCommand.replaceAll("%$TEMP_FILE", TEMP_FILE);
     }
 
-    public ShellScriptBuilder downloadAndUnpack(ShellScriptBuilder builder, String version, String link) {
+    public PythonScriptBuilder downloadAndUnpack(PythonScriptBuilder builder, String version, String link) {
         builder.appendLine("mkdir ./" + TEMP_DIR)
                 .appendLine("cd ./" + TEMP_DIR)
                 .appendLineWithOutput(downloadCommand.replaceAll("%$link", link))

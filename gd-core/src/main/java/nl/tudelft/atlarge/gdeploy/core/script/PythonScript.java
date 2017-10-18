@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Chris Lemaire on 24-8-2017.
  */
-public class ShellScript {
+public class PythonScript {
 
     private final String name;
 
@@ -17,7 +17,7 @@ public class ShellScript {
 
     private final List<RemoteSystem> relayRemotes;
 
-    ShellScript(String name, String path, RemoteSystem remote, LinkedList<RemoteSystem> relayRemotes) {
+    PythonScript(String name, String path, RemoteSystem remote, LinkedList<RemoteSystem> relayRemotes) {
         this.name = name;
         this.fullPath = remote.scripts() + path.substring(1) + '/' + name;
         this.remote = remote;
@@ -54,11 +54,11 @@ public class ShellScript {
 
     @Override
     public boolean equals(Object other) {
-        if (other == null || !(other instanceof ShellScript)) {
+        if (other == null || !(other instanceof PythonScript)) {
             return false;
         }
 
-        ShellScript that = (ShellScript) other;
+        PythonScript that = (PythonScript) other;
 
         return name.equals(that.name)
                 && fullPath.equals(that.fullPath);

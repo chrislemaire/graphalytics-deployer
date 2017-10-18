@@ -1,13 +1,13 @@
 package nl.tudelft.atlarge.gdeploy.install;
 
-import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
 
 /**
  * Created by Chris Lemaire on 5-9-2017.
  */
 public class GitProductInstallScriptWriter extends InstallScriptWriter {
 
-    public GitProductInstallScriptWriter(ShellScriptBuilder builder, String product) {
+    public GitProductInstallScriptWriter(PythonScriptBuilder builder, String product) {
         super(builder, product);
     }
 
@@ -21,7 +21,7 @@ public class GitProductInstallScriptWriter extends InstallScriptWriter {
     //                                          or  f434222
 
     @Override
-    public ShellScriptBuilder write(String version) {
+    public PythonScriptBuilder write(String version) {
         builder.appendLine("# START OF GIT PRODUCT INSTALL SCRIPT #");
         writeInitializer(version)
 

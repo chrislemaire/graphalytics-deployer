@@ -6,7 +6,7 @@ import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonSerializable;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.Das5ReserveWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.HostReserveWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformConfigurationWriter;
-import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
 
 @Data
 public class SystemSettings implements JacksonSerializable {
@@ -25,7 +25,7 @@ public class SystemSettings implements JacksonSerializable {
             this.writer = writer;
         }
 
-        public PlatformConfigurationWriter newInstance(ShellScriptBuilder builder, HostReserveWriter platformSettings) {
+        public PlatformConfigurationWriter newInstance(PythonScriptBuilder builder, HostReserveWriter platformSettings) {
             try {
                 return (PlatformConfigurationWriter) writer.getConstructors()[0]
                         .newInstance(builder, platformSettings);

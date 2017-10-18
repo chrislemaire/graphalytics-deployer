@@ -2,19 +2,19 @@ package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
 import lombok.Data;
 import lombok.Getter;
+import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonSerializable;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GiraphConfigurationWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GraphmatConfigurationWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformConfigurationWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PowergraphConfigurationWriter;
-import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 
 import java.util.Map;
 
 @Data
 public class PlatformSettings implements JacksonSerializable {
 
-    private enum SoftwarePlatforms {
+    public enum SoftwarePlatforms {
         NONE(PlatformConfigurationWriter.class),
         GIRAPH(GiraphConfigurationWriter.class),
         GRAPHX(GiraphConfigurationWriter.class),
@@ -28,7 +28,7 @@ public class PlatformSettings implements JacksonSerializable {
             this.writer = writer;
         }
 
-        public PlatformConfigurationWriter newInstance(ShellScriptBuilder builder, PlatformSettings platformSettings) {
+        public PlatformConfigurationWriter newInstance(PythonScriptBuilder builder, PlatformSettings platformSettings) {
             try {
                 return (PlatformConfigurationWriter) writer.getConstructors()[0]
                         .newInstance(builder, platformSettings);
@@ -37,6 +37,7 @@ public class PlatformSettings implements JacksonSerializable {
             }
             return null;
         }
+
     }
 
     private SoftwarePlatforms platform;
