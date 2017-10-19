@@ -2,7 +2,7 @@ package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
 import lombok.Data;
 import lombok.Getter;
-import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonSerializable;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GiraphConfigurationWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GraphmatConfigurationWriter;
@@ -28,7 +28,7 @@ public class PlatformSettings implements JacksonSerializable {
             this.writer = writer;
         }
 
-        public PlatformConfigurationWriter newInstance(PythonScriptBuilder builder, PlatformSettings platformSettings) {
+        public PlatformConfigurationWriter newInstance(ShellScriptBuilder builder, PlatformSettings platformSettings) {
             try {
                 return (PlatformConfigurationWriter) writer.getConstructors()[0]
                         .newInstance(builder, platformSettings);

@@ -3,7 +3,7 @@ package nl.tudelft.atlarge.gdeploy.deploy.deploy.platform;
 import nl.tudelft.atlarge.gdeploy.core.config.PropertiesConfig;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.PlatformSettings;
 import nl.tudelft.atlarge.gdeploy.core.script.RemoteSystem;
-import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,12 +16,12 @@ public class PowergraphConfigurationWriter extends PlatformConfigurationWriter {
             .replace("%20", " ")
             .replace('\\', '/');
 
-    public PowergraphConfigurationWriter(PythonScriptBuilder builder, PlatformSettings settings) {
+    public PowergraphConfigurationWriter(ShellScriptBuilder builder, PlatformSettings settings) {
         super(builder, settings);
     }
 
     @Override
-    public PythonScriptBuilder write() {
+    public ShellScriptBuilder write() {
         try {
             Files.write(TEMP_FILE.toPath(), Files.readAllBytes(Paths.get(PLATFORM_TEMPLATE)));
 

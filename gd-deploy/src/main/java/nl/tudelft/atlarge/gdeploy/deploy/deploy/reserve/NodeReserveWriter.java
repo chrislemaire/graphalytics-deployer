@@ -1,6 +1,6 @@
 package nl.tudelft.atlarge.gdeploy.deploy.deploy.reserve;
 
-import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.SystemSettings;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptWriter;
 
@@ -14,18 +14,18 @@ public abstract class NodeReserveWriter extends ScriptWriter {
 
     SystemSettings settings;
 
-    public NodeReserveWriter(PythonScriptBuilder builder, SystemSettings settings) {
+    public NodeReserveWriter(ShellScriptBuilder builder, SystemSettings settings) {
         super(builder);
 
         this.settings = settings;
     }
 
-    abstract PythonScriptBuilder writeNodeReserving() throws IOException;
+    abstract ShellScriptBuilder writeNodeReserving() throws IOException;
 
-    public abstract PythonScriptBuilder writeNodeCancel();
+    public abstract ShellScriptBuilder writeNodeCancel();
 
     @Override
-    public PythonScriptBuilder write() {
+    public ShellScriptBuilder write() {
         writeNodeReserving();
 
         return builder;

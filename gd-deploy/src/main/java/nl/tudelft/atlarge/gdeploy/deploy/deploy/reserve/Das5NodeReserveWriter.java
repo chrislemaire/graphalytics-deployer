@@ -1,6 +1,6 @@
 package nl.tudelft.atlarge.gdeploy.deploy.deploy.reserve;
 
-import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.SystemSettings;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptCopyWriter;
 
@@ -8,13 +8,13 @@ import java.io.IOException;
 
 public class Das5NodeReserveWriter extends NodeReserveWriter {
 
-    public Das5NodeReserveWriter(PythonScriptBuilder builder, SystemSettings settings)
+    public Das5NodeReserveWriter(ShellScriptBuilder builder, SystemSettings settings)
             throws IOException {
         super(builder, settings);
     }
 
     @Override
-    PythonScriptBuilder writeNodeReserving() throws IOException {
+    ShellScriptBuilder writeNodeReserving() throws IOException {
         ScriptCopyWriter writer = ScriptCopyWriter.fromInternal(builder,
                 "/scripts/das5-preserve/request.sh");
 
@@ -24,7 +24,7 @@ public class Das5NodeReserveWriter extends NodeReserveWriter {
     }
 
     @Override
-    public PythonScriptBuilder writeNodeCancel() {
+    public ShellScriptBuilder writeNodeCancel() {
         return null;
     }
 

@@ -1,6 +1,6 @@
 package nl.tudelft.atlarge.gdeploy.deploy.deploy;
 
-import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,11 +13,11 @@ public class ScriptCopyWriter extends ScriptWriter {
 
     private List<String> lines;
 
-    private ScriptCopyWriter(PythonScriptBuilder builder) {
+    private ScriptCopyWriter(ShellScriptBuilder builder) {
         super(builder);
     }
 
-    public static ScriptCopyWriter fromInternal(PythonScriptBuilder builder, String internal)
+    public static ScriptCopyWriter fromInternal(ShellScriptBuilder builder, String internal)
             throws IOException {
         ScriptCopyWriter result = new ScriptCopyWriter(builder);
 
@@ -36,7 +36,7 @@ public class ScriptCopyWriter extends ScriptWriter {
     }
 
     @Override
-    public PythonScriptBuilder write() {
+    public ShellScriptBuilder write() {
         lines.forEach(line -> builder.appendLine(line));
 
         return builder;

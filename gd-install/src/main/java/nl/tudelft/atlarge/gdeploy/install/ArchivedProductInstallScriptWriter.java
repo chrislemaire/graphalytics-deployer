@@ -1,6 +1,6 @@
 package nl.tudelft.atlarge.gdeploy.install;
 
-import nl.tudelft.atlarge.gdeploy.core.script.PythonScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.install.archive.ProductArchive;
 import nl.tudelft.atlarge.gdeploy.install.packages.ProductPackage;
 
@@ -11,18 +11,18 @@ public class ArchivedProductInstallScriptWriter extends InstallScriptWriter {
 
     private ProductArchive productArchive;
 
-    public ArchivedProductInstallScriptWriter(PythonScriptBuilder builder, String product) {
+    public ArchivedProductInstallScriptWriter(ShellScriptBuilder builder, String product) {
         super(builder, product);
 
         this.productArchive = new ProductArchive(product);
         this.product = product;
     }
 
-    public PythonScriptBuilder writeAdditionalOperations(String version) {
+    public ShellScriptBuilder writeAdditionalOperations(String version) {
         return builder;
     }
 
-    public PythonScriptBuilder write(String version) {
+    public ShellScriptBuilder write(String version) {
         if (!productArchive.hasVersion(version)) {
             System.err.println("Unable to write downloader for version `" + version + "`.");
             System.err.println("This version does not exist.");
