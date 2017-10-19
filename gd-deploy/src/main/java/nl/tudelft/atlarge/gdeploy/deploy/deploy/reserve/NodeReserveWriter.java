@@ -4,8 +4,6 @@ import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.SystemSettings;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptWriter;
 
-import java.io.IOException;
-
 public abstract class NodeReserveWriter extends ScriptWriter {
 
     public static final String mainNode = "MAIN_NODE";
@@ -20,7 +18,7 @@ public abstract class NodeReserveWriter extends ScriptWriter {
         this.settings = settings;
     }
 
-    abstract ShellScriptBuilder writeNodeReserving() throws IOException;
+    abstract ShellScriptBuilder writeNodeReserving();
 
     public abstract ShellScriptBuilder writeNodeCancel();
 
