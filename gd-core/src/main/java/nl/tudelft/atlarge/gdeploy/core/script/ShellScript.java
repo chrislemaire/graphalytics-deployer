@@ -45,9 +45,9 @@ public class ShellScript {
 
         StringBuilder commandBuilder = new StringBuilder();
         for (int i = relayRemotes.lastIndexOf(hostRemote) + 1; i < relayRemotes.size(); i++) {
-            commandBuilder.append("ssh ").append(relayRemotes.get(i).sshAlias).append(' ');
+            commandBuilder.append("ssh ").append(relayRemotes.get(i).getSshAlias()).append(' ');
         }
-        commandBuilder.append("\"nohup ").append(fullPath).append('\"');
+        commandBuilder.append("\"").append(fullPath).append("\" &");
 
         return commandBuilder.toString();
     }

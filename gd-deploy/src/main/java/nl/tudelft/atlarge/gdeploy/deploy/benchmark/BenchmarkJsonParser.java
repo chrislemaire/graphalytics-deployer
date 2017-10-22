@@ -26,8 +26,4 @@ public class BenchmarkJsonParser {
         return initialize(mapper.readValue(file, Benchmark.class));
     }
 
-    public static void main(String[] args) throws IOException {
-        Benchmark benchmark = fromInternalPath("/test-experiment.json");
-    }
-
 }

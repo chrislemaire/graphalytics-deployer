@@ -4,7 +4,7 @@
       "host": "DAS5VU",
       "nodeType": "KNL",
       "numberOfNodesUsed": 1,
-      "numberOfCpusUsed": 1,
+      "numberOfCpusUsed": 64,
       "totalReserveTime": "04:00:00"
     },
     "targetPlatform": {

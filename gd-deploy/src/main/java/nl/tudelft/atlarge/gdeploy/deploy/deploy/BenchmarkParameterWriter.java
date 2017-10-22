@@ -4,6 +4,7 @@ import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class BenchmarkParameterWriter extends ScriptCopyWriter {
 
@@ -12,7 +13,7 @@ public class BenchmarkParameterWriter extends ScriptCopyWriter {
 
         try {
             this.readLines("/scripts/parameter-set.sh");
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
     }

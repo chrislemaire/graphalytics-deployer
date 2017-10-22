@@ -23,6 +23,4 @@ public class Global {
 
     public static final SimpleDateFormat LOG_DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-    public static String CURRENT_PROJECT = "NA";
-
 }

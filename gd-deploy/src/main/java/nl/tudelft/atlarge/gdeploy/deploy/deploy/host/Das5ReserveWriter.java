@@ -4,6 +4,7 @@ import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 public class Das5ReserveWriter extends HostReserveWriter {
@@ -13,7 +14,7 @@ public class Das5ReserveWriter extends HostReserveWriter {
 
         try {
             this.readLines("/scripts/das5-request.sh");
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
     }
@@ -28,4 +29,10 @@ public class Das5ReserveWriter extends HostReserveWriter {
                 + " -t " + settings.getTotalReserveTime());
     }
 
+    @Override
+    public ShellScriptBuilder write() {
+        this.builder.startBuildingSshRemoteScript(settings.getHost().getRemote());
+
+        return super.write();
+    }
 }

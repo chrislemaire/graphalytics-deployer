@@ -4,6 +4,7 @@ import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,12 +31,11 @@ public class ScriptCopyWriter extends ScriptWriter {
      * @throws IOException when the file doesn't exist or
      *                     something goes wrong while reading it.
      */
-    protected void readLines(String internalFile)
-            throws IOException {
-        URL url = ScriptCopyWriter.class.getResource(internalFile);
-        Path filePath = Paths.get(url.getFile()
-                .replace("%20", " ")
-                .replace('\\', '/'));
+    public void readLines(String internalFile)
+            throws IOException, URISyntaxException {
+        URL url = getClass().getResource(internalFile);
+
+        Path filePath = Paths.get(url.toURI());
 
         this.lines = Files.readAllLines(filePath);
     }
@@ -49,8 +49,8 @@ public class ScriptCopyWriter extends ScriptWriter {
     private void replaceFromMap(Map<String, String> stringMap) {
         specificReplacements(stringMap);
 
-        stringMap.forEach((scriptVarName, replacement) ->
-                lines.forEach(s -> s = s.replace(scriptVarName, replacement)));
+        stringMap.forEach((key, value) ->
+                lines.replaceAll(s -> s.replace(key, value)));
     }
 
     /**
