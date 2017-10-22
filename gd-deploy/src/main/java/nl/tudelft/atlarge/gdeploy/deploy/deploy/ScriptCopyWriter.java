@@ -17,7 +17,7 @@ public class ScriptCopyWriter extends ScriptWriter {
 
     private List<String> lines;
 
-    ScriptCopyWriter(ShellScriptBuilder builder, Benchmark benchmark) {
+    public ScriptCopyWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder);
 
         this.benchmark = benchmark;

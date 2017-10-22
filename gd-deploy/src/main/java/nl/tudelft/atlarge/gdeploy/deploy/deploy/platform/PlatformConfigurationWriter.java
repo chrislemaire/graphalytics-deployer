@@ -1,21 +1,18 @@
 package nl.tudelft.atlarge.gdeploy.deploy.deploy.platform;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.PlatformSettings;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptCopyWriter;
 
-import java.io.File;
-
-public abstract class PlatformConfigurationWriter extends ScriptWriter {
-
-    static final File TEMP_FILE = new File("./temp");
+public abstract class PlatformConfigurationWriter extends ScriptCopyWriter {
 
     PlatformSettings settings;
 
-    public PlatformConfigurationWriter(ShellScriptBuilder builder, PlatformSettings settings) {
-        super(builder);
+    PlatformConfigurationWriter(ShellScriptBuilder builder, Benchmark benchmark) {
+        super(builder, benchmark);
 
-        this.settings = settings;
+        this.settings = benchmark.getExperimentSetup().getTargetPlatform();
     }
 
 }
