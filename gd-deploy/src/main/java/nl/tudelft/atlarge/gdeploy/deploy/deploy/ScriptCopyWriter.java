@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 public class ScriptCopyWriter extends ScriptWriter {
 
@@ -17,22 +18,21 @@ public class ScriptCopyWriter extends ScriptWriter {
         super(builder);
     }
 
-    public static ScriptCopyWriter fromInternal(ShellScriptBuilder builder, String internal)
+    public void readLines(String internalFile)
             throws IOException {
         ScriptCopyWriter result = new ScriptCopyWriter(builder);
 
-        URL url = ScriptCopyWriter.class.getResource(internal);
+        URL url = ScriptCopyWriter.class.getResource(internalFile);
         Path filePath = Paths.get(url.getFile()
                 .replace("%20", " ")
                 .replace('\\', '/'));
 
         result.lines = Files.readAllLines(filePath);
-
-        return result;
     }
 
-    public void replaceParameter(int parameter, String replacement) {
-        lines.forEach(l -> l = l.replace("$" + parameter, replacement));
+    public void replaceFromMap(Map<String, String> stringMap) {
+        stringMap.forEach((scriptVarName, replacement) ->
+                lines.forEach(s -> s = s.replace(scriptVarName, replacement)));
     }
 
     @Override
