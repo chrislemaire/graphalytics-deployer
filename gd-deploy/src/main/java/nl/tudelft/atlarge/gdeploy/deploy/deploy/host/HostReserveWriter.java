@@ -1,26 +1,18 @@
 package nl.tudelft.atlarge.gdeploy.deploy.deploy.host;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.SystemSettings;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptCopyWriter;
 
-public abstract class HostReserveWriter extends ScriptWriter {
+public abstract class HostReserveWriter extends ScriptCopyWriter {
 
     SystemSettings settings;
 
-    public HostReserveWriter(ShellScriptBuilder builder, SystemSettings settings) {
-        super(builder);
+    HostReserveWriter(ShellScriptBuilder builder, Benchmark benchmark) {
+        super(builder, benchmark);
 
-        this.settings = settings;
+        this.settings = benchmark.getExperimentSetup().getTargetSystem();
     }
-
-    @Override
-    public ShellScriptBuilder write() {
-        return writeReserve();
-    }
-
-    public abstract ShellScriptBuilder writeReserve();
-
-    public abstract ShellScriptBuilder writeCleanup();
 
 }

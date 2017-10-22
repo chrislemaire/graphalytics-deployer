@@ -40,9 +40,16 @@ public class SystemSettings implements JacksonDeserializable {
     }
 
     public enum NodeType {
-        NONE,
-        KNL,
-        DAS5
+        NONE(""),
+        KNL("-q knlq"),
+        DAS5("");
+
+        @Getter
+        String queueArgs;
+
+        NodeType(String queueArgs) {
+            this.queueArgs = queueArgs;
+        }
     }
 
     private RemoteHost host;
@@ -52,6 +59,8 @@ public class SystemSettings implements JacksonDeserializable {
     private String numberOfNodesUsed = "1";
 
     private String numberOfCpusUsed = "1";
+
+    private String totalReserveTime = "00:00:01";
 
     @Override
     public void init() {

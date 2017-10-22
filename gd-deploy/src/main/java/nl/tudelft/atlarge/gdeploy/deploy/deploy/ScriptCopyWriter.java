@@ -30,7 +30,7 @@ public class ScriptCopyWriter extends ScriptWriter {
      * @throws IOException when the file doesn't exist or
      *                     something goes wrong while reading it.
      */
-    void readLines(String internalFile)
+    protected void readLines(String internalFile)
             throws IOException {
         URL url = ScriptCopyWriter.class.getResource(internalFile);
         Path filePath = Paths.get(url.getFile()
@@ -47,8 +47,19 @@ public class ScriptCopyWriter extends ScriptWriter {
      *                  mapped to their names in the script.
      */
     private void replaceFromMap(Map<String, String> stringMap) {
+        specificReplacements(stringMap);
+
         stringMap.forEach((scriptVarName, replacement) ->
                 lines.forEach(s -> s = s.replace(scriptVarName, replacement)));
+    }
+
+    /**
+     * Enhances the replacement map with extension specific
+     * variables overrides.
+     * @param map replacement map that will be enhanced during
+     *            in this method.
+     */
+    protected void specificReplacements(Map<String, String> map) {
     }
 
     @Override

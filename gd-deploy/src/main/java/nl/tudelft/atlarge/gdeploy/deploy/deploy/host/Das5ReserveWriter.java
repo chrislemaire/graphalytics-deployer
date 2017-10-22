@@ -1,22 +1,31 @@
 package nl.tudelft.atlarge.gdeploy.deploy.deploy.host;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
-import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.SystemSettings;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
+
+import java.io.IOException;
+import java.util.Map;
 
 public class Das5ReserveWriter extends HostReserveWriter {
 
-    public Das5ReserveWriter(ShellScriptBuilder builder, SystemSettings settings) {
-        super(builder, settings);
+    public Das5ReserveWriter(ShellScriptBuilder builder, Benchmark benchmark) {
+        super(builder, benchmark);
+
+        try {
+            this.readLines("/scripts/das5-request.sh");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public ShellScriptBuilder writeReserve() {
-        return null;
-    }
+    protected void specificReplacements(Map<String, String> map) {
+        super.specificReplacements(map);
 
-    @Override
-    public ShellScriptBuilder writeCleanup() {
-        return null;
+        map.put("%preserve_args%",
+                "-# " + settings.getNumberOfNodesUsed() + ' '
+                + settings.getNodeType().getQueueArgs()
+                + " -t " + settings.getTotalReserveTime());
     }
 
 }
