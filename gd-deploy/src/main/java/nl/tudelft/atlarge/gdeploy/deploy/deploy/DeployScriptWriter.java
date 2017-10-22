@@ -3,7 +3,7 @@ package nl.tudelft.atlarge.gdeploy.deploy.deploy;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.HostReserveWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformConfigurationWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformRunWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep.SweepWriter;
 
 public class DeployScriptWriter extends ScriptWriter {
@@ -14,7 +14,7 @@ public class DeployScriptWriter extends ScriptWriter {
 
     private HostReserveWriter hostReserveWriter;
 
-    private PlatformConfigurationWriter platformConfigurationWriter;
+    private PlatformRunWriter platformConfigurationWriter;
 
     public DeployScriptWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder);

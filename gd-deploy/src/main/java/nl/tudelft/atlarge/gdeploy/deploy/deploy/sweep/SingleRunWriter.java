@@ -2,27 +2,20 @@ package nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
-import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.ExperimentSetup;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptCopyWriter;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public abstract class SweepWriter extends ScriptCopyWriter {
+public class SingleRunWriter extends SweepWriter {
 
-    private ExperimentSetup setup;
-
-    public SweepWriter(ShellScriptBuilder builder, Benchmark benchmark) {
+    public SingleRunWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
-
-        this.setup = benchmark.getExperimentSetup();
     }
 
-    public abstract ShellScriptBuilder writeStart();
-
-    public ShellScriptBuilder writeEnd() {
+    @Override
+    public ShellScriptBuilder writeStart() {
         try {
-            this.readLines("/scripts/sweeps/end.sh");
+            this.readLines("/scripts/sweeps/single-run-setup.sh");
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
@@ -30,4 +23,14 @@ public abstract class SweepWriter extends ScriptCopyWriter {
         return write();
     }
 
+    @Override
+    public ShellScriptBuilder writeEnd() {
+        try {
+            this.readLines("/scripts/sweeps/end-no-loop.sh");
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return write();
+    }
 }

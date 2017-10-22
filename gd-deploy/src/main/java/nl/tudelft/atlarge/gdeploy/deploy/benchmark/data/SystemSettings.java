@@ -6,7 +6,7 @@ import nl.tudelft.atlarge.gdeploy.core.script.RemoteSystem;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.Das5ReserveWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.HostReserveWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformConfigurationWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformRunWriter;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 
 import java.util.HashMap;
@@ -33,9 +33,9 @@ public class SystemSettings implements JacksonDeserializable {
             this.remote = remote;
         }
 
-        public PlatformConfigurationWriter newInstance(ShellScriptBuilder builder, HostReserveWriter platformSettings) {
+        public PlatformRunWriter newInstance(ShellScriptBuilder builder, HostReserveWriter platformSettings) {
             try {
-                return (PlatformConfigurationWriter) writer.getConstructors()[0]
+                return (PlatformRunWriter) writer.getConstructors()[0]
                         .newInstance(builder, platformSettings);
             } catch (Exception e) {
                 e.printStackTrace();

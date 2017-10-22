@@ -14,10 +14,10 @@ public class Global {
 
     public static final String USERNAME = "clemaire";
 
-    public static final String SCRIPT_DIRECTORY = "gdeploy-scripts/";
+    public static final String SCRIPT_DIRECTORY = "scripts/";
     public static final String OUTPUT_RESOURCES = SCRIPT_DIRECTORY + "resources/";
     public static final String PRODUCT_DIRECTORY = "frameworks/";
-    public static final String OUTPUT_FILE = "tmpoutput.out";
+    public static final String OUTPUT_FILE = "tmp_output.out";
 
     public static final Random RANDOM = new Random(System.currentTimeMillis());
 

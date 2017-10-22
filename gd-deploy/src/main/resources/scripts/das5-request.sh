@@ -3,7 +3,7 @@
 # Parameters:
 # %preserve_args% -> The arguments for preserve.
 
-echo "[DAS5-PRESERVE]:\tReserving nodes with command preserve %preserve_args%."
+echo -e [DAS5-PRESERVE]:'\t'Reserving nodes with command preserve %preserve_args%.
 
 # Make the reservation for the worker nodes.
 RESERVATION=`preserve %preserve_args% | grep "Reservation number" | awk '{ print $3 }' | sed 's/://'`
@@ -13,7 +13,7 @@ echo RESERVATION=${RESERVATION} > reservation
 # Wait for the nodes to be available
 while [ `preserve -llist | grep ${RESERVATION} | awk '{ print $9 }'` == "-" ]
 do
-    echo "[DAS5-PRESERVE]:\tWaiting for nodes to be available...";
+    echo -e [DAS5-PRESERVE]:'\t'Waiting for nodes to be available...
     sleep 1;
 done
 
@@ -32,6 +32,6 @@ do
 done
 IPS=("${IPS}")
 
-echo "[DAS5-PRESERVE]:\tCompleted request."
-echo "[DAS5-PRESERVE]:\tIP-list: ${IPS}"
+echo -e [DAS5-PRESERVE]:'\t'Completed request.
+echo -e [DAS5-PRESERVE]:'\t'IP-list: ${IPS}
 

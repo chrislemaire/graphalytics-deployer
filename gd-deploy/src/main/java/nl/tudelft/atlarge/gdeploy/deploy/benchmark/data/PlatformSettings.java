@@ -4,9 +4,9 @@ import lombok.Data;
 import lombok.Getter;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GraphmatConfigurationWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformConfigurationWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PowergraphConfigurationWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GraphmatRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PowergraphRunWriter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,20 +15,20 @@ import java.util.Map;
 public class PlatformSettings implements JacksonDeserializable {
 
     public enum SoftwarePlatforms {
-        NONE(PlatformConfigurationWriter.class),
-        POWERGRAPH(PowergraphConfigurationWriter.class),
-        GRAPHMAT(GraphmatConfigurationWriter.class);
+        NONE(PlatformRunWriter.class),
+        POWERGRAPH(PowergraphRunWriter.class),
+        GRAPHMAT(GraphmatRunWriter.class);
 
         @Getter
-        Class<? extends PlatformConfigurationWriter> writer;
+        Class<? extends PlatformRunWriter> writer;
 
-        SoftwarePlatforms(Class<? extends PlatformConfigurationWriter> writer) {
+        SoftwarePlatforms(Class<? extends PlatformRunWriter> writer) {
             this.writer = writer;
         }
 
-        public PlatformConfigurationWriter newInstance(ShellScriptBuilder builder, PlatformSettings platformSettings) {
+        public PlatformRunWriter newInstance(ShellScriptBuilder builder, PlatformSettings platformSettings) {
             try {
-                return (PlatformConfigurationWriter) writer.getConstructors()[0]
+                return (PlatformRunWriter) writer.getConstructors()[0]
                         .newInstance(builder, platformSettings);
             } catch (Exception e) {
                 e.printStackTrace();
