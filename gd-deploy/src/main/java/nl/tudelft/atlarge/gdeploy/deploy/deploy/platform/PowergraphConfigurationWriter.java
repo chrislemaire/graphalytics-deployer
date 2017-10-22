@@ -28,8 +28,6 @@ public class PowergraphConfigurationWriter extends PlatformConfigurationWriter {
             PropertiesConfig config = new PropertiesConfig(TEMP_FILE);
             config.read();
 
-            settings.getConfigurations().forEach(config::configure);
-
             RemoteSystem.NATIVE.resources();
         } catch (IOException e) {
             e.printStackTrace();

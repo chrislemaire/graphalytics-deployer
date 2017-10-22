@@ -2,16 +2,17 @@ package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
 import lombok.Data;
 import lombok.Getter;
-import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonSerializable;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep.ProcessSweepWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep.SweepWriter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Data
-public class BenchmarkRun implements JacksonSerializable {
+public class BenchmarkRun implements JacksonDeserializable {
 
     private enum SweepType {
-        NONE(SweepWriter.class),
-        PROCESSES_VS_THREADS(ProcessSweepWriter.class);
+        NONE(SweepWriter.class);
 
         SweepType(Class<? extends SweepWriter> writer) {
             this.writer = writer;
@@ -33,4 +34,16 @@ public class BenchmarkRun implements JacksonSerializable {
         assert dataSets!= null;
         assert algorithms != null;
     }
+
+    @Override
+    public Map<String, String> getVariableMap() {
+        return new HashMap<String, String>() {
+            {
+                put("%sweep_type%", getSweepType().toString());
+                put("%data_sets%", getDataSets());
+                put("%algorithms%", getAlgorithms());
+            }
+        };
+    }
+
 }

@@ -6,13 +6,7 @@
       "numberOfNodesUsed": 1,
       "numberOfCpusUsed": 1
     },
-    "targetPlatform": {
-      "platform": "GIRAPH",
-      "configurations": {
-        "giraph-memory-per-worker": "1024",
-        "giraph-memory-per-node": "102400"
-      }
-    }
+    "targetPlatform": "GIRAPH"
   },
 
   "runs": [

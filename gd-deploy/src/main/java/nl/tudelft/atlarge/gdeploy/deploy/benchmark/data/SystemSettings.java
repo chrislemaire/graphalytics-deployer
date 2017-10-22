@@ -2,14 +2,17 @@ package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
 import lombok.Data;
 import lombok.Getter;
-import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonSerializable;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.Das5ReserveWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.HostReserveWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformConfigurationWriter;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Data
-public class SystemSettings implements JacksonSerializable {
+public class SystemSettings implements JacksonDeserializable {
 
     public enum RemoteHost {
         NONE(HostReserveWriter.class),
@@ -55,4 +58,17 @@ public class SystemSettings implements JacksonSerializable {
         assert host != RemoteHost.NONE;
         assert nodeType != NodeType.NONE;
     }
+
+    @Override
+    public Map<String, String> getVariableMap() {
+        return new HashMap<String, String>() {
+            {
+                put("%host%", getHost().toString());
+                put("%node_type%", getNodeType().toString());
+                put("%no_nodes%", numberOfNodesUsed);
+                put("%no_cpu%", numberOfCpusUsed);
+            }
+        };
+    }
+
 }

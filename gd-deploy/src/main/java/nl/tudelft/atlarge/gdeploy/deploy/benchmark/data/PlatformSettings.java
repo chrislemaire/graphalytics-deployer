@@ -3,21 +3,19 @@ package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 import lombok.Data;
 import lombok.Getter;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
-import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonSerializable;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GiraphConfigurationWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GraphmatConfigurationWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformConfigurationWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PowergraphConfigurationWriter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Data
-public class PlatformSettings implements JacksonSerializable {
+public class PlatformSettings implements JacksonDeserializable {
 
     public enum SoftwarePlatforms {
         NONE(PlatformConfigurationWriter.class),
-        GIRAPH(GiraphConfigurationWriter.class),
-        GRAPHX(GiraphConfigurationWriter.class),
         POWERGRAPH(PowergraphConfigurationWriter.class),
         GRAPHMAT(GraphmatConfigurationWriter.class);
 
@@ -42,12 +40,18 @@ public class PlatformSettings implements JacksonSerializable {
 
     private SoftwarePlatforms platform;
 
-    private Map<String, String> configurations;
-
     @Override
     public void init() {
         assert platform != SoftwarePlatforms.NONE;
-        assert configurations != null;
+    }
+
+    @Override
+    public Map<String, String> getVariableMap() {
+        return new HashMap<String, String>() {
+            {
+                put("%platform%", getPlatform().toString());
+            }
+        };
     }
 
 }
