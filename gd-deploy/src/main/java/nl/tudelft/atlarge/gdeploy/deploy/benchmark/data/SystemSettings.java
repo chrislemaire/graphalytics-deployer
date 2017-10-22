@@ -63,8 +63,8 @@ public class SystemSettings implements JacksonDeserializable {
     public Map<String, String> getVariableMap() {
         return new HashMap<String, String>() {
             {
-                put("%host%", getHost().toString());
-                put("%node_type%", getNodeType().toString());
+                put("%host%", getHost().name());
+                put("%node_type%", getNodeType().name());
                 put("%no_nodes%", numberOfNodesUsed);
                 put("%no_cpu%", numberOfCpusUsed);
             }

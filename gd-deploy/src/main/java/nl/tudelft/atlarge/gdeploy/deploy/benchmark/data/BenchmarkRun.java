@@ -39,7 +39,7 @@ public class BenchmarkRun implements JacksonDeserializable {
     public Map<String, String> getVariableMap() {
         return new HashMap<String, String>() {
             {
-                put("%sweep_type%", getSweepType().toString());
+                put("%sweep_type%", getSweepType().name());
                 put("%data_sets%", getDataSets());
                 put("%algorithms%", getAlgorithms());
             }

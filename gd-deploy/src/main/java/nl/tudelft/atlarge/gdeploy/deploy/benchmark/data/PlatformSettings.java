@@ -49,7 +49,7 @@ public class PlatformSettings implements JacksonDeserializable {
     public Map<String, String> getVariableMap() {
         return new HashMap<String, String>() {
             {
-                put("%platform%", getPlatform().toString());
+                put("%platform%", getPlatform().name());
             }
         };
     }
