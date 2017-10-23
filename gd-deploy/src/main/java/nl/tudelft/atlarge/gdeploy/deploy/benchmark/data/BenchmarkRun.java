@@ -1,25 +1,39 @@
 package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
 import lombok.Data;
-import lombok.Getter;
+import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
+import nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep.SingleRunWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep.SweepWriter;
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
 public class BenchmarkRun implements JacksonDeserializable {
 
-    private enum SweepType {
-        NONE(SweepWriter.class);
+    public enum SweepType {
+        NONE(SingleRunWriter.class),
+        SINGLE_RUN(SingleRunWriter.class);
 
         SweepType(Class<? extends SweepWriter> writer) {
             this.writer = writer;
         }
 
-        @Getter
         Class<? extends SweepWriter> writer;
+
+        public SweepWriter newInstance(ShellScriptBuilder builder, Benchmark benchmark) {
+            try {
+                Constructor<? extends SweepWriter> cons =
+                        writer.getDeclaredConstructor(ShellScriptBuilder.class, Benchmark.class);
+                return cons.newInstance(builder, benchmark);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
     private SweepType sweepType;

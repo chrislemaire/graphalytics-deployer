@@ -3,11 +3,13 @@ package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 import lombok.Data;
 import lombok.Getter;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GraphmatRunWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformRunWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PowergraphRunWriter;
 
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,10 +28,11 @@ public class PlatformSettings implements JacksonDeserializable {
             this.writer = writer;
         }
 
-        public PlatformRunWriter newInstance(ShellScriptBuilder builder, PlatformSettings platformSettings) {
+        public PlatformRunWriter newInstance(ShellScriptBuilder builder, Benchmark benchmark) {
             try {
-                return (PlatformRunWriter) writer.getConstructors()[0]
-                        .newInstance(builder, platformSettings);
+                Constructor<? extends PlatformRunWriter> cons =
+                        writer.getDeclaredConstructor(ShellScriptBuilder.class, Benchmark.class);
+                return cons.newInstance(builder, benchmark);
             } catch (Exception e) {
                 e.printStackTrace();
             }

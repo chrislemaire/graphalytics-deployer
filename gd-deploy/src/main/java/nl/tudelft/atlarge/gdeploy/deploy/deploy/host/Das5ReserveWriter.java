@@ -29,10 +29,4 @@ public class Das5ReserveWriter extends HostReserveWriter {
                 + " -t " + settings.getTotalReserveTime());
     }
 
-    @Override
-    public ShellScriptBuilder write() {
-        this.builder.startBuildingSshRemoteScript(settings.getHost().getRemote());
-
-        return super.write();
-    }
 }

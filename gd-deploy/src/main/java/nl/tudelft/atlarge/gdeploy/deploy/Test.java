@@ -4,25 +4,39 @@ import nl.tudelft.atlarge.gdeploy.core.script.RemoteSystem;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.BenchmarkJsonParser;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.Das5ReserveWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.deploy.DeployScriptWriter;
 
 import java.io.IOException;
 
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        ShellScriptBuilder builder = new ShellScriptBuilder("hello-world");
+//        ShellScriptBuilder builder = new ShellScriptBuilder("hello-world");
+//        builder.startBuildingSshRemoteScript(RemoteSystem.BASTION);
+//
+//        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/test-experiment.json");
+//
+//        new BenchmarkParameterWriter(builder, benchmark).write();
+//        new Das5ReserveWriter(builder, benchmark).write();
+//
+//        new SingleRunWriter(builder, benchmark).writeStart();
+//        new SingleRunWriter(builder, benchmark).writeEnd();
+//
+//        builder.appendLine("~/scripts/cancel.sh");
+//
+//        builder.stopBuildingSshRemoteScript();
+//        builder.stopBuildingSshRemoteScript();
+//        builder.finish();
+
+        ShellScriptBuilder builder = new ShellScriptBuilder("graphmat-test");
+        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/test-experiment.json");
+
+        DeployScriptWriter writer = new DeployScriptWriter(builder, benchmark);
+
         builder.startBuildingSshRemoteScript(RemoteSystem.BASTION);
 
-        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/test-experiment.json");
-        ScriptWriter writer = new Das5ReserveWriter(builder, benchmark);
         writer.write();
 
-        builder.appendLine("~/scripts/cancel.sh");
-
-        builder.stopBuildingSshRemoteScript();
-        builder.stopBuildingSshRemoteScript();
         builder.finish();
     }
 

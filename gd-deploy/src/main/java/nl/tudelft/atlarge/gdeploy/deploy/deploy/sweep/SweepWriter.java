@@ -12,7 +12,7 @@ public abstract class SweepWriter extends ScriptCopyWriter {
 
     private ExperimentSetup setup;
 
-    public SweepWriter(ShellScriptBuilder builder, Benchmark benchmark) {
+    SweepWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
 
         this.setup = benchmark.getExperimentSetup();

@@ -46,7 +46,7 @@ public enum RemoteSystem {
     }
 
     public String scripts() {
-        return deployer() + Global.SCRIPT_DIRECTORY + '/';
+        return deployer() + Global.SCRIPT_DIRECTORY;
     }
 
     public String resources() {
@@ -63,7 +63,7 @@ public enum RemoteSystem {
      * system including Windows systems.
      */
     public String scriptWrite() {
-        return deployerDirectory + Global.SCRIPT_DIRECTORY + '/';
+        return deployerDirectory + Global.SCRIPT_DIRECTORY;
     }
 
     /**

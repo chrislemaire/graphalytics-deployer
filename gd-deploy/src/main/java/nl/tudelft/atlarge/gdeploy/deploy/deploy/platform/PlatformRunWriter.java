@@ -9,7 +9,7 @@ public abstract class PlatformRunWriter extends ScriptCopyWriter {
 
     PlatformSettings settings;
 
-    PlatformRunWriter(ShellScriptBuilder builder, Benchmark benchmark) {
+    public PlatformRunWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
 
         this.settings = benchmark.getExperimentSetup().getTargetPlatform();
