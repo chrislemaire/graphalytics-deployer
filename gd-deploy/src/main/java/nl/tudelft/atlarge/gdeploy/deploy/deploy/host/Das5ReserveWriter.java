@@ -11,12 +11,6 @@ public class Das5ReserveWriter extends HostReserveWriter {
 
     public Das5ReserveWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
-
-        try {
-            this.readLines("/scripts/das5-request.sh");
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -27,6 +21,28 @@ public class Das5ReserveWriter extends HostReserveWriter {
                 "-# " + settings.getNumberOfNodesUsed() + ' '
                 + settings.getNodeType().getQueueArgs()
                 + " -t " + settings.getTotalReserveTime());
+    }
+
+    @Override
+    public ShellScriptBuilder writeRequest() {
+        try {
+            this.readLines("/scripts/reserving/das5-request.sh");
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return write();
+    }
+
+    @Override
+    public ShellScriptBuilder writeCancel() {
+        try {
+            this.readLines("/scripts/reserving/das5-cancel.sh");
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return write();
     }
 
 }

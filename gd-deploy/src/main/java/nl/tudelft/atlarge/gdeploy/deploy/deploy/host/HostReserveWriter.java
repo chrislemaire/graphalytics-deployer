@@ -15,4 +15,8 @@ public abstract class HostReserveWriter extends ScriptCopyWriter {
         this.settings = benchmark.getExperimentSetup().getTargetSystem();
     }
 
+    public abstract ShellScriptBuilder writeRequest();
+
+    public abstract ShellScriptBuilder writeCancel();
+
 }

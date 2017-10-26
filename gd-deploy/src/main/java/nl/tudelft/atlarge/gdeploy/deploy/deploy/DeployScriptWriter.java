@@ -35,16 +35,18 @@ public class DeployScriptWriter extends ScriptWriter {
                 .getTargetSystem().getHost().getRemote());
 
         parameterWriter.write();
-        hostReserveWriter.write();
+        hostReserveWriter.writeRequest();
 
         for (BenchmarkRun run : benchmark.getRuns()) {
-            SweepWriter sweepWriter = run.getSweepType().newInstance(builder, benchmark);
+            SweepWriter sweepWriter = run.getSweepType().newInstance(builder, benchmark, run);
             assert sweepWriter != null;
 
             sweepWriter.writeStart();
             platformRunWriter.write();
             sweepWriter.writeEnd();
         }
+
+        hostReserveWriter.writeCancel();
 
         return builder;
     }

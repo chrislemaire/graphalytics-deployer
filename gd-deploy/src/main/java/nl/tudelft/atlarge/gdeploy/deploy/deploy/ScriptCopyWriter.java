@@ -12,6 +12,15 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Main writer of this package. This ScriptWriter
+ * is able to read the contents of a script into memory
+ * and operate on them. This class can replace variables
+ * in the 'template' script with actual parameters.
+ * These variables can be recognized by the '%' characters
+ * surround them. For example: '%variable%' is a script
+ * variable that should be replaced by this ScriptWriter.
+ */
 public class ScriptCopyWriter extends ScriptWriter {
 
     protected Benchmark benchmark;
@@ -40,6 +49,29 @@ public class ScriptCopyWriter extends ScriptWriter {
         this.lines = Files.readAllLines(filePath);
     }
 
+
+    /**
+     * An unsafe write method that can only be used by
+     * subclasses of this class. This method reads the
+     * lines of the given file and immediately writes
+     * these lines to the {@link ShellScriptBuilder}.
+     * When an exception is encountered, it is printed
+     * and thereafter an IllegalArgumentException is thrown.
+     *
+     * @param internalFile the file containing the template
+     *                     script to be written to the builder.
+     */
+    protected ShellScriptBuilder writeUnsafe(String internalFile) {
+        try {
+            this.readLines(internalFile);
+            return write();
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException(
+                    "Internal file '" + internalFile + "' is not valid.");
+        }
+    }
+
     /**
      * Replaces all String keys with the String values.
      *
@@ -56,6 +88,7 @@ public class ScriptCopyWriter extends ScriptWriter {
     /**
      * Enhances the replacement map with extension specific
      * variables overrides.
+     *
      * @param map replacement map that will be enhanced during
      *            in this method.
      */

@@ -2,18 +2,20 @@ package nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class SingleRunWriter extends SweepWriter {
 
-    public SingleRunWriter(ShellScriptBuilder builder, Benchmark benchmark) {
-        super(builder, benchmark);
+    public SingleRunWriter(ShellScriptBuilder builder, Benchmark benchmark,
+            BenchmarkRun run) {
+        super(builder, benchmark, run);
     }
 
     @Override
-    public ShellScriptBuilder writeStart() {
+    public ShellScriptBuilder writeStartSpecifics() {
         try {
             this.readLines("/scripts/sweeps/single-run-setup.sh");
         } catch (IOException | URISyntaxException e) {

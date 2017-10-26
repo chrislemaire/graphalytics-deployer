@@ -2,25 +2,28 @@ package nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
+import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
+import java.util.Map;
 
 public class ThreadProcessSweepWriter extends SweepWriter {
 
-    public ThreadProcessSweepWriter(ShellScriptBuilder builder, Benchmark benchmark) {
-        super(builder, benchmark);
+    public ThreadProcessSweepWriter(ShellScriptBuilder builder, Benchmark benchmark,
+            BenchmarkRun run) {
+        super(builder, benchmark, run);
     }
 
     @Override
-    public ShellScriptBuilder writeStart() {
-        try {
-            this.readLines("/scripts/sweeps/thread-process-setup.sh");
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
+    public ShellScriptBuilder writeStartSpecifics() {
+        return this.writeUnsafe("/scripts/sweeps/thread-process-setup.sh");
+    }
 
-        return write();
+    @Override
+    protected void specificReplacements(Map<String, String> map) {
+        super.specificReplacements(map);
+
+        map.put("%data_sets%", run.getDataSets());
+        map.put("%algorithms%", run.getAlgorithms());
     }
 
 }

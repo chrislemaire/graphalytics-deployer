@@ -6,9 +6,14 @@ import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class BenchmarkParameterWriter extends ScriptCopyWriter {
+/**
+ * A {@link ScriptCopyWriter} extension that writes the
+ * benchmark setup script. This writes the global benchmark
+ * variables to the script.
+ */
+class BenchmarkParameterWriter extends ScriptCopyWriter {
 
-    public BenchmarkParameterWriter(ShellScriptBuilder builder, Benchmark benchmark) {
+    BenchmarkParameterWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
 
         try {

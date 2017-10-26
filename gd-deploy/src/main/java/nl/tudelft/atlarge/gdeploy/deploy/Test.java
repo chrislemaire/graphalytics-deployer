@@ -19,7 +19,7 @@ public class Test {
 //        new BenchmarkParameterWriter(builder, benchmark).write();
 //        new Das5ReserveWriter(builder, benchmark).write();
 //
-//        new SingleRunWriter(builder, benchmark).writeStart();
+//        new SingleRunWriter(builder, benchmark).writeStartSpecifics();
 //        new SingleRunWriter(builder, benchmark).writeEnd();
 //
 //        builder.appendLine("~/scripts/cancel.sh");
