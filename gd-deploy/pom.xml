@@ -10,7 +10,7 @@
         <version>1.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gd-writer</artifactId>
+    <artifactId>gd-deploy</artifactId>
 
     <properties>
         <jackson-databind.version>2.9.0</jackson-databind.version>
