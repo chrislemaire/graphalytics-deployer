@@ -3,8 +3,6 @@ package nl.tudelft.atlarge.gdeploy.deploy.deploy.host;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Map;
 
 public class Das5ReserveWriter extends HostReserveWriter {
@@ -25,24 +23,12 @@ public class Das5ReserveWriter extends HostReserveWriter {
 
     @Override
     public ShellScriptBuilder writeRequest() {
-        try {
-            this.readLines("/scripts/reserving/das5-request.sh");
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        return write();
+        return writeUnsafe("/scripts/reserving/das5-request.sh");
     }
 
     @Override
     public ShellScriptBuilder writeCancel() {
-        try {
-            this.readLines("/scripts/reserving/das5-cancel.sh");
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        return write();
+        return writeUnsafe("/scripts/reserving/das5-cancel.sh");
     }
 
 }

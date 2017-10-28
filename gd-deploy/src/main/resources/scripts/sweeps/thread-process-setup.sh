@@ -1,3 +1,7 @@
+# Setup the run parameters
+ALGORITHMS=%algorithms%
+DATA_SETS=%data_sets%
+
 # Set the threads and processes to run with
 SWEEP_THREADS=("%sweep_threads%")
 SWEEP_PROCS=("%sweep_procs%")
