@@ -4,10 +4,12 @@ import lombok.Data;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.ExperimentSetup;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
-public class Benchmark implements JacksonSerializable {
+public class Benchmark implements JacksonDeserializable {
 
     private ExperimentSetup experimentSetup;
 
@@ -21,4 +23,15 @@ public class Benchmark implements JacksonSerializable {
         experimentSetup.init();
         runs.forEach(BenchmarkRun::init);
     }
+
+    @Override
+    public Map<String, String> getVariableMap() {
+        return new HashMap<String, String>() {
+            {
+                putAll(experimentSetup.getVariableMap());
+                runs.forEach(run -> putAll(run.getVariableMap()));
+            }
+        };
+    }
+
 }

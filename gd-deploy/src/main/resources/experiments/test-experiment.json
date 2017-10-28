@@ -4,7 +4,7 @@
       "host": "DAS5VU",
       "nodeType": "KNL",
       "numberOfNodesUsed": 1,
-      "numberOfCpusUsed": 1,
+      "numberOfCoresUsed": 64,
       "totalReserveTime": "04:00:00"
     },
     "targetPlatform": {
@@ -15,7 +15,7 @@
   "runs": [
     {
         "sweepType": "NONE",
-        "dataSets": "graph500-23-fb",
+        "dataSets": "graph500-21 graph500-22",
         "algorithms": "BFS"
     }
   ]

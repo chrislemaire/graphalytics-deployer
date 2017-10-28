@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 /**
  * Created by Chris Lemaire on 29-7-2017.
@@ -73,7 +74,8 @@ public class ShellScriptBuilder {
      * Constructs the first {@link ShellScriptBuilder}.
      */
     public ShellScriptBuilder(String scriptArchiveName) {
-        this(RemoteSystem.NATIVE, null, new LinkedList<RemoteSystem>(), "/" + scriptArchiveName);
+        this(RemoteSystem.getNative(), null,
+                new LinkedList<>(), "/" + scriptArchiveName);
     }
 
     /**
@@ -88,17 +90,16 @@ public class ShellScriptBuilder {
      */
     private ShellScriptBuilder(RemoteSystem sshRemote, ShellScriptBuilder host,
                                LinkedList<RemoteSystem> relayRemotes, String currentPath) {
-        outputBuilder = new StringBuilder();
-        remoteScripts = new Stack<>();
-        appendDefaultExportCommands();
+        this.outputBuilder = new StringBuilder();
+        this.remoteScripts = new Stack<>();
 
         this.sshRemote = sshRemote;
         this.parentBuilder = host;
-        this.path = currentPath + '/' + sshRemote.sshAlias;
+        this.path = currentPath + '/' + sshRemote.getSshAlias();
         this.relayRemotes = new LinkedList<>(relayRemotes);
         this.relayRemotes.add(sshRemote);
 
-        name = generateName();
+        this.name = generateName();
     }
 
     /**
@@ -187,16 +188,20 @@ public class ShellScriptBuilder {
      * Appends some default comments and commands to the start
      * of the Script.
      */
-    private void appendDefaultExportCommands() {
-        appendLine("#!/bin/sh");
-        appendLine("# Created by " + getClass().getName() + " at "
-                + Global.LOG_DATE_FORMAT.format(new Date(System.currentTimeMillis())) + ".");
-        appendLine("");
-        appendLine("# Default commands for script deployment follow.");
-        appendLine("find $(dirname $0) -type f -regex \".*/*.sh\" | xargs --max-args=1 chmod +x");
-        appendLine("find $(dirname $0) -mindepth 1 -maxdepth 1 -type d -printf '%f\\n' "
-                + "| xargs -I % --max-args=1 scp -r ~"
-                + Global.SCRIPT_DIRECTORY + " %:~" + Global.SCRIPT_DIRECTORY + "\n");
+    private void prependDefaultExportCommands() {
+        final String[] copySshString = {"\nfind $(dirname $0) -type f -regex \".*/*.sh\" "
+                + "| xargs --max-args=1 chmod +x\n"};
+
+        remoteScripts.stream().map(r -> r.sshRemote).collect(Collectors.toSet()).forEach(rem ->
+                copySshString[0] +=
+                        "\nssh " + rem.getSshAlias() + " \"rm -rf " + rem.deployer() + "* | mkdir -p " + rem.deployer() + "\"\n"
+                        + "scp -r " + sshRemote.deployer() + "* " + rem.getSshAlias() + ":" + rem.deployer() + "\n\n");
+
+        outputBuilder.insert(0, "#!/usr/bin/env bash\n"
+                + "# Created by " + getClass().getName() + " at "
+                + Global.LOG_DATE_FORMAT.format(new Date(System.currentTimeMillis())) + ".\n\n"
+                + "# Default commands for script deployment follow:"
+                + copySshString[0] + '\n');
     }
 
     /**
@@ -206,7 +211,7 @@ public class ShellScriptBuilder {
      *
      * @param sshAlias ssh alias of the server where the remote Script
      *                 will be executed.
-     * @return
+     * @return ShellScriptBuilder to keep building.
      */
     public ShellScriptBuilder startBuildingSshRemoteScript(RemoteSystem sshAlias) {
         if (writingOnRemote) {
@@ -258,7 +263,9 @@ public class ShellScriptBuilder {
             stopBuildingSshRemoteScript();
         }
 
-        Path fullPath = Paths.get(RemoteSystem.NATIVE.scripts() + path.substring(1));
+        prependDefaultExportCommands();
+
+        Path fullPath = Paths.get(RemoteSystem.getNative().scriptWrite() + path.substring(1));
 
         System.out.println("Creating script directory: '" + fullPath + "'");
         Files.createDirectories(fullPath);
