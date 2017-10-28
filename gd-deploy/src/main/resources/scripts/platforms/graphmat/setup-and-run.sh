@@ -35,9 +35,6 @@ else
     sed -i "s/.*\(platform\.graphmat\.num-procs\s*=\).*/\1 1/" config/platform.properties
 fi
 
-# Random number generator and pid file name
-PID_FILE="$GRAPHMAT_HOME/experiment-${RAND}.pid"
-
 # Temporarily write the starting script
 cat > ./script.sh <<- EOM
     module rm openmpi/gcc
@@ -47,30 +44,16 @@ cat > ./script.sh <<- EOM
     module add intel-mpi/64cd /home/clemaire/graphmat/graphalytics-0.9.0-SNAPSHOT-graphmat-0.2-SNAPSHOT/
 
     cd \$1
-    bin/sh/run-benchmark.sh & echo \$! \$2
+    bin/sh/run-benchmark.sh
 EOM
 
 # Mod the script
 chmod +x ./script.sh
 
 # Start the benchmark
-ssh ${IPS[0]} "./script.sh ${GRAPHMAT_HOME} ${PID_FILE}"
+ssh ${IPS[0]} "./script.sh ${GRAPHMAT_HOME}"
 
-rm script.sh
+rm ./script.sh
+rm config/benchmarks/${BENCHMARK_FILE}
 
-# Get the PID in memory
-PID=`cat ${PID_FILE}`
-
-# Wait until the process has finished
-sleep_time=0
-echo -e "[SETUP-GRAPHMAT]:\tSleeping while pid=$PID is active..."
-while kill -0 "$PID"; do
-        sleep 60
-        sleep_time=$(($sleep_time+1))
-        echo -e "[SETUP-GRAPHMAT]:\tSlept for $sleep_time minutes."
-done
-echo -e "[SETUP-GRAPHMAT]:\tBenchmark run terminated, cleaning up..."
-
-# Remove the PID file to clean up
-rm ${PID_FILE}
 
