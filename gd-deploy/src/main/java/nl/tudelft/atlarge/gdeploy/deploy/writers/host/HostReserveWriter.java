@@ -1,9 +1,9 @@
-package nl.tudelft.atlarge.gdeploy.deploy.deploy.host;
+package nl.tudelft.atlarge.gdeploy.deploy.writers.host;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.SystemSettings;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptCopyWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.ScriptCopyWriter;
 
 public abstract class HostReserveWriter extends ScriptCopyWriter {
 

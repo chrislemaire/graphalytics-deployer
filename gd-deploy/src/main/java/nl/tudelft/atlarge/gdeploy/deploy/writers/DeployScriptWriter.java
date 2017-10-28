@@ -1,11 +1,11 @@
-package nl.tudelft.atlarge.gdeploy.deploy.deploy;
+package nl.tudelft.atlarge.gdeploy.deploy.writers;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.HostReserveWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformRunWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep.SweepWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.host.HostReserveWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.platform.PlatformRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.sweep.SweepWriter;
 
 public class DeployScriptWriter extends ScriptWriter {
 

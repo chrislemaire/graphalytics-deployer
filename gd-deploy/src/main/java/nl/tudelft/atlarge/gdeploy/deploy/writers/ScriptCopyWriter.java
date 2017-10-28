@@ -1,4 +1,4 @@
-package nl.tudelft.atlarge.gdeploy.deploy.deploy;
+package nl.tudelft.atlarge.gdeploy.deploy.writers;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;

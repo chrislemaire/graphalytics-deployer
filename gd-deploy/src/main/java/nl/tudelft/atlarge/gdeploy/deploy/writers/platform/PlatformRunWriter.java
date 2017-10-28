@@ -1,9 +1,9 @@
-package nl.tudelft.atlarge.gdeploy.deploy.deploy.platform;
+package nl.tudelft.atlarge.gdeploy.deploy.writers.platform;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.PlatformSettings;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.ScriptCopyWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.ScriptCopyWriter;
 
 public abstract class PlatformRunWriter extends ScriptCopyWriter {
 
