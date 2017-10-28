@@ -12,7 +12,7 @@ public class GraphmatRunWriter extends PlatformRunWriter {
         super(builder, benchmark);
 
         try {
-            this.readLines("/scripts/graphmat/setup-and-run.sh");
+            this.readLines("/scripts/platforms/graphmat/setup-and-run.sh");
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }

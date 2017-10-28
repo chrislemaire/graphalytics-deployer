@@ -63,7 +63,7 @@ public class SystemSettings implements JacksonDeserializable {
 
     private String numberOfNodesUsed = "1";
 
-    private String numberOfCpusUsed = "1";
+    private String numberOfCoresUsed = "1";
 
     private String totalReserveTime = "00:00:01";
 
@@ -80,7 +80,7 @@ public class SystemSettings implements JacksonDeserializable {
                 put("%host%", getHost().name());
                 put("%node_type%", getNodeType().name());
                 put("%no_nodes%", numberOfNodesUsed);
-                put("%no_cpu%", numberOfCpusUsed);
+                put("%no_cores%", numberOfCoresUsed);
             }
         };
     }

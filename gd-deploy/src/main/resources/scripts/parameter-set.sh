@@ -3,7 +3,9 @@
 HOST=%host%
 NODE_TYPE=%node_type%
 NO_NODES=%no_nodes%
-NO_CPUS=%no_cpu%
+NO_CORES=%no_cores%
 
 # Platform settings
 PLATFORM=%platform%
+
+

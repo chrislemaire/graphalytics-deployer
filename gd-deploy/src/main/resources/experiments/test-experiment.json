@@ -15,7 +15,7 @@
   "runs": [
     {
         "sweepType": "NONE",
-        "dataSets": "graph500-21 graph500-22",
+        "dataSets": "graph500-21, graph500-22",
         "algorithms": "BFS"
     }
   ]

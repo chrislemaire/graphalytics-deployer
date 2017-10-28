@@ -36,7 +36,6 @@ public class Test {
         builder.startBuildingSshRemoteScript(RemoteSystem.BASTION);
 
         writer.write();
-
         builder.finish();
     }
 
