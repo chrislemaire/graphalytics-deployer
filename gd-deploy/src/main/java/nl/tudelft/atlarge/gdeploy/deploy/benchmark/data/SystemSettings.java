@@ -6,8 +6,8 @@ import nl.tudelft.atlarge.gdeploy.core.script.RemoteSystem;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.Das5ReserveWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.host.HostReserveWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.host.Das5ReserveWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.host.HostReserveWriter;
 
 import java.util.HashMap;
 import java.util.Map;

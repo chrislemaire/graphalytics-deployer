@@ -4,9 +4,9 @@ import lombok.Data;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep.SingleRunWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep.SweepWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.sweep.ThreadProcessSweepWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.sweep.SingleRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.sweep.SweepWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.sweep.ThreadProcessSweepWriter;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;

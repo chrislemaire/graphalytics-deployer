@@ -5,9 +5,9 @@ import lombok.Getter;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.GraphmatRunWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PlatformRunWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.deploy.platform.PowergraphRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.platform.GraphmatRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.platform.PlatformRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.platform.PowergraphRunWriter;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -43,6 +43,8 @@ public class PlatformSettings implements JacksonDeserializable {
 
     private SoftwarePlatforms platform;
 
+    private String platformHome;
+
     @Override
     public void init() {
         assert platform != SoftwarePlatforms.NONE;
@@ -53,6 +55,7 @@ public class PlatformSettings implements JacksonDeserializable {
         return new HashMap<String, String>() {
             {
                 put("%platform%", getPlatform().name());
+                put("%platform_home%", getPlatformHome());
             }
         };
     }
