@@ -11,7 +11,7 @@ public class PowergraphRunWriter extends PlatformRunWriter {
 
     @Override
     public ShellScriptBuilder write() {
-        return builder;
+        return writeUnsafe("/scripts/platforms/powergraph/setup-and-run.sh");
     }
 
 }

@@ -7,5 +7,6 @@ NO_CORES=%no_cores%
 
 # Platform settings
 PLATFORM=%platform%
+PLATFORM_HOME=%platform_home%
 
 

@@ -41,7 +41,8 @@ public abstract class SweepWriter extends ScriptCopyWriter {
 
     public ShellScriptBuilder writeStart() {
         writeUnsafe("/scripts/sweeps/setup-run-params.sh");
-        return writeStartSpecifics();
+        writeStartSpecifics();
+        return writeUnsafe("/scripts/sweeps/benchmark-setup.sh");
     }
 
     /**
@@ -52,13 +53,7 @@ public abstract class SweepWriter extends ScriptCopyWriter {
      * @return the ShellScriptBuilder to continue building.
      */
     public ShellScriptBuilder writeEnd() {
-        try {
-            this.readLines("/scripts/sweeps/end.sh");
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        return write();
+        return writeUnsafe("/scripts/sweeps/end.sh");
     }
 
 }

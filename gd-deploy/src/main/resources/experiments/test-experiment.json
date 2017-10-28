@@ -8,7 +8,8 @@
       "totalReserveTime": "04:00:00"
     },
     "targetPlatform": {
-      "platform": "GRAPHMAT"
+      "platform": "POWERGRAPH",
+      "platformHome": "/home/clemaire/powergraph/graphalytics-0.9.0-SNAPSHOT-powergraph-0.2-SNAPSHOT"
     }
   },
 
