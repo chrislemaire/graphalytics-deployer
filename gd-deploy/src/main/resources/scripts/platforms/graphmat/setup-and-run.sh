@@ -1,6 +1,3 @@
-# Set the GraphMat home directory
-GRAPHMAT_HOME=/home/clemaire/graphmat/graphalytics-0.9.0-SNAPSHOT-graphmat-0.2-SNAPSHOT
-
 # Copy over the settings for the platform if available
 if [[ -v ${NO_NODES} ]]; then
     sed -i "s/.*\(platform\.graphmat\.num-machines\s*=\).*/\1 ${NO_NODES}/" config/platform.properties
@@ -36,9 +33,8 @@ EOM
 chmod +x ./script.sh
 
 # Start the benchmark
-ssh ${IPS[0]} "./script.sh ${GRAPHMAT_HOME}"
+ssh ${IPS[0]} "${PWD}/script.sh ${PLATFORM_HOME}"
 
 rm ./script.sh
-rm config/benchmarks/${BENCHMARK_FILE}
 
 

@@ -10,11 +10,8 @@ public class GraphmatRunWriter extends PlatformRunWriter {
 
     public GraphmatRunWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
-    }
 
-    @Override
-    public ShellScriptBuilder write() {
-        return writeUnsafe("/scripts/platforms/graphmat/setup-and-run.sh");
+        readLinesUnsafe("/scripts/platforms/graphmat/setup-and-run.sh");
     }
 
 }

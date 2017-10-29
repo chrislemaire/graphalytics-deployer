@@ -1,6 +1,3 @@
-# Set the PowerGraph home directory
-POWERGRAPH_HOME=/home/clemaire/graphmat/graphalytics-0.9.0-SNAPSHOT-graphmat-0.2-SNAPSHOT
-
 # Copy over the settings for the platform if available
 if [[ -v ${IPS} ]]; then
     sed -i "s/.*\(platform\.powergraph\.nodes\s*=\).*/\1 ${IPS}/" config/platform.properties
@@ -14,9 +11,18 @@ else
     sed -i "s/.*\(platform\.powergraph\.num-threads\s*=\).*/\1 1/" config/platform.properties
 fi
 
-# Start the benchmark
-ssh ${IPS[0]} "${POWERGRAPH_HOME}/bin/sh/run-benchmark.sh"
+# Temporarily write the starting script
+cat > ./script.sh <<- EOM
+    cd \$1
+    bin/sh/run-benchmark.sh
+EOM
 
-rm config/benchmarks/${BENCHMARK_FILE}
+# Mod the script
+chmod +x ./script.sh
+
+# Start the benchmark
+ssh ${IPS[0]} "${PWD}/script.sh ${PLATFORM_HOME}"
+
+rm ./script.sh
 
 

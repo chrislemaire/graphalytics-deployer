@@ -49,6 +49,16 @@ public class ScriptCopyWriter extends ScriptWriter {
         this.lines = Files.readAllLines(filePath);
     }
 
+    public void readLinesUnsafe(String internalFile) {
+        try {
+            readLines(internalFile);
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException(
+                    "Internal file '" + internalFile + "' is not valid.");
+        }
+    }
+
 
     /**
      * An unsafe write method that can only be used by
@@ -62,14 +72,8 @@ public class ScriptCopyWriter extends ScriptWriter {
      *                     script to be written to the builder.
      */
     protected ShellScriptBuilder writeUnsafe(String internalFile) {
-        try {
-            this.readLines(internalFile);
-            return write();
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException(
-                    "Internal file '" + internalFile + "' is not valid.");
-        }
+        this.readLinesUnsafe(internalFile);
+        return write();
     }
 
     /**

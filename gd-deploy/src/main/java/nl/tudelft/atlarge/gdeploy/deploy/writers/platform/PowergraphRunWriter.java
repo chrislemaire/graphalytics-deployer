@@ -7,11 +7,8 @@ public class PowergraphRunWriter extends PlatformRunWriter {
 
     public PowergraphRunWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
-    }
 
-    @Override
-    public ShellScriptBuilder write() {
-        return writeUnsafe("/scripts/platforms/powergraph/setup-and-run.sh");
+        readLinesUnsafe("/scripts/platforms/powergraph/setup-and-run.sh");
     }
 
 }
