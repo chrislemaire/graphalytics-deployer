@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
  * benchmark setup script. This writes the global benchmark
  * variables to the script.
  */
-class BenchmarkParameterWriter extends ScriptCopyWriter {
+class BenchmarkParameterWriter extends BenchmarkCopyWriter {
 
     BenchmarkParameterWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
