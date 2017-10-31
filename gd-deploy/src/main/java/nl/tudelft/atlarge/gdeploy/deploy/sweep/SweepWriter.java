@@ -1,10 +1,9 @@
-package nl.tudelft.atlarge.gdeploy.deploy.writers.sweep;
+package nl.tudelft.atlarge.gdeploy.deploy.sweep;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
-import nl.tudelft.atlarge.gdeploy.core.writer.ScriptCopyWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.BenchmarkCopyWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.BenchmarkCopyWriter;
 
 public abstract class SweepWriter extends BenchmarkCopyWriter {
 

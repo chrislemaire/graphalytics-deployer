@@ -1,19 +1,20 @@
 package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
 import lombok.Data;
+import nl.tudelft.atlarge.gdeploy.core.VariableMappable;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.sweep.SingleRunWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.sweep.SweepWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.sweep.ThreadProcessSweepWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.sweep.SingleRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.sweep.SweepWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.sweep.ThreadProcessSweepWriter;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
-public class BenchmarkRun implements JacksonDeserializable {
+public class BenchmarkRun implements JacksonDeserializable, VariableMappable {
 
     /**
      * The type of Sweep applied during this Run.

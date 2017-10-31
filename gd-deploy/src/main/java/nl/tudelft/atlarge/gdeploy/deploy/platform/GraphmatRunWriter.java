@@ -1,10 +1,7 @@
-package nl.tudelft.atlarge.gdeploy.deploy.writers.platform;
+package nl.tudelft.atlarge.gdeploy.deploy.platform;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class GraphmatRunWriter extends PlatformRunWriter {
 

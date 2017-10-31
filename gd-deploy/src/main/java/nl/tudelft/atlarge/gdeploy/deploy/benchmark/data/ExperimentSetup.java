@@ -1,6 +1,7 @@
 package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
 import lombok.Data;
+import nl.tudelft.atlarge.gdeploy.core.VariableMappable;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ import java.util.Map;
  * Created by Chris Lemaire on 6-9-2017.
  */
 @Data
-public class ExperimentSetup implements JacksonDeserializable {
+public class ExperimentSetup implements JacksonDeserializable, VariableMappable {
 
     private SystemSettings targetSystem;
 

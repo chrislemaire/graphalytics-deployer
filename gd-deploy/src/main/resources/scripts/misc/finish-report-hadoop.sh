@@ -1,5 +1,5 @@
 # assuming the current directory is the home directory
-# of the graphalytics install.
+# of the graphalytics data.
 
 # Parse arguments
 while [[ $# -gt 1 ]]; do

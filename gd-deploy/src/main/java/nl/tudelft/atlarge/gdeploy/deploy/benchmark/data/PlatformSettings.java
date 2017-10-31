@@ -2,19 +2,20 @@ package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
 import lombok.Data;
 import lombok.Getter;
+import nl.tudelft.atlarge.gdeploy.core.VariableMappable;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.platform.GraphmatRunWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.platform.PlatformRunWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.platform.PowergraphRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.platform.GraphmatRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.platform.PlatformRunWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.platform.PowergraphRunWriter;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
-public class PlatformSettings implements JacksonDeserializable {
+public class PlatformSettings implements JacksonDeserializable, VariableMappable {
 
     public enum SoftwarePlatforms {
         NONE(PlatformRunWriter.class),

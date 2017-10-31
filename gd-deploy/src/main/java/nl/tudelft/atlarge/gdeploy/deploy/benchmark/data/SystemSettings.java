@@ -2,18 +2,19 @@ package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
 import lombok.Data;
 import lombok.Getter;
+import nl.tudelft.atlarge.gdeploy.core.VariableMappable;
 import nl.tudelft.atlarge.gdeploy.core.script.RemoteSystem;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.host.Das5ReserveWriter;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.host.HostReserveWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.host.Das5ReserveWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.host.HostReserveWriter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
-public class SystemSettings implements JacksonDeserializable {
+public class SystemSettings implements JacksonDeserializable, VariableMappable {
 
     public enum RemoteHost {
         NONE(HostReserveWriter.class, RemoteSystem.NATIVE_WINDOWS),

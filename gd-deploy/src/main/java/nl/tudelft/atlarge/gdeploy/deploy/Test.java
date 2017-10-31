@@ -4,7 +4,6 @@ import nl.tudelft.atlarge.gdeploy.core.script.RemoteSystem;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.BenchmarkJsonParser;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.DeployScriptWriter;
 
 import java.io.IOException;
 
