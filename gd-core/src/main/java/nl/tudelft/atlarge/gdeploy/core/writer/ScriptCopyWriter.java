@@ -1,7 +1,6 @@
-package nl.tudelft.atlarge.gdeploy.deploy.writers;
+package nl.tudelft.atlarge.gdeploy.core.writer;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
-import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -9,6 +8,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,14 +23,10 @@ import java.util.Map;
  */
 public class ScriptCopyWriter extends ScriptWriter {
 
-    protected Benchmark benchmark;
-
     private List<String> lines;
 
-    public ScriptCopyWriter(ShellScriptBuilder builder, Benchmark benchmark) {
+    public ScriptCopyWriter(ShellScriptBuilder builder) {
         super(builder);
-
-        this.benchmark = benchmark;
     }
 
     /**
@@ -49,6 +45,13 @@ public class ScriptCopyWriter extends ScriptWriter {
         this.lines = Files.readAllLines(filePath);
     }
 
+    /**
+     * Reads the lines from an internally located file
+     * in an unsafe manner, catching and recasting any
+     * thrown errors during the reading.
+     *
+     * @param internalFile String path to the internal file.
+     */
     public void readLinesUnsafe(String internalFile) {
         try {
             readLines(internalFile);
@@ -101,7 +104,7 @@ public class ScriptCopyWriter extends ScriptWriter {
 
     @Override
     public ShellScriptBuilder write() {
-        this.replaceFromMap(benchmark.getVariableMap());
+        replaceFromMap(new HashMap<>());
 
         lines.forEach(line -> builder.appendLine(line));
 

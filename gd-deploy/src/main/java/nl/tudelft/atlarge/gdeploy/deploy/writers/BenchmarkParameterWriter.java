@@ -1,6 +1,7 @@
 package nl.tudelft.atlarge.gdeploy.deploy.writers;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.writer.ScriptCopyWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 
 import java.io.IOException;

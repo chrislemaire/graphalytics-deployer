@@ -3,12 +3,10 @@ package nl.tudelft.atlarge.gdeploy.deploy.writers.sweep;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.ScriptCopyWriter;
+import nl.tudelft.atlarge.gdeploy.core.writer.ScriptCopyWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.BenchmarkCopyWriter;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-public abstract class SweepWriter extends ScriptCopyWriter {
+public abstract class SweepWriter extends BenchmarkCopyWriter {
 
     /**
      * The benchmark run this sweep is executing.

@@ -3,9 +3,10 @@ package nl.tudelft.atlarge.gdeploy.deploy.writers.platform;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.PlatformSettings;
-import nl.tudelft.atlarge.gdeploy.deploy.writers.ScriptCopyWriter;
+import nl.tudelft.atlarge.gdeploy.core.writer.ScriptCopyWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.writers.BenchmarkCopyWriter;
 
-public abstract class PlatformRunWriter extends ScriptCopyWriter {
+public abstract class PlatformRunWriter extends BenchmarkCopyWriter {
 
     PlatformSettings settings;
 

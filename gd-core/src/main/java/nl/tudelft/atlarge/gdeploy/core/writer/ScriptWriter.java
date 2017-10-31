@@ -1,4 +1,4 @@
-package nl.tudelft.atlarge.gdeploy.deploy.writers;
+package nl.tudelft.atlarge.gdeploy.core.writer;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 
@@ -7,8 +7,7 @@ import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
  * class is a template class for all ScriptWriters.
  * It describes the interface by which we use a ScriptWriter:
  * A ScriptWriter is constructed with a {@link ShellScriptBuilder}
- * and the {@link nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark}
- * as its parameters. Next, the ScriptWriter will only write to
+ * as its parameter. Next, the ScriptWriter will only write to
  * the {@link ShellScriptBuilder} as output when the {@link #write()}
  * method is called.
  *

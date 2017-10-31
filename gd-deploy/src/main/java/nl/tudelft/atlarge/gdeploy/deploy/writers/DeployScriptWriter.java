@@ -1,6 +1,7 @@
 package nl.tudelft.atlarge.gdeploy.deploy.writers;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.core.writer.ScriptWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
 import nl.tudelft.atlarge.gdeploy.deploy.writers.host.HostReserveWriter;
