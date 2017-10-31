@@ -28,7 +28,7 @@ public class Test {
 //        builder.stopBuildingSshRemoteScript();
 //        builder.finish();
 
-        ShellScriptBuilder builder = new ShellScriptBuilder("graphmat-test");
+        ShellScriptBuilder builder = new ShellScriptBuilder("thread-process-graphmat");
         Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/test-experiment.json");
 
         DeployScriptWriter writer = new DeployScriptWriter(builder, benchmark);

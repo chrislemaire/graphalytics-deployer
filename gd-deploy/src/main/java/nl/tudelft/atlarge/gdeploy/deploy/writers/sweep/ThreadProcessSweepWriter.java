@@ -8,6 +8,9 @@ import java.util.Map;
 
 public class ThreadProcessSweepWriter extends SweepWriter {
 
+    private static final String THREADS = "1 2 4 8 16 32 64 128 256";
+    private static final String PROCESSES = "256 128 64 32 16 8 4 2 1";
+
     public ThreadProcessSweepWriter(ShellScriptBuilder builder, Benchmark benchmark,
             BenchmarkRun run) {
         super(builder, benchmark, run);
@@ -24,6 +27,8 @@ public class ThreadProcessSweepWriter extends SweepWriter {
 
         map.put("%data_sets%", run.getDataSets());
         map.put("%algorithms%", run.getAlgorithms());
+        map.put("%sweep_threads%", THREADS);
+        map.put("%sweep_procs%", PROCESSES);
     }
 
 }

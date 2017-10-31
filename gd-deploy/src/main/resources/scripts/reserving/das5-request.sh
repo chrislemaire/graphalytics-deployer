@@ -1,12 +1,13 @@
 # author: Alexandru Uta.
 
 # Parameters:
-# %preserve_args% -> The arguments for preserve.
+# %partition% -> The partition to reserve on.
+# %time%      -> The time to reserve the node(s) for.
 
 echo -e [DAS5-PRESERVE]:'\t'Reserving nodes with command preserve %preserve_args%.
 
 # Make the reservation for the worker nodes.
-RESERVATION=`preserve %preserve_args% | grep "Reservation number" | awk '{ print $3 }' | sed 's/://'`
+RESERVATION=`preserve -# ${NO_NODES} -q %partition% -t %time% | grep "Reservation number" | awk '{ print $3 }' | sed 's/://'`
 
 
 # Wait for the nodes to be available

@@ -9,4 +9,7 @@ NO_CORES=%no_cores%
 PLATFORM=%platform%
 PLATFORM_HOME=%platform_home%
 
+# Project settings
+PROJECT_NAME="%project_name%"
+
 

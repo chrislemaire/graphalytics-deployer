@@ -46,14 +46,14 @@ public class SystemSettings implements JacksonDeserializable {
 
     public enum NodeType {
         NONE(""),
-        KNL("-q knlq"),
-        DAS5("");
+        KNL("knlq"),
+        DAS5("all");
 
         @Getter
-        String queueArgs;
+        String partition;
 
-        NodeType(String queueArgs) {
-            this.queueArgs = queueArgs;
+        NodeType(String partition) {
+            this.partition = partition;
         }
     }
 
