@@ -1,4 +1,4 @@
-package nl.tudelft.atlarge.gdeploy.install;
+package nl.tudelft.atlarge.gdeploy.install.data;
 
 import lombok.Data;
 import nl.tudelft.atlarge.gdeploy.core.VariableMappable;
@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Objects;
 
 @Data
-public class ProductData implements VariableMappable {
-
-    private String installDirectory = "~/";
+public class Product implements VariableMappable {
 
     private String downloadUrl = "";
+
+    private String product = "";
 
     private String version = "";
 
@@ -22,7 +22,7 @@ public class ProductData implements VariableMappable {
     public Map<String, String> getVariableMap() {
         return new HashMap<String, String>() {
             {
-                put("%install_dir%", installDirectory);
+                put("%product%", product);
                 put("%download_url%", downloadUrl);
                 put("%version%", version);
                 put("%clean_install%", Objects.toString(clean));

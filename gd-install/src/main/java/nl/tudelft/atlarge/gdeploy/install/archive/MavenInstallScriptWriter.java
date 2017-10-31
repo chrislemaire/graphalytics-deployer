@@ -1,11 +1,12 @@
 package nl.tudelft.atlarge.gdeploy.install.archive;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
-import nl.tudelft.atlarge.gdeploy.install.InstallScriptWriter;
 import nl.tudelft.atlarge.gdeploy.install.data.Install;
 import nl.tudelft.atlarge.gdeploy.install.data.Product;
 
-public class ApacheInstallScriptWriter extends InstallScriptWriter {
+import java.util.Map;
+
+public class MavenInstallScriptWriter extends ApacheInstallScriptWriter {
 
     /**
      * Constructs a new ApacheInstallScriptWriter from
@@ -16,10 +17,22 @@ public class ApacheInstallScriptWriter extends InstallScriptWriter {
      * @param data    the data of the full install script.
      * @param product data describing the object to data.
      */
-    public ApacheInstallScriptWriter(ShellScriptBuilder builder, Install data, Product product) {
+    public MavenInstallScriptWriter(ShellScriptBuilder builder, Install data, Product product) {
         super(builder, data, product);
+    }
 
-        readLinesUnsafe("/scripts/install/apache-install.sh");
+    @Override
+    protected void specificReplacements(Map<String, String> map) {
+        super.specificReplacements(map);
+
+        map.put("%maven_path%", data.getInstallDirectory() + '/'
+                + product.getProduct() + '/' + product.getVersion());
+    }
+
+    @Override
+    public ShellScriptBuilder write() {
+        super.write();
+        return writeUnsafe("/scripts/install/maven-install.sh");
     }
 
 }

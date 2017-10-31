@@ -1,5 +1,5 @@
 # System information
-INSTALL_DIR="%install_dir"      # The absolute path to the directory where installs are located.
+INSTALL_DIR="%install_dir%"      # The absolute path to the directory where installs are located.
 
 # Package information
 CLEAN_INSTALL="%clean_install%"

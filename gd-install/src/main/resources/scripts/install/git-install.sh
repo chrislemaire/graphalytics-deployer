@@ -5,7 +5,7 @@
 # checkout the requested commit/version of the repo.
 
 # System information
-INSTALL_DIR="%install_dir"      # The absolute path to the directory where installs are located.
+INSTALL_DIR="%install_dir%"      # The absolute path to the directory where installs are located.
 
 # Product information
 URL="%download_url%"
