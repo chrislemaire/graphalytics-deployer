@@ -47,19 +47,7 @@ then
     PACKAGE_FILE=`ls -tp | grep -v / | head -n1`
     echo -e "[APACHE-INSTALL]:\tFound package to be $PACKAGE_FILE"
 
-    if [[ "$PACKAGE_FILE" == "*.tar.gz" ]]; then
-        # Unpack like a tarball
-        echo -e "[APACHE-INSTALL]:\tUnpacking tarball $PACKAGE_FILE..."
-        tar -xzvf ${PACKAGE_FILE}
-    elif [[ "$PACKAGE_FILE" == "*.zip" ]]; then
-        # Unpack like a zip
-        echo -e "[APACHE-INSTALL]:\tUnzipping zip file $PACKAGE_FILE..."
-        unzip ${PACKAGE_FILE}
-    else
-        # Not a recognized package file-extension
-        echo -e "[APACHE-INSTALL]:\tPackage type not recognized!"
-        echo -e "[APACHE-INSTALL]:\tQuitting install procedure for $PRODUCT"
-    fi
+    ${UTIL}/unpack.sh ${PACKAGE_FILE}
 
     # Remove the singleton directories in this directory
     echo -e "[APACHE-INSTALL]:\tMoving out the install directory from singleton directories."
