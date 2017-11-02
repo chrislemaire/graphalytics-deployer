@@ -21,7 +21,7 @@ EOM
 chmod +x ./script.sh
 
 # Start the benchmark
-ssh ${IPS[0]} "${PWD}/script.sh ${PLATFORM_HOME}"
+ssh ${IPS[0]} "nohup ${PWD}/script.sh ${PLATFORM_HOME} > ~/experiment.out 2>&1 & echo $! > experiment.pid"
 
 rm ./script.sh
 

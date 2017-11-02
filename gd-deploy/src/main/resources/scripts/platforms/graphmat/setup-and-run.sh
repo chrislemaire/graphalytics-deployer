@@ -24,7 +24,7 @@ else
 fi
 
 # Temporarily write the starting script
-cat > ./script.sh <<- EOM
+cat > ${PWD}/script.sh <<- EOM
     module rm openmpi/gcc
     module rm openmpi/open64
 
@@ -32,15 +32,33 @@ cat > ./script.sh <<- EOM
     module add intel-mpi/64
 
     cd \$1
-    bin/sh/run-benchmark.sh
+    nohup bin/sh/run-benchmark.sh > \$1/experiment.log 2>&1 & echo \$! > \$1/experiment.pid
 EOM
 
 # Mod the script
-chmod +x ./script.sh
+chmod +x ${PWD}/script.sh
 
 # Start the benchmark
 ssh ${IPS[0]} "${PWD}/script.sh ${PLATFORM_HOME}"
 
-rm ./script.sh
+# Wait until the script has started
+sleep 5
+
+# Get the experiment pid
+PID=$(cat $PWD/experiment.pid)
+
+# Wait until it's done
+SLEEP_TIME=0
+echo -e "[GRAPHMAT-RUN]:\t\tSleeping while pid=${PID} is active..."
+while `ssh ${IPS[0]} kill -0 "$PID"`
+do
+        sleep 60
+        SLEEP_TIME=$(($SLEEP_TIME+1))
+        echo -e "[GRAPHMAT-RUN]:\t\tSlept for $SLEEP_TIME minutes."
+done
+echo -e "[GRAPHMAT-RUN]:\t\tBenchmark run terminated, cleaning up..."
+
+# Remove the script file
+rm ${PWD}/script.sh
 
 
