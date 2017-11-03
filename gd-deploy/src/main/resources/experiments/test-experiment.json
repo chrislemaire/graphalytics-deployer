@@ -1,5 +1,5 @@
 {
-  "name": "proc-sweep-early-all",
+  "name": "proc-sweep-early-small",
   "experimentSetup": {
     "targetSystem": {
       "host": "DAS5VU",
@@ -17,7 +17,7 @@
   "runs": [
     {
         "sweepType": "THREAD_PROCESS",
-        "dataSets": "datagen-7_6-fb,datagen-7_7-zf,datagen-7_8-zf,datagen-7_9-fb,datagen-8_0-fb,datagen-9_0-fb,dota-league",
+        "dataSets": "datagen-7_6-fb,datagen-7_7-zf,datagen-7_8-zf,datagen-7_9-fb",
         "algorithms": "BFS,CDLP,LCC,PR,WCC"
     }
   ]
