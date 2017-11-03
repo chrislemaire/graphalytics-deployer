@@ -47,7 +47,7 @@ public class ShellScript {
         for (int i = relayRemotes.lastIndexOf(hostRemote) + 1; i < relayRemotes.size(); i++) {
             commandBuilder.append("nohup ssh ").append(relayRemotes.get(i).getSshAlias()).append(' ');
         }
-        commandBuilder.append("\"nohup \\\"").append(fullPath).append("\\\" & echo $! > ~/curr.pid\" &");
+        commandBuilder.append("\"nohup \\\"").append(fullPath).append("\\\" > ~/curr.out & echo $! > ~/curr.pid\" &");
 
         return commandBuilder.toString();
     }

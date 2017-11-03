@@ -32,31 +32,63 @@ cat > ${PWD}/script.sh <<- EOM
     module add intel-mpi/64
 
     cd \$1
-    nohup bin/sh/run-benchmark.sh > \$1/experiment.log 2>&1 & echo \$! > \$1/experiment.pid
+    nohup bin/sh/run-benchmark.sh > /dev/null 2>&1 & echo \$! > \$1/experiment.pid
 EOM
 
 # Mod the script
+echo -e "[GRAPHMAT-RUN]:\t\tWrote script file to ${PWD}/script.sh"
 chmod +x ${PWD}/script.sh
 
+# Remove the old pid file
+rm ${PWD}/experiment.pid
+
 # Start the benchmark
-ssh ${IPS[0]} "${PWD}/script.sh ${PLATFORM_HOME}"
+echo -e "[GRAPHMAT-RUN]:\t\tStarting benchmark..."
+nohup ssh ${IPS[0]} "${PWD}/script.sh ${PLATFORM_HOME}" &
+
+# Wait a few seconds
+echo -e "[GRAPHMAT-RUN]:\t\tSleeping for 10 seconds to wait for benchmark to start..."
+sleep 10
 
 # Wait until the script has started
-sleep 5
-
-# Get the experiment pid
-PID=$(cat $PWD/experiment.pid)
-
-# Wait until it's done
-SLEEP_TIME=0
-echo -e "[GRAPHMAT-RUN]:\t\tSleeping while pid=${PID} is active..."
-while `ssh ${IPS[0]} kill -0 "$PID"`
+PID_FOUND=0
+for (( i=0; i<10; ++i ))
 do
+    # Check if experiment.pid file exists.
+    if [[ -f "$PWD/experiment.pid" ]]; then
+        # Experiment pid is found, set PID_FOUND
+        PID_FOUND=1
+        echo -e "[GRAPHMAT-RUN]:\t\tFound PID file after $((i * 1/2)) minutes and $((30*(i-2*(i*1/2)))) seconds"
+        break
+    fi
+
+    # Wait for half a minute until checking the pid file again.
+    echo -e "[GRAPHMAT-RUN]:\t\tDid not find PID file yet, sleeping for 30 seconds..."
+    sleep 30
+done
+
+if [[ PID_FOUND == 0 ]]; then
+
+    echo -e "[GRAPHMAT-RUN]:\t\tCouldn't successfully start benchmark... Skipping this benchmark..."
+
+else
+
+    # Get the experiment pid
+    PID=$(cat $PWD/experiment.pid)
+
+    # Wait until it's done
+    SLEEP_TIME=0
+    echo -e "[GRAPHMAT-RUN]:\t\tSleeping while pid=${PID} is active..."
+    while `ssh ${IPS[0]} kill -0 "$PID"`
+    do
+        # Wait for a minute until polling again.
         sleep 60
         SLEEP_TIME=$(($SLEEP_TIME+1))
         echo -e "[GRAPHMAT-RUN]:\t\tSlept for $SLEEP_TIME minutes."
-done
-echo -e "[GRAPHMAT-RUN]:\t\tBenchmark run terminated, cleaning up..."
+    done
+    echo -e "[GRAPHMAT-RUN]:\t\tBenchmark run terminated, cleaning up..."
+
+fi
 
 # Remove the script file
 rm ${PWD}/script.sh
