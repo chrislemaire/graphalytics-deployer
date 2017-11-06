@@ -1,5 +1,5 @@
 {
-  "name": "proc-sweep-early-small",
+  "name": "datagen-8_6-8_7-all-algs-KNL077-CACHE-SNC_4",
   "experimentSetup": {
     "targetSystem": {
       "host": "DAS5VU",
@@ -17,7 +17,7 @@
   "runs": [
     {
         "sweepType": "THREAD_PROCESS",
-        "dataSets": "datagen-7_6-fb,datagen-7_7-zf,datagen-7_8-zf,datagen-7_9-fb",
+        "dataSets": "datagen-8_6-fb,datagen-8_7-zf",
         "algorithms": "BFS,CDLP,LCC,PR,WCC"
     }
   ]

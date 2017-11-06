@@ -1,0 +1,24 @@
+{
+  "name": "thread-sweep-powergraph-medium",
+  "experimentSetup": {
+    "targetSystem": {
+      "host": "DAS5VU",
+      "nodeType": "KNL",
+      "numberOfNodesUsed": 1,
+      "numberOfCoresUsed": 64,
+      "totalReserveTime": "72:00:00"
+    },
+    "targetPlatform": {
+      "platform": "POWERGRAPH",
+      "platformHome": "/home/clemaire/powergraph/graphalytics-0.9.0-SNAPSHOT-powergraph-0.2-SNAPSHOT"
+    }
+  },
+
+  "runs": [
+    {
+        "sweepType": "THREAD_PROCESS",
+        "dataSets": "datagen-8_5-fb",
+        "algorithms": "BFS,CDLP,LCC,PR,WCC"
+    }
+  ]
+}

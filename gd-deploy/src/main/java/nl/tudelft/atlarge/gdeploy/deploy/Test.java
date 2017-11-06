@@ -10,25 +10,10 @@ import java.io.IOException;
 public class Test {
 
     public static void main(String[] args) throws IOException {
-//        ShellScriptBuilder builder = new ShellScriptBuilder("hello-world");
-//        builder.startBuildingSshRemoteScript(RemoteSystem.BASTION);
-//
-//        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/test-experiment.json");
-//
-//        new BenchmarkParameterWriter(builder, benchmark).write();
-//        new Das5ReserveWriter(builder, benchmark).write();
-//
-//        new SingleRunWriter(builder, benchmark).writeStartSpecifics();
-//        new SingleRunWriter(builder, benchmark).writeEnd();
-//
-//        builder.appendLine("~/scripts/cancel.sh");
-//
-//        builder.stopBuildingSshRemoteScript();
-//        builder.stopBuildingSshRemoteScript();
-//        builder.finish();
+        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/test-powergraph.json");
 
-        ShellScriptBuilder builder = new ShellScriptBuilder("thread-process-graphmat");
-        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/test-experiment.json");
+        ShellScriptBuilder builder = new ShellScriptBuilder(
+                benchmark.getName() + "-" + benchmark.getIdentifier());
 
         DeployScriptWriter writer = new DeployScriptWriter(builder, benchmark);
 

@@ -62,6 +62,12 @@ public class ShellScriptBuilder {
      */
     private final String path;
 
+    /**
+     * The file to which output will be redirected by nohup
+     * during execution of the script.
+     */
+    private String outputFile;
+
 
     /**
      * A list of remotes traveled through starting with
@@ -76,6 +82,8 @@ public class ShellScriptBuilder {
     public ShellScriptBuilder(String scriptArchiveName) {
         this(RemoteSystem.getNative(), null,
                 new LinkedList<>(), "/" + scriptArchiveName);
+
+        this.outputFile = "~/" + scriptArchiveName + ".out";
     }
 
     /**
@@ -194,7 +202,7 @@ public class ShellScriptBuilder {
 
         remoteScripts.stream().map(r -> r.sshRemote).collect(Collectors.toSet()).forEach(rem ->
                 copySshString[0] +=
-                        "\nssh " + rem.getSshAlias() + " \"rm -rf " + rem.deployer() + "* | mkdir -p " + rem.deployer() + "\"\n"
+                        "\nssh " + rem.getSshAlias() + " \"mkdir -p " + rem.deployer() + "\"\n"
                         + "scp -r " + sshRemote.deployer() + "* " + rem.getSshAlias() + ":" + rem.deployer() + "\n\n");
 
         outputBuilder.insert(0, "#!/usr/bin/env bash\n"
@@ -218,6 +226,7 @@ public class ShellScriptBuilder {
             getCurrentBuilder().startBuildingSshRemoteScript(sshAlias);
         } else {
             remoteScripts.push(new ShellScriptBuilder(sshAlias, this, relayRemotes, path));
+            remoteScripts.lastElement().outputFile = this.outputFile;
             writingOnRemote = true;
         }
 
@@ -277,7 +286,7 @@ public class ShellScriptBuilder {
         System.out.println("Finished building Script '" + name + "' at '"
                 + fullPath + "/" + name + "'");
 
-        return new ShellScript(name, path, sshRemote, relayRemotes);
+        return new ShellScript(name, path, sshRemote, relayRemotes, outputFile);
     }
 
 }

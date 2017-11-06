@@ -11,5 +11,6 @@ PLATFORM_HOME=%platform_home%
 
 # Project settings
 PROJECT_NAME="%project_name%"
+PROJECT_ID=%project_id%
 
 
