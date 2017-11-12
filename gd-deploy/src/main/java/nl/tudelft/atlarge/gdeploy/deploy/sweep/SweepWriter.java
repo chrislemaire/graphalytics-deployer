@@ -5,6 +5,8 @@ import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
 import nl.tudelft.atlarge.gdeploy.deploy.BenchmarkCopyWriter;
 
+import java.util.Map;
+
 public abstract class SweepWriter extends BenchmarkCopyWriter {
 
     /**
@@ -35,6 +37,14 @@ public abstract class SweepWriter extends BenchmarkCopyWriter {
      * @return the ShellScriptBuilder to continue building.
      */
     protected abstract ShellScriptBuilder writeStartSpecifics();
+
+    @Override
+    protected void specificReplacements(Map<String, String> map) {
+        super.specificReplacements(map);
+
+        map.put("%data_sets%", run.getDataSets());
+        map.put("%algorithms%", run.getAlgorithms());
+    }
 
     public ShellScriptBuilder writeStart() {
         writeUnsafe("/scripts/sweeps/setup-run-params.sh");

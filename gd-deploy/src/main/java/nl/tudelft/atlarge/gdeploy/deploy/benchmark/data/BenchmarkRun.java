@@ -8,6 +8,7 @@ import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
 import nl.tudelft.atlarge.gdeploy.deploy.sweep.SingleRunWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.sweep.SweepWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.sweep.ThreadProcessSweepWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.sweep.ThreadSweepWriter;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -25,7 +26,8 @@ public class BenchmarkRun implements JacksonDeserializable, VariableMappable {
     public enum SweepType {
         NONE(SingleRunWriter.class),
         SINGLE_RUN(SingleRunWriter.class),
-        THREAD_PROCESS(ThreadProcessSweepWriter.class);
+        THREAD_PROCESS(ThreadProcessSweepWriter.class),
+        THREAD(ThreadSweepWriter.class);
 
         SweepType(Class<? extends SweepWriter> writer) {
             this.writer = writer;

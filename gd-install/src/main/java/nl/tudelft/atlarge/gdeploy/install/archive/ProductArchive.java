@@ -5,6 +5,7 @@ import nl.tudelft.atlarge.gdeploy.core.Util;
 import nl.tudelft.atlarge.gdeploy.core.config.PropertiesConfig;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * Created by Chris Lemaire on 30-8-2017.
@@ -14,8 +15,12 @@ public class ProductArchive {
     private PropertiesConfig archive;
 
     public ProductArchive(String product) {
-        archive = new PropertiesConfig(Util.fileFromInternal(
-                Global.VERSIONS_DIR_CLASS + product + ".txt"));
+        try {
+            archive = new PropertiesConfig(Util.fileFromInternal(
+                    Global.VERSIONS_DIR_CLASS + product + ".txt"));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         try {
             archive.read();

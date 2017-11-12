@@ -23,6 +23,9 @@ else
     echo -e "[GRAPHMAT-SETUP]:\tSetup with platform.graphmat.num-procs = 1 by default"
 fi
 
+# Set the experiment file
+EXPERIMENT_DONE="$PLATFORM_HOME/done-$PROJECT_ID"
+
 # Temporarily write the starting script
 cat > ${PWD}/script.sh <<- EOM
     module rm openmpi/gcc
@@ -31,64 +34,34 @@ cat > ${PWD}/script.sh <<- EOM
     module add intel/compiler
     module add intel-mpi/64
 
-    cd \$1
-    nohup bin/sh/run-benchmark.sh > /dev/null 2>&1 & echo \$! > \$1/experiment.pid
+    cd ${PLATFORM_HOME}
+    bin/sh/run-benchmark.sh
+    echo "done" > ${EXPERIMENT_DONE}
 EOM
 
 # Mod the script
 echo -e "[GRAPHMAT-RUN]:\t\tWrote script file to ${PWD}/script.sh"
 chmod +x ${PWD}/script.sh
 
-# Remove the old pid file
-rm ${PWD}/experiment.pid
-
 # Start the benchmark
 echo -e "[GRAPHMAT-RUN]:\t\tStarting benchmark..."
-nohup ssh ${IPS[0]} "${PWD}/script.sh ${PLATFORM_HOME}" &
+ssh ${IPS[0]} "nohup ${PWD}/script.sh > /dev/null 2>&1 &"
 
-# Wait a few seconds
-echo -e "[GRAPHMAT-RUN]:\t\tSleeping for 10 seconds to wait for benchmark to start..."
-sleep 10
-
-# Wait until the script has started
-PID_FOUND=0
-for (( i=0; i<10; ++i ))
+# Wait until benchmark-done-... file exists
+seconds=0
+while [[ ! -f ${EXPERIMENT_DONE} ]]
 do
-    # Check if experiment.pid file exists.
-    if [[ -f "$PWD/experiment.pid" ]]; then
-        # Experiment pid is found, set PID_FOUND
-        PID_FOUND=1
-        echo -e "[GRAPHMAT-RUN]:\t\tFound PID file after $((i * 1/2)) minutes and $((30*(i-2*(i*1/2)))) seconds"
-        break
-    fi
-
-    # Wait for half a minute until checking the pid file again.
-    echo -e "[GRAPHMAT-RUN]:\t\tDid not find PID file yet, sleeping for 30 seconds..."
-    sleep 30
+    # Sleep a minute
+    sleep 60
+    seconds=$((seconds+60))
+    echo -e "[GRAPHMAT-RUN]:\t\tBenchmark has been running for $((seconds/60)) minutes"
 done
 
-if [[ PID_FOUND == 0 ]]; then
+# Benchmark finished
+echo -e "[GRAPHMAT-RUN]:\t\tBenchmark finished after $((seconds/3600)) hours and $(( (seconds-(seconds/3600)*3600)/60 ))"
 
-    echo -e "[GRAPHMAT-RUN]:\t\tCouldn't successfully start benchmark... Skipping this benchmark..."
-
-else
-
-    # Get the experiment pid
-    PID=$(cat $PWD/experiment.pid)
-
-    # Wait until it's done
-    SLEEP_TIME=0
-    echo -e "[GRAPHMAT-RUN]:\t\tSleeping while pid=${PID} is active..."
-    while `ssh ${IPS[0]} kill -0 "$PID"`
-    do
-        # Wait for a minute until polling again.
-        sleep 60
-        SLEEP_TIME=$(($SLEEP_TIME+1))
-        echo -e "[GRAPHMAT-RUN]:\t\tSlept for $SLEEP_TIME minutes."
-    done
-    echo -e "[GRAPHMAT-RUN]:\t\tBenchmark run terminated, cleaning up..."
-
-fi
+# Remove the done file
+rm ${EXPERIMENT_DONE}
 
 # Remove the script file
 rm ${PWD}/script.sh

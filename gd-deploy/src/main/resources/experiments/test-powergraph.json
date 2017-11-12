@@ -1,5 +1,5 @@
 {
-  "name": "thread-sweep-powergraph-medium",
+  "name": "datagen-7_6-7_9-all-DAS5VU-KNL076-FLAT-QUAD",
   "experimentSetup": {
     "targetSystem": {
       "host": "DAS5VU",
@@ -16,9 +16,9 @@
 
   "runs": [
     {
-        "sweepType": "THREAD_PROCESS",
-        "dataSets": "datagen-8_5-fb",
-        "algorithms": "BFS,CDLP,LCC,PR,WCC"
+        "sweepType": "THREAD",
+        "dataSets": "datagen-7_6-fb,datagen-7_7-zf,datagen-7_8-zf,datagen-7_9-fb",
+        "algorithms": "BFS,CDLP,LCC,PR,WCC,SSSP"
     }
   ]
 }
