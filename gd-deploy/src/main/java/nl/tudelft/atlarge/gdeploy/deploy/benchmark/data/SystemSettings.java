@@ -9,54 +9,14 @@ import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
 import nl.tudelft.atlarge.gdeploy.deploy.host.Das5ReserveWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.host.HostReserveWriter;
+import nl.tudelft.atlarge.gdeploy.deploy.host.NodeType;
+import nl.tudelft.atlarge.gdeploy.deploy.host.RemoteHost;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
 public class SystemSettings implements JacksonDeserializable, VariableMappable {
-
-    public enum RemoteHost {
-        NONE(HostReserveWriter.class, RemoteSystem.NATIVE_WINDOWS),
-        DAS5VU(Das5ReserveWriter.class, RemoteSystem.DAS5VU),
-        DAS5TUD(Das5ReserveWriter.class, RemoteSystem.DAS5TUD),
-        INTEL(HostReserveWriter.class, RemoteSystem.DAS5TUD),
-        SURF_SARA(HostReserveWriter.class, RemoteSystem.DAS5TUD);
-
-        @Getter
-        private Class<? extends HostReserveWriter> writer;
-
-        @Getter
-        private RemoteSystem remote;
-
-        RemoteHost(Class<? extends HostReserveWriter> writer, RemoteSystem remote) {
-            this.writer = writer;
-            this.remote = remote;
-        }
-
-        public HostReserveWriter newInstance(ShellScriptBuilder builder, Benchmark benchmark) {
-            try {
-                return (HostReserveWriter) writer.getConstructors()[0]
-                        .newInstance(builder, benchmark);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
-    public enum NodeType {
-        NONE(""),
-        KNL("knlq"),
-        DAS5("all");
-
-        @Getter
-        String partition;
-
-        NodeType(String partition) {
-            this.partition = partition;
-        }
-    }
 
     private RemoteHost host;
 

@@ -19,7 +19,7 @@ public class ThreadSweepWriter extends SweepWriter {
      * @param benchmark The benchmark that defines this sweep.
      * @param run       The run this sweep is instantiated from.
      */
-    ThreadSweepWriter(ShellScriptBuilder builder, Benchmark benchmark, BenchmarkRun run) {
+    public ThreadSweepWriter(ShellScriptBuilder builder, Benchmark benchmark, BenchmarkRun run) {
         super(builder, benchmark, run);
     }
 
