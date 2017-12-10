@@ -7,9 +7,9 @@ import java.util.Map;
 public enum NodeType {
 
     NONE("", 0, 0, null),
-    KNL076("knlq", 64, 4, new KnlConfigurationBuilder()
+    KNL076("knlq", 68, 4, new KnlConfigurationBuilder()
             .clusterMode("QUAD").memoryMode("FLAT").build()),
-    KNL077("knlq", 64, 4, new KnlConfigurationBuilder()
+    KNL077("knlq", 68, 4, new KnlConfigurationBuilder()
             .clusterMode("SNC_4").memoryMode("CACHE").build()),
     DAS5("all", 16, 2, null);
 

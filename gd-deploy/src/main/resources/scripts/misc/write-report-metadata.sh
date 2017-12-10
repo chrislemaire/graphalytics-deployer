@@ -23,5 +23,10 @@ sed -i "s/.*%RUN_ID%.*/${RUN_ID}/" ${METADATA}
 sed -i "s/.*%PLATFORM_NAME%.*/${PLATFORM_NAME}/" ${METADATA}
 sed -i "s/.*%PLATFORM_HOME%.*/${PLATFORM_HOME}/" ${METADATA}
 
+sed -i "s/.*%NETWORK%.*/${NETWORK}/" ${METADATA}
 sed -i "s/.*%SITE_NAME%.*/${SITE_NAME}/" ${METADATA}
 sed -i "s/.*%USER%.*/${USER}/" ${METADATA}
+
+sed -i "s/.*%NODES%.*/${NODES_JSON}/" ${METADATA}
+sed -i "s/.*%DATASETS%.*/${DATA_SETS_JSON}/" ${METADATA}
+sed -i "s/.*%ALGORITHMS%.*/${ALGORITHMS_JSON}/" ${METADATA}

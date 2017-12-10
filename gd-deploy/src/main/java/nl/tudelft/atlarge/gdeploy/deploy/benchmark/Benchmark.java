@@ -2,6 +2,7 @@ package nl.tudelft.atlarge.gdeploy.deploy.benchmark;
 
 import lombok.Data;
 import nl.tudelft.atlarge.gdeploy.core.VariableMappable;
+import nl.tudelft.atlarge.gdeploy.core.script.RemoteSystem;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.ExperimentSetup;
 
@@ -40,6 +41,7 @@ public class Benchmark implements JacksonDeserializable, VariableMappable {
             {
                 put("%project_id%", String.valueOf(getIdentifier()));
                 put("%project_name%", getName());
+                put("%deployer_root%", RemoteSystem.getNative().deployer());
 
                 putAll(experimentSetup.getVariableMap());
                 runs.forEach(run -> putAll(run.getVariableMap()));
