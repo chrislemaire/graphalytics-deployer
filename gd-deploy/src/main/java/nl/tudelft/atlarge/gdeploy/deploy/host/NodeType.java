@@ -30,7 +30,7 @@ public enum NodeType {
         this.configurations = configurations;
     }
 
-    public String generateJson(int count, int threadsInUse, int processesInUse) {
+    public String generateJson(String count, String threadsInUse, String processesInUse) {
         StringBuilder builder = new StringBuilder("{")
                 .append("\"name\": \"").append(name()).append("\", ")
                 .append("\"numberOfCores\": ").append(numberOfCores).append(", ")

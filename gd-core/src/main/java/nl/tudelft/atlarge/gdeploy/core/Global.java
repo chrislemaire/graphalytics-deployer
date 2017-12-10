@@ -17,6 +17,7 @@ public class Global {
     public static final String SCRIPT_DIRECTORY = "scripts/";
     public static final String OUTPUT_RESOURCES = SCRIPT_DIRECTORY + "resources/";
     public static final String PRODUCT_DIRECTORY = "frameworks/";
+    public static final String UTILITY_DIR = "util/";
     public static final String OUTPUT_FILE = "tmp_output.out";
 
     public static final Random RANDOM = new Random(System.currentTimeMillis());

@@ -1,9 +1,8 @@
 package nl.tudelft.atlarge.gdeploy.core.archiver;
 
 import nl.tudelft.atlarge.gdeploy.core.Global;
-import nl.tudelft.atlarge.gdeploy.core.Util;
+import nl.tudelft.atlarge.gdeploy.core.util.Util;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 

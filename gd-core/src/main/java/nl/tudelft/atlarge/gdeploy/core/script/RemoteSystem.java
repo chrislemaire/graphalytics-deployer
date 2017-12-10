@@ -53,6 +53,10 @@ public enum RemoteSystem {
         return deployer() + Global.OUTPUT_RESOURCES + '/';
     }
 
+    public String utilWrite() {
+        return deployerDirectory + Global.UTILITY_DIR;
+    }
+
     /**
      * Returns the script writing directory to which the script files
      * will be written during the writing phase. This path may be

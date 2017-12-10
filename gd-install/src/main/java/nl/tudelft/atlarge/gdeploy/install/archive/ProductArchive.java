@@ -1,7 +1,7 @@
 package nl.tudelft.atlarge.gdeploy.install.archive;
 
 import nl.tudelft.atlarge.gdeploy.core.Global;
-import nl.tudelft.atlarge.gdeploy.core.Util;
+import nl.tudelft.atlarge.gdeploy.core.util.Util;
 import nl.tudelft.atlarge.gdeploy.core.config.PropertiesConfig;
 
 import java.io.IOException;
