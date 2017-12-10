@@ -1,4 +1,7 @@
 # Set-up parameters for the Benchmark runs
+# Deployer settings
+DEPLOYER_ROOT=%deployer_root%
+
 # System settings
 HOST=%host%
 NODE_TYPE=%node_type%

@@ -1,10 +1,10 @@
 {
-  "name": "datagen-7_6-7_9-all-DAS5VU-KNL076-FLAT-QUAD",
+  "name": "POWERGRAPH-datagen-7_6-7_9-all-DAS5VU-KNL-CACHE-SNC_4+FLAT-QUAD",
   "experimentSetup": {
     "targetSystem": {
       "host": "DAS5VU",
-      "nodeType": "KNL",
-      "numberOfNodesUsed": 1,
+      "nodeType": "KNL076",
+      "numberOfNodesUsed": 2,
       "numberOfCoresUsed": 64,
       "totalReserveTime": "72:00:00"
     },

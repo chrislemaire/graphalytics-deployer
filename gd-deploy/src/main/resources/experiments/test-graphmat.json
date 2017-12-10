@@ -1,9 +1,9 @@
 {
-  "name": "datagen-7_6-7_9-all-DAS5VU-KNL077-CACHE-SNC_4",
+  "name": "GRAPHMAT-datagen-8_0-8_2-all-DAS5VU-KNL076-FLAT-QUAD",
   "experimentSetup": {
     "targetSystem": {
       "host": "DAS5VU",
-      "nodeType": "KNL",
+      "nodeType": "KNL076",
       "numberOfNodesUsed": 1,
       "numberOfCoresUsed": 64,
       "totalReserveTime": "48:00:00"
@@ -17,8 +17,8 @@
   "runs": [
     {
         "sweepType": "THREAD_PROCESS",
-        "dataSets": "datagen-7_6-fb,datagen-7_7-zf,datagen-7_8-zf,datagen-7_9-fb",
-        "algorithms": "BFS,CDLP,LCC,PR,WCC"
+        "dataSets": "datagen-8_0-fb,datagen-8_1-fb,datagen-8_2-zf",
+        "algorithms": "BFS,CDLP,LCC,PR,WCC,SSSP"
     }
   ]
 }

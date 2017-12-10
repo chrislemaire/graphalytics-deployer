@@ -1,0 +1,24 @@
+{
+  "projectName": "%PROJ_NAME%",
+  "projectId": "%PROJ_ID%",
+  "runStart": "%RUN_START%",
+  "runEnd": "%RUN_END%",
+  "runId": "%RUN_ID%",
+  "platform": {
+    "name": "%PLATFORM_NAME%",
+    "home": "%PLATFORM_HOME%"
+  },
+  "network": "%NETWORK%",
+  "siteName": "%SITE_NAME%",
+  "user": "%USER%",
+  "nodes": [
+    %NODES%
+  ],
+  "datasets": [
+    %DATASETS%
+  ],
+  "algorithms": [
+    %ALGORITHMS%
+  ],
+  "successful": %SUCCESS%
+}
