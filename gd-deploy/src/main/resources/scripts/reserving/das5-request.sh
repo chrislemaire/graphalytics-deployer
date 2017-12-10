@@ -20,7 +20,10 @@ done
 
 # Get the node numbers.
 NODES=`preserve -llist | grep ${RESERVATION} | awk '{ for(i=9; i<=NF; i++) print $i; }' | sed "s/node[0-9]//"`
-NODES=(${NODES})
+#echo -e "[DAS5-PRESERVE]:\tReserved nodes: ${NODES}."
+
+# Put the nodes in an array.
+NODES=("${NODES}")
 
 # Get the IP of infiniband
 IP_IB0=`cat /etc/sysconfig/network-scripts/ifcfg-ib0 | grep IPADDR | sed "s/.*=\(.*\.\).*/\1/"`
@@ -30,7 +33,10 @@ for node in ${NODES}
 do
     IPS="${IPS} ${IP_IB0}${node}"
 done
-IPS=("${IPS}")
+#echo -e "[DAS5-PRESERVE]:\tReserved node ips: ${IPS}."
+
+# Put IPS in an array.
+IPS=(${IPS})
 
 echo -e [DAS5-PRESERVE]:'\t'Completed request.
 echo -e [DAS5-PRESERVE]:'\t'IP-list: ${IPS}

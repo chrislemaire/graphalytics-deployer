@@ -3,7 +3,8 @@ cd ${PLATFORM_HOME}
 
 # Make benchmark properties file
 RAND=$$
-BENCHMARK_FILE=gd-deploy-benchmark-${RAND}.properties
+RUN_ID=${RAND}
+BENCHMARK_FILE=gd-deploy-benchmark-${RUN_ID}.properties
 
 # Remove old benchmark files
 rm ./config/benchmarks/gd-deploy-benchmark-*.properties

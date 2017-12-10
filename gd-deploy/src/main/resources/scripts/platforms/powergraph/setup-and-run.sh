@@ -1,7 +1,11 @@
+# Setup platform properties.
+PLATFORM_NAME="GraphMat"
+
 # Copy over the settings for the platform if available
 if [[ ! -z ${IPS} ]]; then
-    sed -i "s/.*\(platform\.powergraph\.nodes\s*=\).*/\1 ${IPS}/" config/platform.properties
-    echo -e "[POWERGRAPH-SETUP]:\tSetup with platform.powergraph.nodes = ${IPS}"
+    COMMA_SEP_IPS=`echo ${IPS[*]} | sed "s/ /,/g"`
+    sed -i "s/.*\(platform\.powergraph\.nodes\s*=\).*/\1 ${COMMA_SEP_IPS}/" config/platform.properties
+    echo -e "[POWERGRAPH-SETUP]:\tSetup with platform.powergraph.nodes = ${COMMA_SEP_IPS}"
 fi
 
 if [[ ! -z ${NO_THREADS} ]]; then
@@ -15,70 +19,39 @@ else
     echo -e "[POWERGRAPH-SETUP]:\tSetup with platform.powergraph.num-threads = 1 by default"
 fi
 
+# Set the experiment file
+EXPERIMENT_DONE="$PLATFORM_HOME/done-$PROJECT_ID"
+
 # Temporarily write the starting script
-cat > ./script.sh <<- EOM
-    cd \$1
-    nohup bin/sh/run-benchmark.sh > /dev/null 2>&1 &
-    echo \$! > \$2
+cat > ${PWD}/script.sh <<- EOM
+    cd ${PLATFORM_HOME}
+    bin/sh/run-benchmark.sh
+    echo "done" > ${EXPERIMENT_DONE}
 EOM
 
 # Mod the script
-chmod +x ./script.sh
-
-# Set the experiment file
-EXPERIMENT_PID="$PLATFORM_HOME/exp-%project_id%.pid"
+echo -e "[POWERGRAPH-RUN]:\tWrote script file to ${PWD}/script.sh"
+chmod +x ${PWD}/script.sh
 
 # Start the benchmark
-echo -e "[POWERGRAPH-RUN]:\tStarting benchmark..."
-nohup ssh ${IPS[0]} "${PWD}/script.sh $PLATFORM_HOME $EXPERIMENT_PID" &
+echo -e "[POWERGRAPH-RUN]:\tStarting benchmark on ${IPS[0]}"
+ssh ${IPS[0]} "nohup ${PWD}/script.sh > /dev/null 2>&1 &"
 
-# Wait a few seconds
-echo -e "[POWERGRAPH-RUN]:\tSleeping for 10 seconds to wait for benchmark to start..."
-sleep 10
-
-# Wait until the script has started
-PID_FOUND=0
-for (( i=0; i<10; ++i ))
+# Wait until benchmark-done-... file exists
+seconds=0
+while [[ ! -f ${EXPERIMENT_DONE} ]]
 do
-    # Check if experiment pid file exists.
-    if [[ -f "$EXPERIMENT_PID" ]]; then
-        # Experiment pid is found, set PID_FOUND
-        PID_FOUND=1
-        echo -e "[POWERGRAPH-RUN]:\tFound PID file after $((i * 1/2)) minutes and $((30*(i-2*(i*1/2)))) seconds"
-        break
-    fi
-
-    # Wait for half a minute until checking the pid file again.
-    echo -e "[POWERGRAPH-RUN]:\tDid not find PID file yet, sleeping for 30 seconds..."
-    sleep 30
+    # Sleep a minute
+    sleep 60
+    seconds=$((seconds+60))
+    echo -e "[POWERGRAPH-RUN]:\tBenchmark has been running for $((seconds/60)) minutes"
 done
 
-if [[ PID_FOUND -ge 0 ]]; then
+# Benchmark finished
+echo -e "[POWERGRAPH-RUN]:\tBenchmark finished after $((seconds/3600)) hours and $(( (seconds-(seconds/3600)*3600)/60 ))"
 
-    # Get the experiment pid
-    PID=$(cat ${EXPERIMENT_PID})
-
-    # Wait until it's done
-    SLEEP_TIME=0
-    echo -e "[POWERGRAPH-RUN]:\tSleeping while pid=${PID} is active..."
-    while [[ ! -z `ssh ${IPS[0]} "ps -eaf" | grep ${USER} | grep ${PID}` ]];
-    do
-        # Wait for a minute until polling again.
-        sleep 60
-        SLEEP_TIME=$(($SLEEP_TIME+1))
-        echo -e "[POWERGRAPH-RUN]:\tSlept for $SLEEP_TIME minutes."
-    done
-    echo -e "[POWERGRAPH-RUN]:\tBenchmark run terminated, cleaning up..."
-
-else
-
-    # Print out that the benchmark wasn't started successfully
-    echo -e "[POWERGRAPH-RUN]:\tCouldn't successfully start benchmark... Skipping this benchmark..."
-
-fi
-
-# Remove the old pid file
-rm ${EXPERIMENT_PID}
+# Remove the done file
+rm ${EXPERIMENT_DONE}
 
 # Remove the script file
 rm ${PWD}/script.sh

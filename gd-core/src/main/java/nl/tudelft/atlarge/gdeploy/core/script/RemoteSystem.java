@@ -9,7 +9,7 @@ import nl.tudelft.atlarge.gdeploy.core.Global;
 public enum RemoteSystem {
 
     // Must exist since Scripts get generated on the Native system first.
-    NATIVE_LINUX("localhost", "/home/Chris/graphalytics-deployer/"),
+    NATIVE_LINUX("localhost", "/home/clemaire/graphalytics-deployer/"),
 
     // For running from Windows.
     NATIVE_WINDOWS("localhost", "C:/Users/Chris Lemaire/Documents/Temporary/graphalytics-deployer/"),
