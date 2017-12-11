@@ -20,5 +20,5 @@
   "algorithms": [
     %ALGORITHMS%
   ],
-  "successful": %SUCCESS%
+  "finished": %FINISHED%
 }

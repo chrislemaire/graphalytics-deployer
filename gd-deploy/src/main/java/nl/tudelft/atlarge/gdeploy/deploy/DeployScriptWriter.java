@@ -43,7 +43,7 @@ public class DeployScriptWriter extends ScriptWriter {
             assert sweepWriter != null;
 
             sweepWriter.writeStart();
-            platformRunWriter.write();
+            platformRunWriter.writeSpecifics();
             sweepWriter.writeEnd();
         }
 

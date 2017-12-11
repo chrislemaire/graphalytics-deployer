@@ -1,6 +1,3 @@
-# Setup platform properties.
-PLATFORM_NAME="GraphMat"
-
 # Copy over the settings for the platform if available
 if [[ ! -z ${IPS} ]]; then
     COMMA_SEP_IPS=`echo ${IPS[*]} | sed "s/ /,/g"`

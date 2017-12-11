@@ -47,9 +47,9 @@ public abstract class SweepWriter extends BenchmarkCopyWriter {
     }
 
     public ShellScriptBuilder writeStart() {
-        writeUnsafe("/scripts/sweeps/setup-run-params.sh");
+        writeUnsafe("/scripts/runs/setup-run-params.sh");
         writeStartSpecifics();
-        return writeUnsafe("/scripts/sweeps/benchmark-setup.sh");
+        return writeUnsafe("/scripts/runs/benchmark-setup.sh");
     }
 
     /**

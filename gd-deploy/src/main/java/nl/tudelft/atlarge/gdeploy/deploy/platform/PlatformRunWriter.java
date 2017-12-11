@@ -15,4 +15,10 @@ public abstract class PlatformRunWriter extends BenchmarkCopyWriter {
         this.settings = benchmark.getExperimentSetup().getTargetPlatform();
     }
 
+    public ShellScriptBuilder writeSpecifics() {
+        super.write();
+
+        return writeUnsafe("/scripts/misc/write-report-metadata.sh");
+    }
+
 }
