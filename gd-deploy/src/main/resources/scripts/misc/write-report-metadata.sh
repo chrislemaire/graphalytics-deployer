@@ -1,8 +1,9 @@
 # Register the end time of the run
 RUN_END=`date`
+RUN_DURATION=$(($(date -d "${RUN_END}" "+%m") - $(date -d "${RUN_START}" "+%m")))
 
 # The report metadata file is given by $METADATA
-METADATA=${DEPLOYER_ROOT}/util/resources/report-metadata.json
+METADATA=${DEPLOYER_ROOT}/util/resources/metadata.json
 
 # The report directory is the latest created directory in ./report/
 if [[ -z ${REPORT} ]]; then
@@ -11,35 +12,39 @@ fi
 
 
 # Copy the metadata file into the report.
+echo -e "[METADATA-WRITE]:\tCopying metadata.json into report directory at \'$REPORT\'"
 cp ${METADATA} ${REPORT}/metadata.json
 METADATA=${REPORT}/metadata.json
 
 
 # Fill in the metadata for the report.
-sed -i "s/.*%PROJ_NAME%.*/${PROJECT_NAME}/" ${METADATA}
-sed -i "s/.*%PROJ_ID%.*/${PROJECT_ID}/" ${METADATA}
+echo -e "[METADATA-WRITE]:\tFilling in metadata entries for \'$METADATA\'"
+sed -i "s/\(.*\)%PROJ_NAME%\(.*\)/\1${PROJECT_NAME}\2/" ${METADATA}
+sed -i "s/\(.*\)%PROJ_ID%\(.*\)/\1${PROJECT_ID}\2/" ${METADATA}
 
-sed -i "s/.*%RUN_START%.*/${RUN_START}/" ${METADATA}
-sed -i "s/.*%RUN_END%.*/${RUN_END}/" ${METADATA}
-sed -i "s/.*%RUN_END%.*/`$(($(date -d "$RUN_START" "+%s") - $(date -d "$RUN_END" "+%s")))`/" ${METADATA}
-sed -i "s/.*%RUN_ID%.*/${RUN_ID}/" ${METADATA}
+sed -i "s/\(.*\)%RUN_START%\(.*\)/\1${RUN_START}\2/" ${METADATA}
+sed -i "s/\(.*\)%RUN_END%\(.*\)/\1${RUN_END}\2/" ${METADATA}
+sed -i "s/\(.*\)%RUN_DURATION%\(.*\)/\1${RUN_DURATION}\2/" ${METADATA}
+sed -i "s/\(.*\)%RUN_ID%\(.*\)/\1${RUN_ID}\2/" ${METADATA}
 
-sed -i "s/.*%PLATFORM_NAME%.*/${PLATFORM_NAME}/" ${METADATA}
-sed -i "s/.*%PLATFORM_HOME%.*/${PLATFORM_HOME}/" ${METADATA}
+sed -i "s/\(.*\)%PLATFORM_NAME%\(.*\)/\1${PLATFORM_NAME}\2/" ${METADATA}
+sed -i "s:\(.*\)%PLATFORM_HOME%\(.*\):\1${PLATFORM_HOME}\2:" ${METADATA}
 
-sed -i "s/.*%NETWORK%.*/${NETWORK}/" ${METADATA}
-sed -i "s/.*%SITE_NAME%.*/${SITE_NAME}/" ${METADATA}
-sed -i "s/.*%USER%.*/${USER}/" ${METADATA}
+sed -i "s/\(.*\)%NETWORK%\(.*\)/\1${NETWORK}\2/" ${METADATA}
+sed -i "s/\(.*\)%SITE_NAME%\(.*\)/\1${HOST}\2/" ${METADATA}
+sed -i "s/\(.*\)%USER%\(.*\)/\1${USER}\2/" ${METADATA}
 
-sed -i "s/.*%NODES%.*/${NODES_JSON}/" ${METADATA}
-sed -i "s/.*%DATASETS%.*/${DATA_SETS_JSON}/" ${METADATA}
-sed -i "s/.*%ALGORITHMS%.*/${ALGORITHMS_JSON}/" ${METADATA}
+sed -i "s/\(.*\)%NODES%\(.*\)/\1${NODES_JSON}\2/" ${METADATA}
+sed -i "s/\(.*\)%DATASETS%\(.*\)/\1${DATA_SETS_JSON}\2/" ${METADATA}
+sed -i "s/\(.*\)%ALGORITHMS%\(.*\)/\1${ALGORITHMS_JSON}\2/" ${METADATA}
 
 # If the json directory exists in the report, apparently it finished.
 if [[ -d ${REPORT}/json ]]; then
-    sed -i "s/.*%FINISHED%.*/true/" ${METADATA}
+    echo -e "[METADATA-WRITE]:\tBenchmark has exited and finished normally"
+    sed -i "s/\(.*\)%FINISHED%\(.*\)/\1true\2/" ${METADATA}
 else
-    sed -i "s/.*%FINISHED%.*/false/" ${METADATA}
+    echo -e "[METADATA-WRITE]:\tBenchmark exited in an unusual manner!"
+    sed -i "s/\(.*\)%FINISHED%\(.*\)/\1false\2/" ${METADATA}
 fi
 
 

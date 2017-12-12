@@ -25,8 +25,6 @@ public class ThreadProcessSweepWriter extends SweepWriter {
     protected void specificReplacements(Map<String, String> map) {
         super.specificReplacements(map);
 
-        map.put("%data_sets%", run.getDataSets());
-        map.put("%algorithms%", run.getAlgorithms());
         map.put("%sweep_threads%", THREADS);
         map.put("%sweep_procs%", PROCESSES);
     }

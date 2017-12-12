@@ -11,7 +11,7 @@ public enum NodeType {
             .clusterMode("QUAD").memoryMode("FLAT").build()),
     KNL077("knlq", 68, 4, new KnlConfigurationBuilder()
             .clusterMode("SNC_4").memoryMode("CACHE").build()),
-    DAS5("all", 16, 2, null);
+    DAS5("defq", 16, 2, null);
 
     @Getter
     String partition;

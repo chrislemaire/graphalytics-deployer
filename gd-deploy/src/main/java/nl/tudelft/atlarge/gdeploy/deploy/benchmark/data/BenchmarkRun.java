@@ -80,7 +80,7 @@ public class BenchmarkRun implements JacksonDeserializable, VariableMappable {
                 put("%data_sets%", String.join(",", dataSetsList));
                 put("%algorithms%", String.join(",", algorithmsList));
                 put("%data_sets_json%", "\\\"" + String.join("\\\", \\\"", dataSetsList) + "\\\"");
-                put("%algorithms_json%", "\\\"" + String.join("\\\", \\\"", algorithms) + "\\\"");
+                put("%algorithms_json%", "\\\"" + String.join("\\\", \\\"", algorithmsList) + "\\\"");
             }
         };
     }

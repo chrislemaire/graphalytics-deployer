@@ -3,6 +3,7 @@
   "projectId": "%PROJ_ID%",
   "runStart": "%RUN_START%",
   "runEnd": "%RUN_END%",
+  "runDuration": "%RUN_DURATION%",
   "runId": "%RUN_ID%",
   "platform": {
     "name": "%PLATFORM_NAME%",
@@ -10,6 +11,8 @@
   },
   "network": "%NETWORK%",
   "siteName": "%SITE_NAME%",
+  "processesUsed": "%PROCS_USED%",
+  "threadsUsed": "%THREADS_USED%",
   "user": "%USER%",
   "nodes": [
     %NODES%

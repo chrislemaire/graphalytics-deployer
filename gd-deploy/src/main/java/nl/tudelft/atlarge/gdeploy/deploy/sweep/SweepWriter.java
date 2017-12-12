@@ -1,9 +1,9 @@
 package nl.tudelft.atlarge.gdeploy.deploy.sweep;
 
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
+import nl.tudelft.atlarge.gdeploy.deploy.BenchmarkCopyWriter;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
-import nl.tudelft.atlarge.gdeploy.deploy.BenchmarkCopyWriter;
 
 import java.util.Map;
 
@@ -41,9 +41,6 @@ public abstract class SweepWriter extends BenchmarkCopyWriter {
     @Override
     protected void specificReplacements(Map<String, String> map) {
         super.specificReplacements(map);
-
-        map.put("%data_sets%", run.getDataSets());
-        map.put("%algorithms%", run.getAlgorithms());
     }
 
     public ShellScriptBuilder writeStart() {

@@ -58,7 +58,7 @@ do
 done
 
 # Benchmark finished
-echo -e "[GRAPHMAT-RUN]:\t\tBenchmark finished after $((seconds/3600)) hours and $(( (seconds-(seconds/3600)*3600)/60 ))"
+echo -e "[GRAPHMAT-RUN]:\t\tBenchmark finished after $((seconds/3600)) hour(s) and $(( (seconds-(seconds/3600)*3600)/60 )) minute(s)"
 
 # Remove the done file
 rm ${EXPERIMENT_DONE}
