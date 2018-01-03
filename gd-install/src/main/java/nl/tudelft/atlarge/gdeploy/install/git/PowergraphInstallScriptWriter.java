@@ -25,7 +25,7 @@ public class PowergraphInstallScriptWriter extends GitInstallScriptWriter {
     protected void specificReplacements(Map<String, String> map) {
         super.specificReplacements(map);
 
-        map.put("%powergraph_dir%", data.getInstallDirectory() + "/powergraph");
+        map.put("%powergraph_dir%", data.installDirectory + "/powergraph");
     }
 
 }

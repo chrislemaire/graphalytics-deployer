@@ -1,26 +1,24 @@
 package nl.tudelft.atlarge.gdeploy.install.data;
 
-import lombok.Data;
 import nl.tudelft.atlarge.gdeploy.core.VariableMappable;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-@Data
 public class Product implements VariableMappable {
 
-    private String downloadUrl = "";
+    public String downloadUrl = "";
 
-    private String product = "";
+    public String product = "";
 
-    private String version = "";
+    public String version = "";
 
-    private boolean clean = false;
+    public boolean clean = false;
 
     @Override
     public Map<String, String> getVariableMap() {
-        return new HashMap<String, String>() {
+        return new HashMap<>() {
             {
                 put("%product%", product);
                 put("%download_url%", downloadUrl);

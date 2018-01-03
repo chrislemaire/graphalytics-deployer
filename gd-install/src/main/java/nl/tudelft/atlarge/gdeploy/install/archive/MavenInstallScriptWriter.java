@@ -25,8 +25,8 @@ public class MavenInstallScriptWriter extends ApacheInstallScriptWriter {
     protected void specificReplacements(Map<String, String> map) {
         super.specificReplacements(map);
 
-        map.put("%maven_path%", data.getInstallDirectory() + '/'
-                + product.getProduct() + '/' + product.getVersion());
+        map.put("%maven_path%", data.installDirectory + '/'
+                + product.product + '/' + product.version);
     }
 
     @Override

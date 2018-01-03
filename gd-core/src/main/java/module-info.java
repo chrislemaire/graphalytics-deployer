@@ -3,6 +3,8 @@ module gd.core {
     requires jsoup;
 
     exports nl.tudelft.atlarge.gdeploy.core;
+    exports nl.tudelft.atlarge.gdeploy.core.archiver;
+    exports nl.tudelft.atlarge.gdeploy.core.config;
     exports nl.tudelft.atlarge.gdeploy.core.script;
     exports nl.tudelft.atlarge.gdeploy.core.util;
     exports nl.tudelft.atlarge.gdeploy.core.writer;

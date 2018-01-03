@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
  */
 public class ProductArchive {
 
-    private PropertiesConfig archive;
+    public PropertiesConfig archive;
 
     public ProductArchive(String product) {
         try {
