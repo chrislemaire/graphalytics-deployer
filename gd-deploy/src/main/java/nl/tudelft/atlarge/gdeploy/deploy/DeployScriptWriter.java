@@ -24,22 +24,22 @@ public class DeployScriptWriter extends ScriptWriter {
         this.benchmark = benchmark;
 
         this.parameterWriter = new BenchmarkParameterWriter(builder, benchmark);
-        this.hostReserveWriter = benchmark.getExperimentSetup().getTargetSystem()
-                .getHost().newInstance(builder, benchmark);
-        this.platformRunWriter = benchmark.getExperimentSetup().getTargetPlatform()
-                .getPlatform().newInstance(builder, benchmark);
+        this.hostReserveWriter = benchmark.experimentSetup.targetSystem
+                .host.newInstance(builder, benchmark);
+        this.platformRunWriter = benchmark.experimentSetup.targetPlatform
+                .platform.newInstance(builder, benchmark);
     }
 
     @Override
     public ShellScriptBuilder write() {
-        builder.startBuildingSshRemoteScript(benchmark.getExperimentSetup()
-                .getTargetSystem().getHost().getRemote());
+        builder.startBuildingSshRemoteScript(benchmark.experimentSetup
+                .targetSystem.host.remote);
 
         parameterWriter.write();
         hostReserveWriter.writeRequest();
 
-        for (BenchmarkRun run : benchmark.getRuns()) {
-            SweepWriter sweepWriter = run.getSweepType().newInstance(builder, benchmark, run);
+        for (BenchmarkRun run : benchmark.runs) {
+            SweepWriter sweepWriter = run.sweepType.newInstance(builder, benchmark, run);
             assert sweepWriter != null;
 
             sweepWriter.writeStart();

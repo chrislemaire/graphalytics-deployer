@@ -1,6 +1,5 @@
 package nl.tudelft.atlarge.gdeploy.deploy.host;
 
-import lombok.Getter;
 import nl.tudelft.atlarge.gdeploy.core.script.RemoteSystem;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
@@ -13,11 +12,9 @@ public enum RemoteHost {
     INTEL(HostReserveWriter.class, RemoteSystem.DAS5TUD),
     SURF_SARA(HostReserveWriter.class, RemoteSystem.DAS5TUD);
 
-    @Getter
-    private Class<? extends HostReserveWriter> writer;
+    public Class<? extends HostReserveWriter> writer;
 
-    @Getter
-    private RemoteSystem remote;
+    public RemoteSystem remote;
 
     RemoteHost(Class<? extends HostReserveWriter> writer, RemoteSystem remote) {
         this.writer = writer;

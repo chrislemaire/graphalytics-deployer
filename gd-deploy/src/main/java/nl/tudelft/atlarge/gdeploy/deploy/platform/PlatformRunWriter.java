@@ -12,7 +12,7 @@ public abstract class PlatformRunWriter extends BenchmarkCopyWriter {
     public PlatformRunWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
 
-        this.settings = benchmark.getExperimentSetup().getTargetPlatform();
+        this.settings = benchmark.experimentSetup.targetPlatform;
     }
 
     public ShellScriptBuilder writeSpecifics() {

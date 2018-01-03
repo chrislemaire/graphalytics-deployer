@@ -1,6 +1,5 @@
 package nl.tudelft.atlarge.gdeploy.core.script;
 
-import lombok.Getter;
 import nl.tudelft.atlarge.gdeploy.core.Global;
 
 /**
@@ -19,8 +18,7 @@ public enum RemoteSystem {
     DAS5VU("das5vu", "/home/" + Global.USERNAME + "/graphalytics-deployer/"),
     DAS5TUD("das5tud", "/home/" + Global.USERNAME + "/graphalytics-deployer/");
 
-    @Getter
-    private String sshAlias;
+    String sshAlias;
 
     private String deployerDirectory;
 

@@ -1,6 +1,5 @@
 package nl.tudelft.atlarge.gdeploy.deploy.benchmark;
 
-import lombok.Data;
 import nl.tudelft.atlarge.gdeploy.core.VariableMappable;
 import nl.tudelft.atlarge.gdeploy.core.script.RemoteSystem;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.BenchmarkRun;
@@ -11,18 +10,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-@Data
 public class Benchmark implements JacksonDeserializable, VariableMappable {
 
     public static final int ID_BOUND = 100000000;
 
-    private int identifier;
+    public int identifier;
 
-    private String name;
+    public String name;
 
-    private ExperimentSetup experimentSetup;
+    public ExperimentSetup experimentSetup;
 
-    private List<BenchmarkRun> runs;
+    public List<BenchmarkRun> runs;
 
     @Override
     public void init() {
@@ -39,8 +37,8 @@ public class Benchmark implements JacksonDeserializable, VariableMappable {
     public Map<String, String> getVariableMap() {
         return new HashMap<String, String>() {
             {
-                put("%project_id%", String.valueOf(getIdentifier()));
-                put("%project_name%", getName());
+                put("%project_id%", String.valueOf(identifier));
+                put("%project_name%", name);
                 put("%deployer_root%", RemoteSystem.getNative().deployer());
 
                 putAll(experimentSetup.getVariableMap());

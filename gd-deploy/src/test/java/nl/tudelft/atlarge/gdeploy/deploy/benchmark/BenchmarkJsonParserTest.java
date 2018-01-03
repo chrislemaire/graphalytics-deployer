@@ -13,7 +13,7 @@ public class BenchmarkJsonParserTest {
     void fromInternalShouldWork() throws IOException {
         Benchmark benchmark = BenchmarkJsonParser.fromInternalPath(INTERNAL_TEST_EXP);
 
-        Assertions.assertThat(benchmark.getRuns().get(0).getAlgorithms())
+        Assertions.assertThat(benchmark.runs.get(0).algorithms)
                 .isEqualTo("BFS");
     }
 

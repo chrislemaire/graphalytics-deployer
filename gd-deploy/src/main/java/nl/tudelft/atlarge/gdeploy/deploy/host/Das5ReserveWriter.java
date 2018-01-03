@@ -15,8 +15,8 @@ public class Das5ReserveWriter extends HostReserveWriter {
     protected void specificReplacements(Map<String, String> map) {
         super.specificReplacements(map);
 
-        map.put("%partition%", settings.getNodeType().getPartition());
-        map.put("%time%", settings.getTotalReserveTime());
+        map.put("%partition%", settings.nodeType.partition);
+        map.put("%time%", settings.totalReserveTime);
     }
 
     @Override

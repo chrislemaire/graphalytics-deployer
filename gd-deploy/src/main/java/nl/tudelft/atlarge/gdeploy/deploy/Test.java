@@ -16,7 +16,7 @@ public class Test {
         Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/test-powergraph.json");
 
         ShellScriptBuilder builder = new ShellScriptBuilder(
-                benchmark.getName() + "-" + benchmark.getIdentifier());
+                benchmark.name + "-" + benchmark.identifier);
 
         DeployScriptWriter writer = new DeployScriptWriter(builder, benchmark);
 

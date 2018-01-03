@@ -8,7 +8,8 @@ import java.io.IOException;
 
 public class BenchmarkJsonParser {
 
-    private static ObjectMapper mapper = new ObjectMapper().enable(JsonParser.Feature.ALLOW_COMMENTS);
+    private static ObjectMapper mapper = new ObjectMapper()
+            .enable(JsonParser.Feature.ALLOW_COMMENTS);
 
     private static Benchmark initialize(Benchmark benchmark) {
         benchmark.init();

@@ -1,7 +1,5 @@
 package nl.tudelft.atlarge.gdeploy.deploy.host;
 
-import lombok.Getter;
-
 import java.util.Map;
 
 public enum NodeType {
@@ -13,8 +11,7 @@ public enum NodeType {
             .clusterMode("SNC_4").memoryMode("CACHE").build()),
     DAS5("defq", 16, 2, null);
 
-    @Getter
-    String partition;
+    public String partition;
 
     int numberOfCores;
 

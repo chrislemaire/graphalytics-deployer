@@ -1,6 +1,5 @@
 package nl.tudelft.atlarge.gdeploy.deploy.platform;
 
-import lombok.Getter;
 import nl.tudelft.atlarge.gdeploy.core.script.ShellScriptBuilder;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 
@@ -12,7 +11,6 @@ public enum SoftwarePlatforms {
     POWERGRAPH(PowergraphRunWriter.class),
     GRAPHMAT(GraphmatRunWriter.class);
 
-    @Getter
     Class<? extends PlatformRunWriter> writer;
 
     SoftwarePlatforms(Class<? extends PlatformRunWriter> writer) {

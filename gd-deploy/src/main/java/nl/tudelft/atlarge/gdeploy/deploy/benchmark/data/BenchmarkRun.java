@@ -1,6 +1,5 @@
 package nl.tudelft.atlarge.gdeploy.deploy.benchmark.data;
 
-import lombok.Data;
 import nl.tudelft.atlarge.gdeploy.core.VariableMappable;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.JacksonDeserializable;
 import nl.tudelft.atlarge.gdeploy.deploy.sweep.SweepType;
@@ -11,35 +10,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Data
 public class BenchmarkRun implements JacksonDeserializable, VariableMappable {
 
     /**
      * The type of sweep this run executes.
      */
-    private SweepType sweepType;
+    public SweepType sweepType;
 
     /**
      * The data-sets this run executes on.
      */
-    private String dataSets;
+    public String dataSets;
 
     /**
      * The list of Strings representing the names of the
      * data-sets to run Graphalytics for.
      */
-    private List<String> dataSetsList = new ArrayList<>();
+    public List<String> dataSetsList = new ArrayList<>();
 
     /**
      * The algorithms this run executes.
      */
-    private String algorithms;
+    public String algorithms;
 
     /**
      * The list of Strings representing the names of the
      * algorithms to run Graphalytics with.
      */
-    private List<String> algorithmsList = new ArrayList<>();
+    public List<String> algorithmsList = new ArrayList<>();
 
     /**
      * Tokenize a comma/space separated string into trimmed
@@ -76,7 +74,7 @@ public class BenchmarkRun implements JacksonDeserializable, VariableMappable {
     public Map<String, String> getVariableMap() {
         return new HashMap<String, String>() {
             {
-                put("%sweep_type%", getSweepType().name());
+                put("%sweep_type%", sweepType.name());
                 put("%data_sets%", String.join(",", dataSetsList));
                 put("%algorithms%", String.join(",", algorithmsList));
                 put("%data_sets_json%", "\\\"" + String.join("\\\", \\\"", dataSetsList) + "\\\"");

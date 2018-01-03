@@ -103,7 +103,7 @@ public class ShellScriptBuilder {
 
         this.sshRemote = sshRemote;
         this.parentBuilder = host;
-        this.path = currentPath + '/' + sshRemote.getSshAlias();
+        this.path = currentPath + '/' + sshRemote.sshAlias;
         this.relayRemotes = new LinkedList<>(relayRemotes);
         this.relayRemotes.add(sshRemote);
 
@@ -202,8 +202,8 @@ public class ShellScriptBuilder {
 
         remoteScripts.stream().map(r -> r.sshRemote).collect(Collectors.toSet()).forEach(rem ->
                 copySshString[0] +=
-                        "\nssh " + rem.getSshAlias() + " \"mkdir -p " + rem.deployer() + "\"\n"
-                        + "scp -r " + sshRemote.deployer() + "* " + rem.getSshAlias() + ":" + rem.deployer() + "\n\n");
+                        "\nssh " + rem.sshAlias + " \"mkdir -p " + rem.deployer() + "\"\n"
+                        + "scp -r " + sshRemote.deployer() + "* " + rem.sshAlias + ":" + rem.deployer() + "\n\n");
 
         outputBuilder.insert(0, "#!/usr/bin/env bash\n"
                 + "# Created by " + getClass().getName() + " at "

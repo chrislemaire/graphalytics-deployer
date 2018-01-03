@@ -12,7 +12,7 @@ public abstract class HostReserveWriter extends BenchmarkCopyWriter {
     HostReserveWriter(ShellScriptBuilder builder, Benchmark benchmark) {
         super(builder, benchmark);
 
-        this.settings = benchmark.getExperimentSetup().getTargetSystem();
+        this.settings = benchmark.experimentSetup.targetSystem;
     }
 
     public abstract ShellScriptBuilder writeRequest();
