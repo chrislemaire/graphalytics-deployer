@@ -23,11 +23,20 @@ else
     echo -e "[GRAPHMAT-SETUP]:\tSetup with platform.graphmat.num-procs = 1 by default"
 fi
 
+if [[ ! -z ${AFFINITY} ]]; then
+    sed -i "s/.*\(platform\.graphmat\.affinity\s*=\).*/\1 ${AFFINITY}/" config/platform.properties
+    echo -e "[GRAPHMAT-SETUP]:\tSetup with platform.graphmat.affinity = ${AFFINITY} by AFFINITY"
+else
+    sed -i "s/.*\(platform\.graphmat\.affinity\s*=\).*/\1 scatter/" config/platform.properties
+    echo -e "[GRAPHMAT-SETUP]:\tSetup with platform.graphmat.affinity = scatter by default"
+fi
+
 # Set the experiment file
 EXPERIMENT_DONE="$PLATFORM_HOME/done-$PROJECT_ID"
 
 # Temporarily write the starting script
 cat > ${PWD}/script.sh <<- EOM
+#!/bin/bash
     module rm openmpi/gcc
     module rm openmpi/open64
 

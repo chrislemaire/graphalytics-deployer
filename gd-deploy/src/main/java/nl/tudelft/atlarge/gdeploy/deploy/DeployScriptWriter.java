@@ -24,8 +24,8 @@ public class DeployScriptWriter extends ScriptWriter {
         this.benchmark = benchmark;
 
         this.parameterWriter = new BenchmarkParameterWriter(builder, benchmark);
-        this.hostReserveWriter = benchmark.experimentSetup.targetSystem
-                .host.newInstance(builder, benchmark);
+        this.hostReserveWriter = benchmark.experimentSetup
+                .reserver.newInstance(builder, benchmark);
         this.platformRunWriter = benchmark.experimentSetup.targetPlatform
                 .platform.newInstance(builder, benchmark);
     }

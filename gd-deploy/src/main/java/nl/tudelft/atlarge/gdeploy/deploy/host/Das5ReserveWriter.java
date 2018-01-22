@@ -21,11 +21,15 @@ public class Das5ReserveWriter extends HostReserveWriter {
 
     @Override
     public ShellScriptBuilder writeRequest() {
+        super.writeRequest();
+
         return writeUnsafe("/scripts/reserving/das5-request.sh");
     }
 
     @Override
     public ShellScriptBuilder writeCancel() {
+        super.writeCancel();
+
         return writeUnsafe("/scripts/reserving/das5-cancel.sh");
     }
 

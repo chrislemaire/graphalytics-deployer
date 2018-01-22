@@ -6,29 +6,16 @@ import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 
 public enum RemoteHost {
 
-    NONE(HostReserveWriter.class, RemoteSystem.NATIVE_WINDOWS),
-    DAS5VU(Das5ReserveWriter.class, RemoteSystem.DAS5VU),
-    DAS5TUD(Das5ReserveWriter.class, RemoteSystem.DAS5TUD),
-    INTEL(HostReserveWriter.class, RemoteSystem.DAS5TUD),
-    SURF_SARA(HostReserveWriter.class, RemoteSystem.DAS5TUD);
-
-    public Class<? extends HostReserveWriter> writer;
+    NONE(RemoteSystem.NATIVE_WINDOWS),
+    DAS5VU(RemoteSystem.DAS5VU),
+    DAS5TUD(RemoteSystem.DAS5TUD),
+    INTEL(RemoteSystem.DAS5TUD),
+    SURF_SARA(RemoteSystem.DAS5TUD);
 
     public RemoteSystem remote;
 
-    RemoteHost(Class<? extends HostReserveWriter> writer, RemoteSystem remote) {
-        this.writer = writer;
+    RemoteHost(RemoteSystem remote) {
         this.remote = remote;
-    }
-
-    public HostReserveWriter newInstance(ShellScriptBuilder builder, Benchmark benchmark) {
-        try {
-            return (HostReserveWriter) writer.getConstructors()[0]
-                    .newInstance(builder, benchmark);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }

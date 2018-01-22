@@ -5,7 +5,11 @@ import nl.tudelft.atlarge.gdeploy.deploy.benchmark.Benchmark;
 import nl.tudelft.atlarge.gdeploy.deploy.benchmark.data.SystemSettings;
 import nl.tudelft.atlarge.gdeploy.deploy.BenchmarkCopyWriter;
 
+import java.util.Map;
+
 public abstract class HostReserveWriter extends BenchmarkCopyWriter {
+
+    String commandPrefix = "ssh ${IPS[0]}";
 
     SystemSettings settings;
 
@@ -15,8 +19,19 @@ public abstract class HostReserveWriter extends BenchmarkCopyWriter {
         this.settings = benchmark.experimentSetup.targetSystem;
     }
 
-    public abstract ShellScriptBuilder writeRequest();
+    public ShellScriptBuilder writeRequest() {
+        return writeUnsafe("/scripts/reserving/prefix-setup.sh");
+    }
 
-    public abstract ShellScriptBuilder writeCancel();
+    public ShellScriptBuilder writeCancel() {
+        return builder;
+    }
+
+    @Override
+    protected void specificReplacements(Map<String, String> map) {
+        super.specificReplacements(map);
+
+        map.put("%cmd_prefix%", commandPrefix);
+    }
 
 }

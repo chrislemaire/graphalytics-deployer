@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 public class Test {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/test-powergraph.json");
+        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/A/AGSLA.json");
 
         ShellScriptBuilder builder = new ShellScriptBuilder(
                 benchmark.name + "-" + benchmark.identifier);

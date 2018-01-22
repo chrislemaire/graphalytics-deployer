@@ -11,12 +11,15 @@ import java.util.Map;
  */
 public class ExperimentSetup implements JacksonDeserializable, VariableMappable {
 
+    public Reserver reserver = Reserver.NONE;
+
     public SystemSettings targetSystem;
 
     public PlatformSettings targetPlatform;
 
     @Override
     public void init() {
+        assert reserver != null;
         assert targetSystem != null;
         assert targetPlatform != null;
 
@@ -26,8 +29,9 @@ public class ExperimentSetup implements JacksonDeserializable, VariableMappable 
 
     @Override
     public Map<String, String> getVariableMap() {
-        return new HashMap<>() {
+        return new HashMap<String, String>() {
             {
+                put("%reserver%", reserver.name());
                 putAll(targetSystem.getVariableMap());
                 putAll(targetPlatform.getVariableMap());
             }

@@ -20,7 +20,7 @@ public class PlatformSettings implements JacksonDeserializable, VariableMappable
 
     @Override
     public Map<String, String> getVariableMap() {
-        return new HashMap<>() {
+        return new HashMap<String, String>() {
             {
                 put("%platform%", platform.name());
                 put("%platform_home%", platformHome);

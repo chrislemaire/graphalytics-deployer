@@ -18,6 +18,12 @@ public class BenchmarkRun implements JacksonDeserializable, VariableMappable {
     public SweepType sweepType;
 
     /**
+     * The parameters that may be used for the sweep to
+     * setup.
+     */
+    public Map<String, String> sweepParameters = new HashMap<>();
+
+    /**
      * The data-sets this run executes on.
      */
     public String dataSets;
@@ -38,6 +44,17 @@ public class BenchmarkRun implements JacksonDeserializable, VariableMappable {
      * algorithms to run Graphalytics with.
      */
     public List<String> algorithmsList = new ArrayList<>();
+
+    /**
+     * The number of repetitions for each of the runs in
+     * the benchmark.
+     */
+    public int repetitions = 1;
+
+    /**
+     * The KMP_AFFINITY setting with which mpi will be used.
+     */
+    public String affinity = "scatter";
 
     /**
      * Tokenize a comma/space separated string into trimmed
@@ -65,6 +82,7 @@ public class BenchmarkRun implements JacksonDeserializable, VariableMappable {
         assert sweepType != null;
         assert dataSets != null;
         assert algorithms != null;
+        assert sweepParameters != null;
 
         algorithmsList = tokenize(algorithms);
         dataSetsList = tokenize(dataSets);
@@ -79,6 +97,9 @@ public class BenchmarkRun implements JacksonDeserializable, VariableMappable {
                 put("%algorithms%", String.join(",", algorithmsList));
                 put("%data_sets_json%", "\\\"" + String.join("\\\", \\\"", dataSetsList) + "\\\"");
                 put("%algorithms_json%", "\\\"" + String.join("\\\", \\\"", algorithmsList) + "\\\"");
+                put("%repetitions%", String.valueOf(repetitions));
+                put("%affinity%", affinity);
+                putAll(transformKeys(k -> "%sweep_param_" + k + "%", sweepParameters));
             }
         };
     }

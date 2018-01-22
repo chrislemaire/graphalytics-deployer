@@ -1,7 +1,7 @@
 # Set the threads and processes to run with
-SWEEP_THREADS="%sweep_threads%"
+SWEEP_THREADS="%sweep_param_threads%"
 SWEEP_THREADS=(${SWEEP_THREADS})
-SWEEP_PROCS="%sweep_procs%"
+SWEEP_PROCS="%sweep_param_processes%"
 SWEEP_PROCS=(${SWEEP_PROCS})
 
 # Start the loop:

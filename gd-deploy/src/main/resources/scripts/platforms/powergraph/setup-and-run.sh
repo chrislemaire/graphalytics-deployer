@@ -21,7 +21,11 @@ EXPERIMENT_DONE="$PLATFORM_HOME/done-$PROJECT_ID"
 
 # Temporarily write the starting script
 cat > ${PWD}/script.sh <<- EOM
+#!/bin/bash
     cd ${PLATFORM_HOME}
+    export KMP_AFFINITY=${AFFINITY}
+    export OMP_NUM_THREADS=${NO_THREADS}
+    export TOTAL_PROCS=${NO_PROCS}
     bin/sh/run-benchmark.sh
     echo "done" > ${EXPERIMENT_DONE}
 EOM
@@ -32,7 +36,7 @@ chmod +x ${PWD}/script.sh
 
 # Start the benchmark
 echo -e "[POWERGRAPH-RUN]:\tStarting benchmark on ${IPS[0]}"
-ssh ${IPS[0]} "nohup ${PWD}/script.sh > /dev/null 2>&1 &"
+${CMD_PREFIX} ${PWD}/script.sh
 
 # Wait until benchmark-done-... file exists
 seconds=0
