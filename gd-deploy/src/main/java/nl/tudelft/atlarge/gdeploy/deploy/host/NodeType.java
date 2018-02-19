@@ -9,7 +9,13 @@ public enum NodeType {
             .clusterMode("QUAD").memoryMode("FLAT").build()),
     KNL077("knlq", 68, 4, new KnlConfigurationBuilder()
             .clusterMode("SNC_4").memoryMode("CACHE").build()),
-    DAS5("defq", 16, 2, null);
+    DAS5("defq", 16, 2, null),
+    INTEL("defq", 68, 4, new KnlConfigurationBuilder()
+            .clusterMode("ALL-TO-ALL").memoryMode("FLAT").build()),
+    SURF_FLAT("knl_flat", 68, 4, new KnlConfigurationBuilder()
+            .clusterMode("ALL-TO-ALL").memoryMode("FLAT").build()),
+    SURF_CACHE("knl_cache", 68, 4, new KnlConfigurationBuilder()
+            .clusterMode("ALL-TO-ALL").memoryMode("CACHE").build());
 
     public String partition;
 

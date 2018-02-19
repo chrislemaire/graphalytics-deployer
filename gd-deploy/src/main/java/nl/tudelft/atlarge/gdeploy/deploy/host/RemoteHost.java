@@ -9,8 +9,8 @@ public enum RemoteHost {
     NONE(RemoteSystem.NATIVE_WINDOWS),
     DAS5VU(RemoteSystem.DAS5VU),
     DAS5TUD(RemoteSystem.DAS5TUD),
-    INTEL(RemoteSystem.DAS5TUD),
-    SURF_SARA(RemoteSystem.DAS5TUD);
+    INTEL(RemoteSystem.INTEL),
+    SURF_SARA(RemoteSystem.SURF_SARA);
 
     public RemoteSystem remote;
 

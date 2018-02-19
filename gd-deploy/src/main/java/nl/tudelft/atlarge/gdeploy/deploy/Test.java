@@ -13,14 +13,14 @@ import java.net.URISyntaxException;
 public class Test {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/A/AGSLA.json");
+        Benchmark benchmark = BenchmarkJsonParser.fromInternalPath("/experiments/A/AGCMS.json");
 
         ShellScriptBuilder builder = new ShellScriptBuilder(
                 benchmark.name + "-" + benchmark.identifier);
 
         DeployScriptWriter writer = new DeployScriptWriter(builder, benchmark);
 
-        builder.startBuildingSshRemoteScript(RemoteSystem.BASTION);
+//        builder.startBuildingSshRemoteScript(RemoteSystem.BASTION);
 
         writer.write();
         builder.finish();

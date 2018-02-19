@@ -20,7 +20,7 @@ public class Install implements VariableMappable {
 
     @Override
     public Map<String, String> getVariableMap() {
-        return new HashMap<>() {
+        return new HashMap<String, String>() {
             {
                 put("%install_dir%", installDirectory);
 

@@ -9,7 +9,9 @@ import java.util.Map;
 
 public abstract class HostReserveWriter extends BenchmarkCopyWriter {
 
-    String commandPrefix = "ssh ${IPS[0]}";
+    public static final String SCRIPT_FILE = "./script.sh";
+
+    String command = "ssh ${IPS[0]}";
 
     SystemSettings settings;
 
@@ -31,7 +33,8 @@ public abstract class HostReserveWriter extends BenchmarkCopyWriter {
     protected void specificReplacements(Map<String, String> map) {
         super.specificReplacements(map);
 
-        map.put("%cmd_prefix%", commandPrefix);
+        map.put("%run_cmd%", command);
+        map.put("%script_file%", SCRIPT_FILE);
     }
 
 }

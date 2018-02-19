@@ -1,0 +1,32 @@
+{
+  "name": "A-GCMS",
+  "experimentSetup": {
+    "reserver": "PRESERVE",
+    "targetSystem": {
+      "host": "DAS5VU",
+      "nodeType": "KNL077",
+      "numberOfNodesUsed": 1,
+      "numberOfCoresUsed": 68,
+      "totalReserveTime": "72:00:00"
+    },
+    "targetPlatform": {
+      "platform": "GRAPHMAT",
+      "platformHome": "/home/clemaire/distr/graphmat"
+    }
+  },
+
+  "runs": [
+    {
+      "sweepType": "THREAD_PROCESS",
+      "sweepParameters": {
+        "threads": "2 4 8 16 32 64 128 256",
+        "processes": "128 64 32 16 8 4 2 1"
+      },
+
+      "dataSets": "graph500-24,datagen-8_0-fb",
+      "algorithms": "BFS,PR,SSSP",
+      "repetitions": 3,
+      "affinity": "compact"
+    }
+  ]
+}

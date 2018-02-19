@@ -18,7 +18,7 @@ public class Product implements VariableMappable {
 
     @Override
     public Map<String, String> getVariableMap() {
-        return new HashMap<>() {
+        return new HashMap<String, String>() {
             {
                 put("%product%", product);
                 put("%download_url%", downloadUrl);

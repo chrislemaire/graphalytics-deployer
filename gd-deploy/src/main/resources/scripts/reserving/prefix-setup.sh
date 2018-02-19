@@ -1,3 +1,6 @@
+# Check whether the script-name variable is set, default it if not
+SCRIPT_FILE="%script_file%"
+
 # Intialize the command prefix
-CMD_PREFIX="%cmd_prefix%"
+SCRIPT_RUN_CMD="%run_cmd%"
 

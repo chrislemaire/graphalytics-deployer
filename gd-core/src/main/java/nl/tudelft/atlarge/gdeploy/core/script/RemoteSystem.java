@@ -16,7 +16,9 @@ public enum RemoteSystem {
     // Remote systems.
     BASTION("bastion", "/home/nfs/" + Global.USERNAME + "/graphalytics-deployer/"),
     DAS5VU("das5vu", "/home/" + Global.USERNAME + "/graphalytics-deployer/"),
-    DAS5TUD("das5tud", "/home/" + Global.USERNAME + "/graphalytics-deployer/");
+    DAS5TUD("das5tud", "/home/" + Global.USERNAME + "/graphalytics-deployer/"),
+    INTEL("intel", "/home/" + Global.USERNAME + "/graphalytics-deployer/"),
+    SURF_SARA("surf", "/home/" + Global.USERNAME + "/graphalytics-deployer/");
 
     String sshAlias;
 

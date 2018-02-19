@@ -20,7 +20,7 @@ fi
 EXPERIMENT_DONE="$PLATFORM_HOME/done-$PROJECT_ID"
 
 # Temporarily write the starting script
-cat > ${PWD}/script.sh <<- EOM
+cat > ${SCRIPT_FILE} <<- EOM
 #!/bin/bash
     cd ${PLATFORM_HOME}
     export KMP_AFFINITY=${AFFINITY}
@@ -31,12 +31,12 @@ cat > ${PWD}/script.sh <<- EOM
 EOM
 
 # Mod the script
-echo -e "[POWERGRAPH-RUN]:\tWrote script file to ${PWD}/script.sh"
-chmod +x ${PWD}/script.sh
+echo -e "[POWERGRAPH-RUN]:\tWrote script file to ${SCRIPT_FILE}"
+chmod +x ${SCRIPT_FILE}
 
 # Start the benchmark
 echo -e "[POWERGRAPH-RUN]:\tStarting benchmark on ${IPS[0]}"
-${CMD_PREFIX} ${PWD}/script.sh
+${SCRIPT_RUN_CMD}
 
 # Wait until benchmark-done-... file exists
 seconds=0
@@ -55,6 +55,6 @@ echo -e "[POWERGRAPH-RUN]:\tBenchmark finished after $((seconds/3600)) hour(s) a
 rm ${EXPERIMENT_DONE}
 
 # Remove the script file
-rm ${PWD}/script.sh
+rm ${SCRIPT_FILE}
 
 

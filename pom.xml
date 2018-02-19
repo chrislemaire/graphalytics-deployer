@@ -17,7 +17,7 @@
     </modules>
 
     <properties>
-        <maven-compiler-plugin.jvm-version>9</maven-compiler-plugin.jvm-version>
+        <maven-compiler-plugin.jvm-version>1.8</maven-compiler-plugin.jvm-version>
 
         <lombok.version>1.16.18</lombok.version>
 
