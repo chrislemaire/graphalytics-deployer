@@ -1,0 +1,27 @@
+{
+  "projectName": "%PROJ_NAME%",
+  "projectId": "%PROJ_ID%",
+  "runStart": "%RUN_START%",
+  "runId": "%RUN_ID%",
+  "platform": {
+    "name": "%PLATFORM_NAME%",
+    "home": "%PLATFORM_HOME%"
+  },
+  "network": "%NETWORK%",
+  "siteName": "%SITE_NAME%",
+  "processesUsed": "%PROCS_USED%",
+  "threadsUsed": "%THREADS_USED%",
+  "machinesUsed": "%MACHINES_USED%",
+  "affinity": "%AFFINITY%",
+  "repetitions": "%REPETITIONS%",
+  "user": "%USER%",
+  "clusterMode": "%CLUSTER_MODE%",
+  "memoryMode": "%MEMORY_MODE%",
+  "datasets": [
+    %DATASETS%
+  ],
+  "algorithms": [
+    %ALGORITHMS%
+  ],
+  "finished": %FINISHED%
+}

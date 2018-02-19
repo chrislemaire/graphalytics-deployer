@@ -20,14 +20,14 @@ public class ReportDiscoverer {
      * named directories found inside a report.
      * (These include 'log/', 'json/', 'html/').
      */
-    private static final List<String> EXCLUDED_DIRECTORIES = Arrays.asList(
+    protected static final List<String> EXCLUDED_DIRECTORIES = Arrays.asList(
             "log", "logs", "json", "html", "config", "configs");
 
     /**
      * A map containing mapping report metadata by the
      * report directories they belong to.
      */
-    private Map<File, String> reports;
+    protected Map<File, String> reports;
 
     /**
      * Construct the report discoverer.
@@ -45,7 +45,7 @@ public class ReportDiscoverer {
      * @return single String representing the content of the
      * metadata file.
      */
-    private String readMetadataFile(File metadataFile) {
+    protected String readMetadataFile(File metadataFile) {
         try {
             return String.join("", Files.readAllLines(metadataFile.toPath()));
         } catch (IOException e) {

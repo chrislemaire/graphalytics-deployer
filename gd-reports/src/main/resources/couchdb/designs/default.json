@@ -1,0 +1,12 @@
+{
+  "language": "javascript",
+
+  "views": {
+    "titles": {
+      "map": "function(doc) { emit(null, { 'id': doc._id, 'title': doc.title }); }"
+    }
+  },
+
+  "shows": {
+  }
+}
